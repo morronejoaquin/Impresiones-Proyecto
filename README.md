@@ -18,7 +18,7 @@ Incluye formularios dinámicos, validaciones reactivas y comunicación con una A
 
 ## 🛠️ Tecnologías utilizadas
 
-- [Angular](https://angular.io/) 17+
+- [Angular](https://angular.io/) 20+
 - TypeScript
 - HTML5 / SCSS
 - RxJS
