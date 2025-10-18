@@ -1,0 +1,23 @@
+footer {
+  background: linear-gradient(90deg, #ff66cc, #00aaff, #f9d923);
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 14px;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+
+footer p {
+  margin: 0;
+}
+
+footer p::before {
+  content: "🖨️ ";
+}

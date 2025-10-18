@@ -1,0 +1,36 @@
+header {
+  background: linear-gradient(90deg, #f9d923, #00aaff, #ff66cc);
+  padding: 15px 0;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 25px;
+}
+
+nav a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  color: #f9d923; 
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
