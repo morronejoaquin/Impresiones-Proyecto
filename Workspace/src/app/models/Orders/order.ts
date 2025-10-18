@@ -1,17 +1,14 @@
-export interface Order {
+export default interface Order {
     orderId: number;
     ringed: boolean;
     printed: boolean;
     delivered: boolean;
-    color: string;
+    color: boolean;
     pages: number;
     comments: string;
     archiveUrl: string;
     copies: number;
-    paymentMethod: string;
-    paymentStatus: boolean;
-    totalAmount: number;
-    sign:number;
-    orderDate: Date;
     userId: number;
+    paymentId: number;
+    amount: number;
 }
