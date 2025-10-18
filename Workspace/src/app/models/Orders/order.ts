@@ -12,5 +12,6 @@ export interface Order {
     paymentStatus: boolean;
     totalAmount: number;
     sign:number;
+    orderDate: Date;
     userId: number;
 }
