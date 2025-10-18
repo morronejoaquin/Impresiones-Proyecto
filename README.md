@@ -11,7 +11,7 @@ Incluye formularios dinámicos, validaciones reactivas y comunicación con una A
 - 👤 **Control de usuarios**: registro y autenticación básica.  
 - 💾 **Persistencia de datos** mediante API (o almacenamiento local temporal).  
 - 🔍 **Búsqueda y filtrado** de trabajos según estado o fecha.  
-- 🎨 **Interfaz moderna y responsiva**, desarrollada con Angular Material o Bootstrap.  
+- 🎨 **Interfaz moderna y responsiva**, desarrollada con Angular Material. 
 - 🧩 **Arquitectura escalable** con componentes, servicios y modelos separados.
 
 ---
