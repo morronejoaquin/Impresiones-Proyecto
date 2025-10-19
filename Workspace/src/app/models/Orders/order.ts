@@ -6,7 +6,7 @@ export default interface Order {
     color: boolean;
     pages: number;
     comments: string;
-    archiveUrl: string;
+    archiveUrl: File | null;
     copies: number;
     userId: number;
     paymentId: number;

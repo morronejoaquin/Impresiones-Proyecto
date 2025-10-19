@@ -26,6 +26,7 @@ selectedFile: File | null = null;
     this.selectedFile = input.files[0];
 
     console.log('Selected file:', this.selectedFile);
+    
   }
 
 }
