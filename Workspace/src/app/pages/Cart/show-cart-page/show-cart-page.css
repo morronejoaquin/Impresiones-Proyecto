@@ -1,0 +1,172 @@
+/* Variables de diseño */
+:root {
+  --primary-color: #2a9d8f;
+  --primary-hover: #1f7a66;
+  --background: #f4f5f7;
+  --surface: #ffffff;
+  --text: #222222;
+  --text-muted: #6c757d;
+  --border: #d6d8db;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --radius: 10px;
+}
+
+/* Contenedor principal */
+.page-wrapper {
+  padding: 2rem 1rem;
+  background: var(--background);
+  min-height: calc(100vh - 6rem);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* Contenedor centrado y con estilo */
+form {
+  width: 100%;
+  max-width: 48rem;
+  margin: 2rem auto;
+  padding: 1.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(20, 20, 20, 0.06);
+  box-sizing: border-box;
+}
+
+/* Espaciado y estructura */
+fieldset {
+  border: none;
+  margin-bottom: 1.25rem;
+  padding: 0;
+  display: block;
+  background: #f9fafb;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+/* Títulos/legend */
+legend {
+  font-weight: 700;
+  color: #111;
+  background: #efefef;
+  padding: 0.45em 0.8em;
+  display: inline-block;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+}
+
+/* Etiquetas */
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #222;
+}
+
+/* Inputs y select */
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+select {
+  width: 100%;
+  padding: 0.55em 0;
+  border: none;
+  border-bottom: 1px solid #d8d8d8;
+  background: transparent;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+  box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-bottom: 2px solid #2a9d8f;
+}
+
+/* Resumen del carrito */
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem;
+  background: #f8fafb;
+  border: 1px solid #d8d8d8;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.cart-summary .label {
+  font-weight: 600;
+  color: #7a7a7a;
+}
+
+.cart-summary .value {
+  font-weight: 800;
+  color: #222;
+  font-size: 1.2rem;
+}
+
+/* Botones */
+button {
+  width: 100%;
+  padding: 0.85rem;
+  background: #2a9d8f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 1rem;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: #1f7a66;
+}
+
+/* Botón secundario */
+.btn-ghost {
+  background: #f8fafb;
+  border: 1px solid #d8d8d8;
+  color: #222;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+.btn-ghost:hover {
+  background: #fff;
+  border-color: #2a9d8f;
+  color: #2a9d8f;
+}
+
+/* Layout de campos en línea */
+.field-inline {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-end;
+}
+
+.field-inline > div {
+  flex: 1;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 520px) {
+  form {
+    padding: 0.9rem;
+    margin: 1rem;
+  }
+
+  .field-inline {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .cart-summary {
+    padding: 0.8rem;
+  }
+}

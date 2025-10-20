@@ -1,106 +1,169 @@
+/* Contenedor centrado y con estilo */
 form {
-    width: 100%;
-    max-width: 45rem;
-    margin: auto;
-    padding: 1rem;
-    font-family: Arial, sans-serif;
-    background: white;
+  width: 100%;
+  max-width: 48rem;
+  margin: 2rem auto;
+  padding: 1.25rem;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(20,20,20,0.06);
+  box-sizing: border-box;
 }
 
+/* Espaciado y estructura */
 fieldset {
-    border: none;
-    margin-bottom: 2rem;
-    padding: 0;
-}
-legend {
-  font-weight: bold;
-  color: black;
-  background: rgb(206, 204, 204);
-  padding: 0.5em 1em;
-  display: inline-block;
-  border-radius: 4px;
-  margin-bottom: 1em;
+  border: none;
+  margin-bottom: 1.25rem;
+  padding: 0;
+  display: block;
 }
 
+/* Títulos/legend */
+legend {
+  font-weight: 700;
+  color: #111;
+  background: #efefef;
+  padding: 0.45em 0.8em;
+  display: inline-block;
+  border-radius: 6px;
+  margin-bottom: 0.8rem;
+}
+
+/* Labels */
 label {
   display: block;
-  font-weight: bold;
-  margin-bottom: 0.25em;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: #222;
 }
 
+/* Inputs y textarea */
 input[type="text"],
 input[type="number"],
 input[type="tel"],
 select,
-textarea,
-input[type="file"] {
+textarea {
   width: 100%;
-  padding: 0.5em 0;
+  padding: 0.55em 0;
   border: none;
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid #d8d8d8;
   background: transparent;
-  font-size: 1em;
-  margin-bottom: 1.2em;
-  color: darkgray;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: #333;
+  box-sizing: border-box;
 }
+
 input:focus,
 select:focus,
 textarea:focus {
   outline: none;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid #2a9d8f;
 }
 
+/* Textarea */
 textarea {
-  min-height: 4em;
+  min-height: 5rem;
+  resize: vertical;
 }
 
+/* Checkbox inline layout */
 input[type="checkbox"] {
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
 }
 
+/* Archivo: wrapper visible, input hidden */
 input[type="file"] {
-    display: none;
+  display: none; /* mantenemos oculto el input real */
 }
 
 .file-input-wrapper {
-    position: relative;
-    width: 100%;
-    height: 3em;
-    border: 2px dashed gray;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: darkslategray;
-    font-weight: bold;
-    margin-bottom: 1.5em;
-    transition: border-color 0.3s, color 0.3s;
+  position: relative;
+  width: 100%;
+  min-height: 3.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  gap: 1rem;
+  border-radius: 8px;
+  border: 2px dashed #d0d0d0;
+  background: linear-gradient(180deg, #fff, #fbfbfb);
+  cursor: pointer;
+  color: #606060;
+  font-weight: 700;
+  box-sizing: border-box;
 }
 
-.file-input-wrapper:hover {
-    border-color: black;
-    color: black;
-}
-
+/* Texto dentro del wrapper */
 .file-input-wrapper span {
-    pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1 1 auto;
+  pointer-events: none;
 }
 
+/* Indicador estilo botón a la derecha (pseudo-elemento) */
+.file-input-wrapper::after {
+  content: "Seleccionar";
+  display: inline-block;
+  background: #2a9d8f;
+  color: #fff;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  font-weight: 700;
+  margin-left: 1rem;
+  pointer-events: none;
+  box-shadow: 0 6px 14px rgba(42,157,143,0.12);
+}
+
+/* Hover / focus visual */
+.file-input-wrapper:hover {
+  border-color: #2a9d8f;
+  color: #2a9d8f;
+}
+.file-input-wrapper:focus-within,
+.file-input-wrapper:active {
+  outline: 3px solid rgba(42,157,143,0.08);
+  border-color: #1f7a66;
+}
+
+/* Meta info */
+.file-meta {
+  font-size: 0.9rem;
+  color: #7a7a7a;
+  margin-top: 0.4rem;
+}
+
+/* Botón principal */
 button {
-    width: 100%;
-    padding: 0.75em;
-    background: green;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: background 0.3s, transform 0.2s;
+  width: 100%;
+  padding: 0.85rem;
+  background: #2a9d8f;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 1rem;
+  transition: transform 0.12s ease, background 0.12s ease;
+}
+button:hover {
+  transform: translateY(-2px);
+  background: #1f7a66;
 }
 
-button:hover {
-    background: darkgray;
-    transform: scale(1.03);
+/* Respuesta en móviles */
+@media (max-width: 520px) {
+  form {
+    padding: 0.9rem;
+    margin: 1rem;
+  }
+  .file-input-wrapper {
+    min-height: 3.6rem;
+    padding: 0 0.9rem;
+  }
+  .file-input-wrapper::after { padding: 0.35rem 0.6rem; font-size: 0.95rem; }
 }

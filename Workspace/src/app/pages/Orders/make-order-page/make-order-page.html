@@ -1,9 +1,27 @@
-<form>
-  <legend>1. Paginas y anillado</legend>
+<form [formGroup]="orderForm">
+  <legend>Sube tu archivo</legend>
   <fieldset>
-    <label for="pages">Número de páginas:</label>
-    <input type="number" id="pages" formControlName="pagesF" min="1">
+    <div class="file-input-wrapper" (click)="fileInput.click()">
+      <span>{{ selectedFileName }}</span>
+      <input accept=".pdf,image/*,.txt" type="file" #fileInput (change)="onFileSelected($event)" id="fileUpload">
+    </div>
+    <p>
+      <strong>Información del archivo:</strong>
+      <ng-container *ngIf="selectedFile; else noFile">
+        <span *ngIf="isPdf">
+          Páginas: {{ pageCount ?? 'Cargando...' }}
+        </span>
+        <span *ngIf="isText">
+          Tamaño: {{ fileSize }} bytes
+        </span>
+        <span *ngIf="isImage">
+          Dimensiones: {{ imageWidth ?? 0 }}x{{ imageHeight ?? 0 }} px
+        </span>
+      </ng-container>
+      <ng-template #noFile>-</ng-template>
+    </p>
   </fieldset>
+  <legend>Paginas y anillado</legend>
   <fieldset>
     <label for="copies">Número de copias:</label>
     <input type="number" id="copies" formControlName="copiesF" min="1">
@@ -17,54 +35,12 @@
     <input type="checkbox" id="color" formControlName="colorF">
   </fieldset>
   <fieldset>
-    <label for="fileUpload">Sube tu archivo:</label>
-    <div class="file-input-wrapper" (click)="fileInput.click()">
-      <span>{{ selectedFileName }}</span>
-      <input type="file" #fileInput (change)="onFileSelected($event)" id="fileUpload">
-    </div>
-    <p>
-      <strong>Información del archivo:</strong>
-      <span [hidden]="!selectedFile">
-        <span [hidden]="selectedFile?.type !== 'application/pdf'">Páginas: {{ pageCount ?? 'Cargando...' }}</span>
-        <span [hidden]="selectedFile?.type !== 'text/plain'">Tamaño: {{ selectedFile?.size }} bytes</span>
-        <span [hidden]="selectedFile?.type !== 'image/jpeg' && selectedFile?.type !== 'image/png'">
-          Dimensiones: {{ imageWidth ?? 0 }}x{{ imageHeight ?? 0 }} px
-        </span>
-      </span>
-      <span [hidden]="selectedFile">-</span>
-    </p>
-  </fieldset>
-  <fieldset>
     <label for="comments">Comentarios:</label>
     <textarea id="comments" formControlName="commentsF"></textarea>
   </fieldset>
 
-  <legend>2. Completa los siguientes datos</legend>
-  <fieldset>
-    <label for="customerName">Nombre:</label>
-    <input type="text" id="customerName" formControlName="customerNameF">
-  </fieldset>
-  <fieldset>
-    <label for="surname">Apellido:</label>
-    <input type="text" id="surname" formControlName="surnameF">
-  </fieldset>
-  <fieldset>
-    <label for="phone">Teléfono:</label>
-    <input type="tel" id="phone" formControlName="phoneF">
-  </fieldset>
+  <p>Hojas a imprimir: {{ pagesToPrint }}</p>
+  <p>Total estimado: {{ totalPrice | number:'1.2-2' }}</p>
 
-  <legend>3. Forma de pago</legend>
-  <fieldset>
-    <label for="paymentMethod">Método de pago:</label>
-    <select id="paymentMethod" formControlName="paymentMethodF">
-      <option value="cash">Efectivo</option>
-      <option value="transfer">Transferencia</option>
-    </select>
-  </fieldset>
-  <fieldset>
-    <label for="sign">Seña:</label>
-    <input type="number" id="sign" formControlName="signF">
-  </fieldset>
-
-  <button type="button" (click)="submitOrder()">Realizar pedido</button>
+  <button type="button" (click)="submitOrder()">Agregar al Carrito</button>
 </form>
