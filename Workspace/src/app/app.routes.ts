@@ -5,6 +5,7 @@ import { MakeOrderPage } from './pages/Orders/make-order-page/make-order-page';
 import { PriceCalculatorPage } from './pages/AboutUs/price-calculator-page/price-calculator-page';
 import { WherePage } from './pages/AboutUs/where-page/where-page';
 import { ShowCartPage } from './pages/Cart/show-cart-page/show-cart-page';
+
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomePage },

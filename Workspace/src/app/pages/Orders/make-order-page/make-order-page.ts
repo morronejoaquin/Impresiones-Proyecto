@@ -1,8 +1,11 @@
 import { Component, NgZone } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { OrderService } from '../../../services/Orders/order-service';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/legacy/build/pdf';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { CartService } from '../../../services/Cart/cart-service';
+import { PriceCalculatorService } from '../../../services/AboutUs/price-calculator-service';
+import { CartItem } from '../../../models/Cart/cart';
 
 GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.14.305/pdf.worker.min.js';
@@ -24,22 +27,19 @@ export class MakeOrderPage {
   imageHeight: number | null = null;
   private currentObjectUrl: string | null = null;
 
-  pricePerSheetBW = 0.05;
-  pricePerSheetColor = 0.15;
-
-  constructor(private orderService: OrderService, private zone: NgZone) {
+  constructor(
+    private zone: NgZone,
+    private cartService: CartService,
+    private priceCalculator: PriceCalculatorService,
+    private router: Router
+  ) {
     this.orderForm = new FormGroup({
-      pagesF: new FormControl(1),
-      copiesF: new FormControl(1),
-      doubleSidedF: new FormControl(false),
-      bindingF: new FormControl(false),
-      colorF: new FormControl(false),
-      commentsF: new FormControl(''),
-      customerNameF: new FormControl(''),
-      surnameF: new FormControl(''),
-      phoneF: new FormControl(''),
-      paymentMethodF: new FormControl('cash'),
-      signF: new FormControl(0)
+      pages: new FormControl(1, [Validators.required, Validators.min(1)]),
+      copies: new FormControl(1, [Validators.required, Validators.min(1)]),
+      isDoubleSided: new FormControl(false),
+      binding: new FormControl(null),
+      isColor: new FormControl(false),
+      comments: new FormControl(''),
     });
   }
 
@@ -72,7 +72,6 @@ export class MakeOrderPage {
         this.zone.run(() => {
           this.imageWidth = img.width;
           this.imageHeight = img.height;
-          // revocar cuando ya no se necesite
           if (this.currentObjectUrl) {
             URL.revokeObjectURL(this.currentObjectUrl);
             this.currentObjectUrl = null;
@@ -93,7 +92,7 @@ export class MakeOrderPage {
 
       this.zone.run(() => {
         this.pageCount = pdf.numPages;
-        this.orderForm.get('pagesF')?.setValue(this.pageCount);
+        this.orderForm.get('pages')?.setValue(this.pageCount);
       });
 
       console.log('Número de páginas:', this.pageCount);
@@ -105,46 +104,31 @@ export class MakeOrderPage {
     }
   }
 
-  get pagesToPrint(): number {
-    const pages = Number(this.orderForm.get('pagesF')?.value) || 0;
-    const copies = Number(this.orderForm.get('copiesF')?.value) || 1;
-    const doubleSided = !!this.orderForm.get('doubleSidedF')?.value;
-    const sheetsPerCopy = doubleSided ? Math.ceil(pages / 2) : pages;
-    return sheetsPerCopy * copies;
-  }
-
-  get unitPrice(): number {
-    return this.orderForm.get('colorF')?.value ? this.pricePerSheetColor : this.pricePerSheetBW;
-  }
-
-  get totalPrice(): number {
-    return this.pagesToPrint * this.unitPrice;
-  }
-
-  submitOrder() {
-    if (!this.orderForm.valid) return;
-
-    const formData = new FormData();
-    // convertir a string para evitar problemas
-    formData.append('pages', String(this.orderForm.get('pagesF')?.value));
-    formData.append('copies', String(this.orderForm.get('copiesF')?.value));
-    formData.append('doubleSided', String(this.orderForm.get('doubleSidedF')?.value));
-    formData.append('binding', String(this.orderForm.get('bindingF')?.value));
-    formData.append('color', String(this.orderForm.get('colorF')?.value));
-    formData.append('comments', String(this.orderForm.get('commentsF')?.value));
-    formData.append('customerName', String(this.orderForm.get('customerNameF')?.value));
-    formData.append('surname', String(this.orderForm.get('surnameF')?.value));
-    formData.append('phone', String(this.orderForm.get('phoneF')?.value));
-    formData.append('paymentMethod', String(this.orderForm.get('paymentMethodF')?.value));
-    formData.append('sign', String(this.orderForm.get('signF')?.value));
-    formData.append('totalPrice', String(this.totalPrice));
-    if (this.selectedFile) {
-      formData.append('file', this.selectedFile, this.selectedFile.name);
+  addToCart() {
+    if (this.orderForm.invalid || !this.selectedFile) {
+      this.orderForm.markAllAsTouched();
+      if (!this.selectedFile) {
+        alert('Por favor, selecciona un archivo.');
+      }
+      return;
     }
-    console.log('FormData preparada. totalPrice=', this.totalPrice);
+
+    const formValues = this.orderForm.value;
+
+    const newItem: Omit<CartItem, 'totalPrice'> = {
+      file: this.selectedFile,
+      ...formValues
+    };
+
+    const price = this.priceCalculator.calculateItemPrice(newItem);
+
+    const finalItem: CartItem = { ...newItem, totalPrice: price };
+
+    this.cartService.addItem(finalItem);
+    alert('¡Producto añadido al carrito!');
+    this.router.navigate(['/cart']);
   }
 
-  // nuevo: getters para usar desde la plantilla y evitar optional chaining en el template
   get isPdf(): boolean {
     return !!this.selectedFile && (
       this.selectedFile.type === 'application/pdf' ||

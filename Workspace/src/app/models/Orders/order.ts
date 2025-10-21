@@ -1,14 +1,14 @@
 export default interface Order {
-    orderId: number;
-    ringed: boolean;
-    printed: boolean;
-    delivered: boolean;
-    color: boolean;
+    id: number;
+    status: 'pending' | 'printing' | 'binding' | 'ready' | 'delivered' | 'cancelled';
+    isColor: boolean;
+    isDoubleSided: boolean;
+    binding?: 'ringed' | 'stapled' | null;
     pages: number;
-    comments: string;
-    archiveUrl: File | null;
+    comments?: string;
+    file: File | null;
     copies: number;
-    userId: number;
-    paymentId: number;
-    amount: number;
+    userId?: number;
+    totalPrice: number;
+    createdAt: Date;
 }

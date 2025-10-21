@@ -1,9 +1,9 @@
 export default interface Payment {
     paymentId: number;
     orderId: number;
-    paymentMethod: string;
-    paymentStatus: boolean;
+    paymentMethod: 'cash' | 'transfer' | 'credit_card';
+    paymentStatus: 'pending' | 'completed' | 'failed' | 'refunded';
     totalAmount: number;
-    sign: number;
+    depositAmount: number;
     orderDate: Date;
 }

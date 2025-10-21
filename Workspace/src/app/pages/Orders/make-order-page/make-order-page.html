@@ -23,24 +23,28 @@
   </fieldset>
   <legend>Paginas y anillado</legend>
   <fieldset>
+    <label for="pages">Número de páginas:</label>
+    <input type="number" id="pages" formControlName="pages" min="1">
     <label for="copies">Número de copias:</label>
-    <input type="number" id="copies" formControlName="copiesF" min="1">
+    <input type="number" id="copies" formControlName="copies" min="1">
   </fieldset>
   <fieldset>
     <label for="doubleSided">Doble cara</label>
-    <input type="checkbox" id="doubleSided" formControlName="doubleSidedF">
-    <label for="binding">Anillado</label>
-    <input type="checkbox" id="binding" formControlName="bindingF">
+    <input type="checkbox" id="doubleSided" formControlName="isDoubleSided">
     <label for="color">Color</label>
-    <input type="checkbox" id="color" formControlName="colorF">
+    <input type="checkbox" id="color" formControlName="isColor">
+  </fieldset>
+  <fieldset>
+    <label for="binding">Anillado:</label>
+    <select id="binding" formControlName="binding">
+      <option [ngValue]="null">Sin anillado</option>
+      <option value="ringed">Anillado</option>
+      <option value="stapled">Abrochado</option>
+    </select>
   </fieldset>
   <fieldset>
     <label for="comments">Comentarios:</label>
-    <textarea id="comments" formControlName="commentsF"></textarea>
+    <textarea id="comments" formControlName="comments"></textarea>
   </fieldset>
-
-  <p>Hojas a imprimir: {{ pagesToPrint }}</p>
-  <p>Total estimado: {{ totalPrice | number:'1.2-2' }}</p>
-
-  <button type="button" (click)="submitOrder()">Agregar al Carrito</button>
+  <button type="button" (click)="addToCart()">Agregar al Carrito</button>
 </form>

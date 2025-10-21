@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-show-cart-page',
@@ -15,11 +15,11 @@ export class ShowCartPage {
 
   constructor(private fb: FormBuilder) {
     this.cartForm = this.fb.group({
-      customerNameF: [''],
-      surnameF: [''],
-      phoneF: [''],
-      paymentMethodF: [''],
-      signF: [0]
+      customerName: ['', Validators.required],
+      surname: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      paymentMethod: ['', Validators.required],
+      signature: [null]
     });
   }
 }
