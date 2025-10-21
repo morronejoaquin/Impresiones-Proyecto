@@ -6,7 +6,7 @@ footer {
   font-size: 14px;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
 
-  position: relative;
+  position:fixed;
   bottom: 0;
   left: 0;
   width: 100%;

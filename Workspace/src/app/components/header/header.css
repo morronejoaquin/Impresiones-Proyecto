@@ -34,3 +34,8 @@ nav a:hover {
     gap: 15px;
   }
 }
+
+img{
+  width: 70px;
+  height: 70px;
+}
