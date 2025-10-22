@@ -6,7 +6,7 @@ export default interface OrderItem {
   binding?: 'ringed' | 'stapled' | null;
   pages: number;
   comments?: string;
-  file: String | null; //Cuando usemos una base de datos cambiarlo a File
+  file: File | null; //Cuando usemos una base de datos cambiarlo a File
   copies: number;
   amount: number;
 }
