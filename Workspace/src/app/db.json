@@ -1,0 +1,103 @@
+{
+  "prices": [
+    {
+      "pricesId": 1,
+      "pricePerSheetBW": 0.05,
+      "pricePerSheetColor": 0.15,
+      "priceRingedBinding": 2.5
+    }
+  ],
+  "users": [
+    {
+      "userId": 1,
+      "username": "jdoe",
+      "name": "John",
+      "surname": "Doe",
+      "email": "john@example.com",
+      "role": "registered",
+      "phone": "+1234567890"
+    },
+    {
+      "userId": 2,
+      "username": "guest1",
+      "name": "Guest",
+      "surname": "User",
+      "email": "guest@example.com",
+      "role": "guest",
+      "phone": ""
+    }
+  ],
+  "carts": [
+    {
+      "cartId": 1,
+      "userId": 1,
+      "total": 12.5,
+      "customer": {
+        "name": "John",
+        "surname": "Doe",
+        "phone": "+1234567890"
+      },
+      "status": "pending"
+    },
+    {
+      "cartId": 2,
+      "userId": null,
+      "total": 3.0,
+      "customer": {
+        "name": "Guest",
+        "surname": "User",
+        "phone": ""
+      },
+      "status": "printing"
+    }
+  ],
+  "orderItems": [
+    {
+      "id": 1,
+      "cartId": 1,
+      "isColor": true,
+      "isDoubleSided": false,
+      "binding": "ringed",
+      "pages": 10,
+      "comments": "Please print high quality",
+      "file": null,
+      "copies": 1,
+      "amount": 5.0
+    },
+    {
+      "id": 2,
+      "cartId": 1,
+      "isColor": false,
+      "isDoubleSided": true,
+      "binding": null,
+      "pages": 20,
+      "comments": null,
+      "file": null,
+      "copies": 1,
+      "amount": 7.5
+    },
+    {
+      "id": 3,
+      "cartId": 2,
+      "isColor": false,
+      "isDoubleSided": false,
+      "binding": null,
+      "pages": 6,
+      "comments": "Draft",
+      "file": null,
+      "copies": 1,
+      "amount": 3.0
+    }
+  ],
+  "payments": [
+    {
+      "paymentId": 1,
+      "cartId": 1,
+      "paymentMethod": "credit_card",
+      "paymentStatus": "pending",
+      "finalPrice": 12.5,
+      "depositAmount": 0,
+      "orderDate": "2025-10-22T20:48:22.000Z"
+    }
+  ]
+}

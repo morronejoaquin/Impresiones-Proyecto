@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../../services/Cart/cart-service';
 import { PriceCalculatorService } from '../../../services/AboutUs/price-calculator-service';
-import { CartItem } from '../../../models/Cart/cart';
 
 GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.14.305/pdf.worker.min.js';

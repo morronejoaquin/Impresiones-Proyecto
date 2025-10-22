@@ -1,18 +1,16 @@
-import Order from "../Orders/order";
-
-// Un item en el carrito es una orden antes de ser confirmada
-export interface CartItem extends Omit<Order, 'id' | 'status' | 'createdAt'> {
-    // Aca se pueden poner propiedades que solo existen en el carrito, si las hubiera
-}
+import OrderItem from "../Orders/order";
 
 export interface CustomerData {
-    name: string;
-    surname: string;
-    phone: string;
+  name: string;
+  surname: string;
+  phone: string;
 }
 
 export default interface Cart {
-    items: CartItem[];
-    total: number;
-    customer?: CustomerData; // Datos del cliente que se van llenando
+  cartId: number;
+  userId?: number | null; // foreign key -> User.userId (nullable for guest carts)
+  items: OrderItem[];
+  total: number;
+  customer?: CustomerData;
+  status: 'pending' | 'printing' | 'binding' | 'ready' | 'delivered' | 'cancelled';
 }
