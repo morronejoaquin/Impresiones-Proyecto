@@ -103,30 +103,6 @@ export class MakeOrderPage {
     }
   }
 
-  addToCart() {
-    if (this.orderForm.invalid || !this.selectedFile) {
-      this.orderForm.markAllAsTouched();
-      if (!this.selectedFile) {
-        alert('Por favor, selecciona un archivo.');
-      }
-      return;
-    }
-
-    const formValues = this.orderForm.value;
-
-    const newItem: Omit<CartItem, 'totalPrice'> = {
-      file: this.selectedFile,
-      ...formValues
-    };
-
-    const price = this.priceCalculator.calculateItemPrice(newItem);
-
-    const finalItem: CartItem = { ...newItem, totalPrice: price };
-
-    this.cartService.addItem(finalItem);
-    alert('¡Producto añadido al carrito!');
-    this.router.navigate(['/cart']);
-  }
 
   get isPdf(): boolean {
     return !!this.selectedFile && (

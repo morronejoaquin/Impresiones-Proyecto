@@ -1,5 +1,5 @@
-header {
-  background: linear-gradient(90deg, #f9d923, #00aaff, #ff66cc);
+header {background: #ff0000;
+  background: linear-gradient(339deg, rgba(255, 0, 0, 1) 0%, rgba(21, 0, 255, 1) 100%);
   padding: 15px 0;
   color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
@@ -24,8 +24,8 @@ nav a {
 }
 
 nav a:hover {
-  color: #f9d923; 
-  text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+  color: #fcc100; 
+  text-shadow: 0 0 8px rgb(250, 2, 2);
 }
 
 @media (max-width: 768px) {
