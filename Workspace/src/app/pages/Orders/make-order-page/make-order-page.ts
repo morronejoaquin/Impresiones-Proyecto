@@ -7,7 +7,7 @@ import { CartService } from '../../../services/Cart/cart-service';
 import { PriceCalculatorService } from '../../../services/AboutUs/price-calculator-service';
 
 GlobalWorkerOptions.workerSrc =
-  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.14.305/pdf.worker.min.js';
+  'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.149/pdf.worker.min.mjs';
 
 @Component({
   selector: 'app-make-order-page',
