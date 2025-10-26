@@ -1,1 +1,32 @@
-<p>price-calculator-page works!</p>
+<form [formGroup]="calculatorForm" (ngSubmit)="calcularPrecio()" class="calculator-form">
+  <label for="pages">Páginas:</label>
+  <input type="number" id="pages" formControlName="pages" />
+
+  <label for="copies">Copias:</label>
+  <input type="number" id="copies" formControlName="copies" />
+
+  <label>
+    <input type="checkbox" formControlName="isDoubleSided" />
+    Doble faz
+  </label>
+
+  <label for="binding">Tipo de encuadernado:</label>
+  <select id="binding" formControlName="binding">
+    <option [value]="null">Ninguno</option>
+    <option value="ringed">Anillado</option>
+    <option value="stapled">Grapado</option>
+  </select>
+
+  <label>
+    <input type="checkbox" formControlName="isColor" />
+    Impresión a color
+  </label>
+
+  <button type="submit">Calcular precio</button>
+</form>
+
+@if (calculatedPrice !== null) {
+  <section class="result">
+    <h3>Precio total: ${{ calculatedPrice }}</h3>
+  </section>
+}
