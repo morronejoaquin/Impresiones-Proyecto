@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { UserService } from '../../../services/Users/user-service';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import User from '../../../models/Users/user';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-user-login-page',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './user-login-page.html',
   styleUrl: './user-login-page.css'
 })
