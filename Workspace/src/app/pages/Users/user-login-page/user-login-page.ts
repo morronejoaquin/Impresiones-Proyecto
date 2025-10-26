@@ -1,7 +1,7 @@
 import { UserService } from '../../../services/Users/user-service';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import User from '../../../models/Users/user';
-import {  RouterLink } from '@angular/router';
+import {  Router, RouterLink } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -14,14 +14,14 @@ export class UserLoginPage implements OnInit {
 
   formUser:FormGroup;
   
-constructor(private userS:UserService,private fb:FormBuilder){
-  this.formUser=this.fb.group({
-    usernameF:['',Validators.required],
-    passwordF:['',Validators.required]
-  });
-}
+  constructor(private userS:UserService,private fb:FormBuilder, private router: Router){
+    this.formUser=this.fb.group({
+      usernameF:['',Validators.required],
+      passwordF:['',Validators.required]
+    });
+  }
+  
   ngOnInit() {
-
     this.cargarUsuarios();
   }
 
@@ -40,8 +40,9 @@ constructor(private userS:UserService,private fb:FormBuilder){
         const usuarioEncontrado=this.userS.User
         .find((user:User)=> user.username===username && user.password===password)
         if (usuarioEncontrado){
-          this.userS.setUserLoggedIn(usuarioEncontrado);
+          this.userS.setLoggedInUser(usuarioEncontrado);
           console.log('Login exitoso');
+          this.router.navigate(['/home'])
         } else {
           console.log('Credenciales incorrectas');
         }
@@ -50,4 +51,24 @@ constructor(private userS:UserService,private fb:FormBuilder){
     }
   }
 
+  loginAsGuest() {
+    const guestUser = this.userS.User.find((user: User) => user.role === 'guest');
+
+    if (guestUser) {
+      console.log('Ingresando como invitado.');
+      this.handleLogin(guestUser);
+    } else {
+      console.error('Error: Usuario invitado no encontrado en los datos.');
+    }
+  }
+
+  private handleLogin(user: User | undefined) {
+    if (user) {
+      this.userS.setLoggedInUser(user);
+      console.log(`Login exitoso como ${user.role}`);
+      this.router.navigate(['/make-order']); 
+    } else {
+      console.log('Credenciales incorrectas');
+    }
+  }
 }

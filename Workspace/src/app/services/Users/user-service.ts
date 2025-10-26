@@ -6,37 +6,63 @@ import User from '../../models/Users/user';
   providedIn: 'root'
 })
 export class UserService {
-    readonly url='http://localhost:3000/users'
+  
+  readonly url='http://localhost:3000/users'
 
-    User:User[]=[]
+  User:User[]=[]
 
-    constructor(private http:HttpClient) { }
+  private loggedInUser: User | null = null;
 
-    getUsers(){
-      return this.http.get<User[]>(this.url);
+  constructor(private http:HttpClient) {
+    const userJson = sessionStorage.getItem('currentUser');
+      if (userJson) {
+          this.loggedInUser = JSON.parse(userJson);
+      }
+  }
+
+  getUsers(){
+    return this.http.get<User[]>(this.url);
+  }
+
+  getUserById(id:number){
+    return this.http.get<User>(`${this.url}/${id}`);
+  }
+
+  postUser(user:User){
+    return this.http.post<User>(this.url,user);
+  }
+
+  updateUser(user:User){
+    return this.http.put<User>(`${this.url}/${user.userId}`,user);
+  }
+
+  deleteUser(id:number){
+    return this.http.delete<User>(`${this.url}/${id}`);
+  }
+
+  // guarda el usuario en sessionStorage
+  setLoggedInUser(user: User) {
+      this.loggedInUser = user;
+      sessionStorage.setItem('currentUser', JSON.stringify(user)); 
+  }
+
+  // recupera el usuario guardado en sessionStorage en caso de que se recargue
+  // la pagina
+  getLoggedInUser(): User | null {
+    if (!this.loggedInUser) {
+        const userJson = sessionStorage.getItem('currentUser');
+        if (userJson) {
+            this.loggedInUser = JSON.parse(userJson);
+        }
     }
+    return this.loggedInUser;
+  }
 
-    getUserById(id:number){
-      return this.http.get<User>(`${this.url}/${id}`);
-    }
+  // obtiene el rol del usuario
+  getUserRole(): 'admin' | 'guest' | 'registered' | null {
+    return this.getLoggedInUser()?.role || null;
+  }
 
-    postUser(user:User){
-      return this.http.post<User>(this.url,user);
-    }
 
-    updateUser(user:User){
-      return this.http.put<User>(`${this.url}/${user.userId}`,user);
-    }
-
-    deleteUser(id:number){
-      return this.http.delete<User>(`${this.url}/${id}`);
-}
-setUserLoggedIn(user:User){
-  localStorage.setItem('registered',JSON.stringify(user));
-}
-getUserLoggedIn(): User | null {
-  const user = localStorage.getItem('registered');
-  return user ? JSON.parse(user) : null;
-}
 
 }

@@ -15,7 +15,8 @@
       "surname": "Doe",
       "email": "john@example.com",
       "role": "registered",
-      "phone": "+1234567890"
+      "phone": "+1234567890",
+      "password": "micontraseña1234"
     },
     {
       "userId": 2,
