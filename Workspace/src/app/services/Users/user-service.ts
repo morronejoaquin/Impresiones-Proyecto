@@ -8,6 +8,7 @@ import User from '../../models/Users/user';
 export class UserService {
     readonly url='http://localhost:3000/users'
 
+    User:User[]=[]
 
     constructor(private http:HttpClient) { }
 

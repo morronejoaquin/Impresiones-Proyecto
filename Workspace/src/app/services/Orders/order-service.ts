@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
+
+OrderItem:OrderItem[]=[]
 export class OrderService {
     readonly url='http://localhost:3000/orderItems'
 
@@ -29,5 +31,4 @@ updateOrderInCart(order:OrderItem){
 deleteOrderFromCart(id:number){
   return this.http.delete<OrderItem>(`${this.url}/${id}`);
 }
-
 }

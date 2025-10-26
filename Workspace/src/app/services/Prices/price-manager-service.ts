@@ -9,6 +9,7 @@ import Prices from '../../models/Prices/Prices';
 export class PriceManagerService {
   readonly url='http://localhost:3000/prices'
   
+  Prices:Prices[]=[]
     constructor (private http:HttpClient) { 
       
   }	

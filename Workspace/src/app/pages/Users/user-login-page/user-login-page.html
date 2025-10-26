@@ -1,1 +1,11 @@
-<p>user-login-page works!</p>
+<form [formGroup]="formUser">
+<fieldset>
+    <label for="name">Ingresa tu nombre de usuario</label>
+    <input id="name" formControlName="usernameF">
+</fieldset>
+<fieldset>
+    <label for="password">Ingresa tu contraseña</label>
+    <input id="password" type="password" formControlName="passwordF">
+</fieldset>
+<button (click)="verificarLogin()">Iniciar Sesion</button>
+</form>

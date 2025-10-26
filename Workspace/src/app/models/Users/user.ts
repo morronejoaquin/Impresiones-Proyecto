@@ -6,4 +6,5 @@ export default interface User {
   email: string;
   role: 'admin' | 'guest' | 'registered';
   phone: string;
+  password:string;
 }
