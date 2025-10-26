@@ -13,7 +13,7 @@ export class CartService {
   constructor(private http:HttpClient) { }
 
 
-  getCartItems(): Observable<any[]> {
+  getCartItems(){
     //Deberia llamar desde la page al otro 
     // servicio de Orders ya que cart no guarda id de orders
     //Este es de uso del admin o del empleado
@@ -21,15 +21,15 @@ export class CartService {
     //Revisar metodo getOrdersFromCart en order-service.ts
   }
 
-  getCartByUserId(userId: number): Observable<any> {
+  getCartByUserId(userId: number) {
     return this.http.get<Cart>(`${this.url}?userId=${userId}`);
   }
 
-  postCart(cart: Cart): Observable<any> {
+  postCart(cart: Cart) {
     return this.http.post<any>(this.url, cart);
     //Se lo envia al administrador o empleado
   }
-  putCart(cart: Cart): Observable<any> {
+  putCart(cart: Cart){
 //REVISAR ESTO deberia realizarse desde cada 
 // order si es de una orden en especifico
 //Se deberia editar los datos para realizar 
@@ -37,7 +37,7 @@ export class CartService {
     return this.http.put<Cart>(`${this.url}/${cart.cartId}`, cart);
   }
   
-  deleteCart(cartId: number): Observable<any> {
+  deleteCart(cartId: number){
     return this.http.delete<any>(`${this.url}/${cartId}`);
   }
 }

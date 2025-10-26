@@ -1,12 +1,15 @@
-<form [formGroup]="formUser">
-<fieldset>
+<form [formGroup]="formUser" (ngSubmit)="verificarLogin()">
+  <fieldset>
     <label for="name">Ingresa tu nombre de usuario</label>
     <input id="name" formControlName="usernameF">
-</fieldset>
-<fieldset>
+  </fieldset>
+
+  <fieldset>
     <label for="password">Ingresa tu contraseña</label>
     <input id="password" type="password" formControlName="passwordF">
-</fieldset>
-<button (click)="verificarLogin()">Iniciar Sesion</button>
-//No tienes cuenta?. Crear componente <a routerLink="/user-register">No tienes cuenta? Registrate aqui</a>
+  </fieldset>
+
+  <button type="submit">Iniciar Sesión</button>
 </form>
+//Crear page
+<a routerLink="/user-register-page">¿No tienes cuenta? Regístrate aquí</a>

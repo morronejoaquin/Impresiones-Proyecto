@@ -31,4 +31,12 @@ export class UserService {
     deleteUser(id:number){
       return this.http.delete<User>(`${this.url}/${id}`);
 }
+setUserLoggedIn(user:User){
+  localStorage.setItem('registered',JSON.stringify(user));
+}
+getUserLoggedIn(): User | null {
+  const user = localStorage.getItem('registered');
+  return user ? JSON.parse(user) : null;
+}
+
 }

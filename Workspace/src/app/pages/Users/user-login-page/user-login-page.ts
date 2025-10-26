@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
 import { UserService } from '../../../services/Users/user-service';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import User from '../../../models/Users/user';
-import { Router, RouterLink } from '@angular/router';
+import {  RouterLink } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-user-login-page',
-  imports: [RouterLink],
+  imports: [RouterLink,ReactiveFormsModule],
   templateUrl: './user-login-page.html',
   styleUrl: './user-login-page.css'
 })
@@ -17,7 +17,7 @@ export class UserLoginPage implements OnInit {
 constructor(private userS:UserService,private fb:FormBuilder){
   this.formUser=this.fb.group({
     usernameF:['',Validators.required],
-    password:['',Validators.required]
+    passwordF:['',Validators.required]
   });
 }
   ngOnInit() {
@@ -35,18 +35,18 @@ constructor(private userS:UserService,private fb:FormBuilder){
     verificarLogin(){
       if (this.formUser.valid){
         const username=this.formUser.get('usernameF')?.value;
-        const password=this.formUser.get('password')?.value;
+        const password=this.formUser.get('passwordF')?.value;
 
         const usuarioEncontrado=this.userS.User
         .find((user:User)=> user.username===username && user.password===password)
         if (usuarioEncontrado){
+          this.userS.setUserLoggedIn(usuarioEncontrado);
           console.log('Login exitoso');
         } else {
           console.log('Credenciales incorrectas');
         }
       } else {
-        console.log('Formulario no válido')
-        ;
+        console.log('Formulario no válido');
     }
   }
 

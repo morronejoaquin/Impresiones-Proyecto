@@ -4,7 +4,6 @@ import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/legacy/build/pdf';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../../services/Cart/cart-service';
-import { PriceCalculatorService } from '../../../services/AboutUs/price-calculator-service';
 
 GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.149/pdf.worker.min.mjs';
@@ -29,7 +28,6 @@ export class MakeOrderPage {
   constructor(
     private zone: NgZone,
     private cartService: CartService,
-    private priceCalculator: PriceCalculatorService,
     private router: Router
   ) {
     this.orderForm = new FormGroup({

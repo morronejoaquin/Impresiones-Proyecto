@@ -6,10 +6,10 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 
-OrderItem:OrderItem[]=[]
 export class OrderService {
     readonly url='http://localhost:3000/orderItems'
 
+OrderItem:OrderItem[]=[]
 constructor(private http:HttpClient) { }
 
 getOrder(id:number){
