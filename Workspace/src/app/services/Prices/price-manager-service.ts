@@ -29,7 +29,7 @@ export class PriceManagerService {
     });
   }
 
-  calculatePrice(pages: number,copies: number,isDoubleSided: boolean,binding: 'ringed' | 'stapled' | null,isColor: boolean): number {
+  calculatePrice(pages: number,copies: number,isDoubleSided: boolean, binding: 'ringed' | 'stapled' | null , isColor: boolean): number {
     const priceData = this.Prices[0];
     if (!priceData) return 0;
 

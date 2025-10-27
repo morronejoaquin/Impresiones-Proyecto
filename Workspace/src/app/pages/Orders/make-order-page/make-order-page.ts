@@ -1,9 +1,10 @@
-import { Component, NgZone } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/legacy/build/pdf';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../../services/Cart/cart-service';
+import { PriceManagerService } from '../../../services/Prices/price-manager-service';
 
 GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.149/pdf.worker.min.mjs';
@@ -15,7 +16,7 @@ GlobalWorkerOptions.workerSrc =
   imports : [ReactiveFormsModule, CommonModule],
   styleUrls: ['./make-order-page.css']
 })
-export class MakeOrderPage {
+export class MakeOrderPage implements OnInit{
 
   orderForm: FormGroup;
   selectedFile: File | null = null;
@@ -24,11 +25,14 @@ export class MakeOrderPage {
   imageWidth: number | null = null;
   imageHeight: number | null = null;
   private currentObjectUrl: string | null = null;
+  public calculatedPrice: number | null = null;
 
   constructor(
     private zone: NgZone,
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private priceS: PriceManagerService,
+    private fb: FormBuilder
   ) {
     this.orderForm = new FormGroup({
       pages: new FormControl(1, [Validators.required, Validators.min(1)]),
@@ -59,9 +63,7 @@ export class MakeOrderPage {
 
     if (fileType === 'application/pdf' || this.selectedFile.name.toLowerCase().endsWith('.pdf')) {
       this.countPdfPages(this.selectedFile);
-    } else if (fileType === 'text/plain') {
-      console.log('Archivo TXT subido, tamaño:', this.selectedFile.size, 'bytes');
-    } else if (fileType === 'image/jpeg' || fileType === 'image/png' || this.selectedFile.type.startsWith('image/')) {
+   } else if (fileType === 'image/jpeg' || fileType === 'image/png' || this.selectedFile.type.startsWith('image/')) {
       const objUrl = URL.createObjectURL(this.selectedFile);
       this.currentObjectUrl = objUrl;
       const img = new Image();
@@ -119,5 +121,29 @@ export class MakeOrderPage {
 
   get fileSize(): number | null {
     return this.selectedFile ? this.selectedFile.size : null;
+  }
+
+  ngOnInit(): void {
+    this.cargarPrecios();
+    this.orderForm.valueChanges.subscribe(() => {
+      this.calcularPrecio();
+    });
+  }
+  cargarPrecios() {
+    this.priceS.getPrices().subscribe({
+      next: (data) => {
+        this.priceS.Prices = data;
+      },
+      error: (error) => {
+        console.error('Error al cargar los precios:', error);
+      }
+    });
+  }
+
+  calcularPrecio() {
+    if (this.orderForm.valid) {
+      const { pages, copies, isDoubleSided, binding, isColor } = this.orderForm.value;
+      this.calculatedPrice = this.priceS.calculatePrice(pages, copies, isDoubleSided, binding, isColor);
+    }
   }
 }

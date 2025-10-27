@@ -20,7 +20,7 @@ export class PriceCalculatorPage implements OnInit {
       pages: [1, [Validators.required, Validators.min(1)]],
       copies: [1, [Validators.required, Validators.min(1)]],
       isDoubleSided: [false, Validators.required],
-      binding: [null, Validators.required],
+      binding: [null],
       isColor: [false, Validators.required]
     });
   }
