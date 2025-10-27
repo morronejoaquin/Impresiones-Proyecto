@@ -63,4 +63,10 @@ export class UserService {
     return this.getLoggedInUser()?.role || null;
   }
 
+  // Cierra la sesión del usuario
+  logout() {
+    this.loggedInUser = null;
+    sessionStorage.removeItem('currentUser');
+  }
+
 }

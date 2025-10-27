@@ -1,1 +1,26 @@
-<p>account-page works!</p>
+<div class="account-container">
+  <div *ngIf="currentUser; else notLoggedIn">
+    <h2>Bienvenido, {{ currentUser.name }}</h2>
+
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Información de la Cuenta:</h5>
+        <p class="card-text"><strong>Nombre completo:</strong> {{ currentUser.name }} {{ currentUser.surname }}</p>
+        <p class="card-text"><strong>Email:</strong> {{ currentUser.email }}</p>
+        <p class="card-text"><strong>Teléfono:</strong> {{ currentUser.phone }}</p>
+        <p class="card-text"><strong>Rol actual:</strong>
+          <span *ngIf="currentUser.role === 'registered'">Registrado</span>
+          <span *ngIf="currentUser.role === 'admin'">Administrador</span>
+          <span *ngIf="currentUser.role === 'guest'">Invitado</span>
+        </p>
+      </div>
+      <div class="card-footer">
+        <button (click)="logout()" class="btn-danger">Cerrar Sesión</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #notLoggedIn>
+    <p>Por favor, inicia sesión para ver tu cuenta.</p>
+  </ng-template>
+</div>

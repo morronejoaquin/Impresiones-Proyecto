@@ -1,0 +1,96 @@
+/* Variables de diseño */
+:root {
+    --primary-color: #007bff;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --background-color: #f8f9fa;
+    --card-background: #ffffff;
+    --text-color: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --card-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    --card-radius: 15px;
+}
+
+/* Contenedor principal de la página */
+.account-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--background-color);
+}
+
+/* Títulos */
+h2 {
+    font-size: 2.25rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Tarjeta de información */
+.card {
+    background: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+}
+
+.card-body {
+    padding: 2rem 2.5rem;
+}
+
+.card-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.card-text {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+}
+
+.card-text strong {
+    color: var(--text-muted);
+    min-width: 180px; /* Aumenta el espacio para las etiquetas */
+    font-weight: 500;
+}
+
+.card-footer {
+    background-color: #ffffff;
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+/* Botón de Cerrar Sesión */
+.btn-danger {
+    padding: 0.6rem 1.5rem;
+    background-color: #c82333;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: #dc3545;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
