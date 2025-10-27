@@ -1,1 +1,54 @@
-<p>user-register-page works!</p>
+<form (ngSubmit)="onRegisterSubmit()" [formGroup]="registerForm">
+    <h1>Registro</h1>
+  
+    <fieldset>
+      <input formControlName="username" type="text" placeholder="Nombre de usuario" />
+      @if (registerForm.get('usernameF')?.touched && registerForm.get('usernameF')?.hasError('required')) {
+        <small>El nombre de usuario es obligatorio</small>
+      }
+    </fieldset>
+  
+    <fieldset>
+      <input formControlName="name" type="text" placeholder="Nombre" />
+      @if (registerForm.get('nameF')?.touched && registerForm.get('nameF')?.hasError('required')) {
+        <small>El nombre es obligatorio</small>
+      }
+    </fieldset>
+  
+    <fieldset>
+      <input formControlName="surname" type="text" placeholder="Apellido" />
+      @if (registerForm.get('surnameF')?.touched && registerForm.get('surnameF')?.hasError('required')) {
+        <small>El apellido es obligatorio</small>
+      }
+    </fieldset>
+  
+    <fieldset>
+      <input formControlName="email" type="email" placeholder="Correo electrónico" />
+      @if (registerForm.get('emailF')?.touched && registerForm.get('emailF')?.hasError('email')) {
+        <small>El correo electrónico no es válido</small>
+      }
+    </fieldset>
+  
+    <fieldset>
+      <input formControlName="phone" type="text" placeholder="Teléfono" />
+      @if (registerForm.get('phoneF')?.touched && registerForm.get('phoneF')?.hasError('required')) {
+        <small>El teléfono es obligatorio</small>
+      }
+    </fieldset>
+  
+    <fieldset>
+      <input formControlName="password" type="password" placeholder="Contraseña" />
+      @if (registerForm.get('passwordF')?.touched && registerForm.get('passwordF')?.hasError('pattern')) {
+        <small>La contraseña debe tener mayúsculas, minúsculas, número y símbolo.</small>
+      }
+      @else if (registerForm.get('passwordF')?.touched && registerForm.get('passwordF')?.hasError('minlength')) {
+        <small>Debe tener al menos 6 caracteres</small>
+      }
+      @else if (registerForm.get('passwordF')?.touched && registerForm.get('passwordF')?.hasError('maxlength')) {
+        <small>No puede superar los 18 caracteres</small>
+      }
+    </fieldset>
+  
+    <button type="submit">Registrarse</button>
+  </form>
+  

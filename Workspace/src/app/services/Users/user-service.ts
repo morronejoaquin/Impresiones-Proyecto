@@ -33,7 +33,7 @@ export class UserService {
   }
 
   updateUser(user:User){
-    return this.http.put<User>(`${this.url}/${user.userId}`,user);
+    return this.http.put<User>(`${this.url}/${user.id}`,user);
   }
 
   deleteUser(id:number){
@@ -62,7 +62,5 @@ export class UserService {
   getUserRole(): 'admin' | 'guest' | 'registered' | null {
     return this.getLoggedInUser()?.role || null;
   }
-
-
 
 }

@@ -1,0 +1,108 @@
+/* Contenedor principal del formulario */
+.calculator-form {
+    width: 100%;
+    max-width: 48rem;
+    margin: 2rem auto;
+    padding: 1.25rem;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(20, 20, 20, 0.06);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  /* Labels */
+  .calculator-form label {
+    display: block;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.35rem;
+  }
+  
+  /* Inputs y selects */
+  .calculator-form input[type="number"],
+  .calculator-form select {
+    width: 100%;
+    padding: 0.55em 0;
+    border: none;
+    border-bottom: 1px solid #d8d8d8;
+    background: transparent;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+  }
+  
+  /* Efectos al enfocar */
+  .calculator-form input:focus,
+  .calculator-form select:focus {
+    outline: none;
+    border-bottom: 2px solid #2a9d8f;
+  }
+  
+  /* Checkboxes */
+  .calculator-form input[type="checkbox"] {
+    margin-right: 0.5rem;
+    transform: scale(1.1);
+  }
+  
+  /* Alinear checkbox con su texto */
+  .calculator-form label input[type="checkbox"] + span,
+  .calculator-form label input[type="checkbox"] {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  /* Botón principal */
+  .calculator-form button[type="submit"] {
+    width: 100%;
+    padding: 0.85rem;
+    background: #2a9d8f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1rem;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  
+  .calculator-form button:hover {
+    transform: translateY(-2px);
+    background: #1f7a66;
+  }
+  
+  /* Sección del resultado */
+  .result {
+    margin-top: 1.5rem;
+    background: #f7f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(20, 20, 20, 0.04);
+  }
+  
+  .result h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #2a9d8f;
+    font-weight: 800;
+  }
+  
+  /* Responsive */
+  @media (max-width: 520px) {
+    .calculator-form {
+      padding: 0.9rem;
+      margin: 1rem;
+    }
+  
+    .calculator-form button {
+      padding: 0.75rem;
+      font-size: 0.95rem;
+    }
+  }
+  

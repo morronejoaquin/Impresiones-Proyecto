@@ -4,12 +4,13 @@
       "pricesId": 1,
       "pricePerSheetBW": 0.05,
       "pricePerSheetColor": 0.15,
-      "priceRingedBinding": 2.5
+      "priceRingedBinding": 2.5,
+      "id": "a7c9"
     }
   ],
   "users": [
     {
-      "userId": 1,
+      "id": "1",
       "username": "jdoe",
       "name": "John",
       "surname": "Doe",
@@ -19,13 +20,23 @@
       "password": "micontraseña1234"
     },
     {
-      "userId": 2,
+      "id": "2",
       "username": "guest1",
       "name": "Guest",
       "surname": "User",
       "email": "guest@example.com",
       "role": "guest",
       "phone": ""
+    },
+    {
+      "id": "cb57",
+      "username": "asd",
+      "name": "asd",
+      "surname": "asd",
+      "email": "asd@gmai.com",
+      "phone": "222222222",
+      "password": "Asdasd@1",
+      "role": "registered"
     }
   ],
   "carts": [
@@ -38,23 +49,25 @@
         "surname": "Doe",
         "phone": "+1234567890"
       },
-      "status": "pending"
+      "status": "pending",
+      "id": "1622"
     },
     {
       "cartId": 2,
       "userId": null,
-      "total": 3.0,
+      "total": 3,
       "customer": {
         "name": "Guest",
         "surname": "User",
         "phone": ""
       },
-      "status": "printing"
+      "status": "printing",
+      "id": "5423"
     }
   ],
   "orderItems": [
     {
-      "id": 1,
+      "id": "1",
       "cartId": 1,
       "isColor": true,
       "isDoubleSided": false,
@@ -63,10 +76,10 @@
       "comments": "Please print high quality",
       "file": null,
       "copies": 1,
-      "amount": 5.0
+      "amount": 5
     },
     {
-      "id": 2,
+      "id": "2",
       "cartId": 1,
       "isColor": false,
       "isDoubleSided": true,
@@ -78,7 +91,7 @@
       "amount": 7.5
     },
     {
-      "id": 3,
+      "id": "3",
       "cartId": 2,
       "isColor": false,
       "isDoubleSided": false,
@@ -87,7 +100,7 @@
       "comments": "Draft",
       "file": null,
       "copies": 1,
-      "amount": 3.0
+      "amount": 3
     }
   ],
   "payments": [
@@ -98,7 +111,8 @@
       "paymentStatus": "pending",
       "finalPrice": 12.5,
       "depositAmount": 0,
-      "orderDate": "2025-10-22T20:48:22.000Z"
+      "orderDate": "2025-10-22T20:48:22.000Z",
+      "id": "4055"
     }
   ]
 }
