@@ -7,6 +7,9 @@ import Cart from '../../models/Cart/cart';
   providedIn: 'root'
 })
 export class CartService {
+  postOrderToCart(arg0: Cart) {
+    throw new Error('Method not implemented.');
+  }
   readonly url='http://localhost:3000/carts'
 
   Cart:Cart[]=[]
@@ -22,7 +25,7 @@ export class CartService {
   }
 
   getCartByUserId(userId: number) {
-    return this.http.get<Cart>(`${this.url}?userId=${userId}`);
+    return this.http.get<Cart[]>(`${this.url}?userId=${userId}`);
   }
 
   postCart(cart: Cart) {

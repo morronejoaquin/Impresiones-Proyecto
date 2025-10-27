@@ -5,6 +5,9 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CartService } from '../../../services/Cart/cart-service';
 import { PriceManagerService } from '../../../services/Prices/price-manager-service';
+import Cart from '../../../models/Cart/cart';
+import OrderItem from '../../../models/Orders/order';
+import { OrderService } from '../../../services/Orders/order-service';
 
 GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.149/pdf.worker.min.mjs';
@@ -26,13 +29,15 @@ export class MakeOrderPage implements OnInit{
   imageHeight: number | null = null;
   private currentObjectUrl: string | null = null;
   public calculatedPrice: number | null = null;
+  orderItemService: any;
 
   constructor(
     private zone: NgZone,
     private cartService: CartService,
     private router: Router,
     private priceS: PriceManagerService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private orderService: OrderService
   ) {
     this.orderForm = new FormGroup({
       pages: new FormControl(1, [Validators.required, Validators.min(1)]),
@@ -146,4 +151,76 @@ export class MakeOrderPage implements OnInit{
       this.calculatedPrice = this.priceS.calculatePrice(pages, copies, isDoubleSided, binding, isColor);
     }
   }
+
+  addToCart() {
+  // 1️⃣ Validar que haya archivo y que el formulario sea válido
+  if (!this.selectedFile || !this.orderForm.valid) {
+    alert('Selecciona un archivo y completa todos los campos.');
+    return;
+  }
+
+  // 2️⃣ Obtener el userId actual (ejemplo: desde login o localStorage)
+  const userId = 1; // reemplazar con el userId real de tu auth/login
+
+  // 3️⃣ Consultar si ya existe un carrito para este usuario
+  this.cartService.getCartByUserId(userId).subscribe({
+    next: (carts) => {
+      if (Array.isArray(carts) && carts.length > 0) {
+        // ✅ Usuario ya tiene carrito → agregamos el item
+        this.createOrderItem(carts[0].cartId);//aca es en la posicion cero pq siempre es un carrito por
+      } else {
+        // 🆕 Usuario no tiene carrito → creamos uno
+        const newCart: Partial<Cart> = {
+          userId,
+          total: 0,
+          status: 'pending'
+        };
+
+        this.cartService.postCart(newCart as Cart).subscribe({//aca le agrega el carrito al usuario
+          next: (createdCart) => {
+            this.createOrderItem(createdCart.cartId);
+          },
+          error: (err) => console.error('Error creando carrito:', err)
+        });
+      }
+    },
+    error: (err) => console.error('Error obteniendo carrito:', err)
+  });
+}
+
+private createOrderItem(cartId: number) {
+  const f = this.orderForm.value;
+
+  const newItem: OrderItem = {
+    id: 0,// JSON Server asigna automáticamente el id
+    cartId,
+    isColor: f.isColor,
+    isDoubleSided: f.isDoubleSided,
+    binding: f.binding,
+    pages: f.pages,
+    copies: f.copies,
+    comments: f.comments,
+    file: this.selectedFile,
+    amount: this.calculatedPrice ?? 0
+  };
+
+  this.orderService.postOrderToCart(newItem).subscribe({
+    next: () => {
+      alert('Archivo agregado al carrito');
+      // Limpiar formulario y selección de archivo
+      this.selectedFile = null;
+      this.selectedFileName = 'Selecciona un archivo';
+      this.orderForm.reset({
+        pages: 1,
+        copies: 1,
+        isDoubleSided: false,
+        binding: null,
+        isColor: false,
+        comments: ''
+      });
+      this.calculatedPrice = null;
+    },
+    error: (err: any) => console.error('Error agregando item:', err)
+  });
+}
 }

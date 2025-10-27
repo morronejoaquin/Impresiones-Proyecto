@@ -101,6 +101,30 @@
       "file": null,
       "copies": 1,
       "amount": 3
+    },
+    {
+      "id": 0,
+      "cartId": 1,
+      "isColor": true,
+      "isDoubleSided": false,
+      "binding": null,
+      "pages": 1,
+      "copies": 1,
+      "comments": "",
+      "file": {},
+      "amount": 0.15
+    },
+    {
+      "id": 0,
+      "cartId": 1,
+      "isColor": true,
+      "isDoubleSided": true,
+      "binding": null,
+      "pages": 1,
+      "copies": 17,
+      "comments": "opti",
+      "file": {},
+      "amount": 2.55
     }
   ],
   "payments": [

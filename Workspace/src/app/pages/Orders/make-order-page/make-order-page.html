@@ -1,4 +1,4 @@
-<form [formGroup]="orderForm">
+<form [formGroup]="orderForm" (ngSubmit)="addToCart()">
   <legend>Sube tu archivo</legend>
   <fieldset>
     <div class="file-input-wrapper" (click)="fileInput.click()">
@@ -47,5 +47,5 @@
     <h3>Precio total: ${{ calculatedPrice }}</h3>
   </section>
 }
-  <button type="button">Agregar al Carrito</button>
+  <button type="submit">Agregar al Carrito</button>
 </form>
