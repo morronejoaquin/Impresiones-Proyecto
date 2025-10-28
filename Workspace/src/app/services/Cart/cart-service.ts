@@ -24,7 +24,7 @@ export class CartService {
     //Revisar metodo getOrdersFromCart en order-service.ts
   }
 
-  getCartByUserId(userId: number) {
+  getCartByUserId(userId: string) {
     return this.http.get<Cart[]>(`${this.url}?userId=${userId}`);
   }
 
@@ -40,7 +40,11 @@ export class CartService {
     return this.http.put<Cart>(`${this.url}/${cart.cartId}`, cart);
   }
   
-  deleteCart(cartId: number){
+  deleteCart(cartId: string){
     return this.http.delete<any>(`${this.url}/${cartId}`);
+  }
+
+  getCartByUserIdObservable(userId: string): Observable<Cart[]> {
+    return this.http.get<Cart[]>(`${this.url}?userId=${userId}`);
   }
 }

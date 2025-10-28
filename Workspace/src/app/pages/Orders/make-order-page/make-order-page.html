@@ -47,5 +47,5 @@
     <h3>Precio total: ${{ calculatedPrice }}</h3>
   </section>
 }
-  <button type="submit">Agregar al Carrito</button>
+  <button type="submit" [disabled]="!orderForm.valid || !selectedFile">Agregar al Carrito</button>
 </form>

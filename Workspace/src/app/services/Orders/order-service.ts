@@ -16,7 +16,7 @@ getOrder(id:number){
   return this.http.get<OrderItem>(`${this.url}/${id}`);
 }
 
-getOrdersFromCart(cartId:number){
+getOrdersFromCart(cartId:string){
   return this.http.get<OrderItem[]>(`${this.url}?cartId=${cartId}`);
 }
 
@@ -28,7 +28,7 @@ updateOrderInCart(order:OrderItem){
   return this.http.put<OrderItem>(`${this.url}/${order.id}`,order);
 }
 
-deleteOrderFromCart(id:number){
+deleteOrderFromCart(id:string){
   return this.http.delete<OrderItem>(`${this.url}/${id}`);
 }
 }

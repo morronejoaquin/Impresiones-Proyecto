@@ -24,7 +24,7 @@ export class UserService {
     return this.http.get<User[]>(this.url);
   }
 
-  getUserById(id:number){
+  getUserById(id:string){
     return this.http.get<User>(`${this.url}/${id}`);
   }
 
@@ -36,7 +36,7 @@ export class UserService {
     return this.http.put<User>(`${this.url}/${user.id}`,user);
   }
 
-  deleteUser(id:number){
+  deleteUser(id:string){
     return this.http.delete<User>(`${this.url}/${id}`);
   }
 

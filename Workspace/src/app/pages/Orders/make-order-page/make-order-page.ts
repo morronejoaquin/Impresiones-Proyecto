@@ -2,11 +2,10 @@ import { Component, NgZone, OnInit } from '@angular/core';
 import { FormGroup, FormControl, ReactiveFormsModule, Validators, FormBuilder } from '@angular/forms';
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/legacy/build/pdf';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { CartService } from '../../../services/Cart/cart-service';
 import { PriceManagerService } from '../../../services/Prices/price-manager-service';
+import { UserService } from '../../../services/Users/user-service';
 import Cart from '../../../models/Cart/cart';
-import OrderItem from '../../../models/Orders/order';
 import { OrderService } from '../../../services/Orders/order-service';
 
 GlobalWorkerOptions.workerSrc =
@@ -34,18 +33,20 @@ export class MakeOrderPage implements OnInit{
   constructor(
     private zone: NgZone,
     private cartService: CartService,
-    private router: Router,
     private priceS: PriceManagerService,
-    private fb: FormBuilder,
-    private orderService: OrderService
+    private orderService: OrderService,
+    private userService: UserService,
+    private fb: FormBuilder
   ) {
-    this.orderForm = new FormGroup({
-      pages: new FormControl(1, [Validators.required, Validators.min(1)]),
-      copies: new FormControl(1, [Validators.required, Validators.min(1)]),
-      isDoubleSided: new FormControl(false),
-      binding: new FormControl(null, [Validators.required]),
-      isColor: new FormControl(false),
-      comments: new FormControl(''),
+    this.orderForm = this.fb.group({
+      pages: [1, [Validators.required, Validators.min(1)]],
+      copies: [1, [Validators.required, Validators.min(1)]],
+      isDoubleSided: [false],
+      binding: ['unringed', [Validators.required]],
+      isColor: [false],
+      comments: [''],
+      file: [null],
+      amount: [0]
     });
   }
 
@@ -131,9 +132,12 @@ export class MakeOrderPage implements OnInit{
   ngOnInit(): void {
     this.cargarPrecios();
     this.orderForm.valueChanges.subscribe(() => {
-      this.calcularPrecio();
+        this.calcularPrecio();
     });
+    this.calcularPrecio(); // Calcular el precio inicial al cargar
   }
+
+
   cargarPrecios() {
     this.priceS.getPrices().subscribe({
       next: (data) => {
@@ -153,16 +157,20 @@ export class MakeOrderPage implements OnInit{
   }
 
   addToCart() {
-  // 1️⃣ Validar que haya archivo y que el formulario sea válido
   if (!this.selectedFile || !this.orderForm.valid) {
     alert('Selecciona un archivo y completa todos los campos.');
     return;
   }
 
-  // 2️⃣ Obtener el userId actual (ejemplo: desde login o localStorage)
-  const userId = 1; // reemplazar con el userId real de tu auth/login
+  const currentUser = this.userService.getLoggedInUser();
+  if (!currentUser) {
+    alert('Debes iniciar sesión para agregar productos al carrito.');
+    // Optionally, redirect to login page
+    return;
+  }
 
-  // 3️⃣ Consultar si ya existe un carrito para este usuario
+  const userId = currentUser.id;
+
   this.cartService.getCartByUserId(userId).subscribe({
     next: (carts) => {
       if (Array.isArray(carts) && carts.length > 0) {
@@ -188,23 +196,22 @@ export class MakeOrderPage implements OnInit{
   });
 }
 
-private createOrderItem(cartId: number) {
-  const f = this.orderForm.value;
 
-  const newItem: OrderItem = {
-    id: 0,// JSON Server asigna automáticamente el id
-    cartId,
-    isColor: f.isColor,
-    isDoubleSided: f.isDoubleSided,
-    binding: f.binding,
-    pages: f.pages,
-    copies: f.copies,
-    comments: f.comments,
-    file: this.selectedFileName,
-    amount: this.calculatedPrice ?? 0
+private createOrderItem(cartId: string) {
+  const f = this.orderForm.value;
+  const orderItem = {
+    ...f, // Copia las propiedades del formulario (pages, copies, etc.)
+    cartId: cartId, // 1. Agrega el cartId
+    file: this.selectedFileName, // 2. Agrega el nombre del archivo
+    amount: this.calculatedPrice // 3. Usa el precio calculado
   };
 
-  this.orderService.postOrderToCart(newItem).subscribe({
+  // Elimina la propiedad 'pages' si el archivo no es un PDF, ya que no aplicaría
+  if (!this.isPdf) {
+    delete orderItem.pages;
+  }
+
+  this.orderService.postOrderToCart(orderItem).subscribe({
     next: () => {
       alert('Archivo agregado al carrito');
       // Limpiar formulario y selección de archivo
