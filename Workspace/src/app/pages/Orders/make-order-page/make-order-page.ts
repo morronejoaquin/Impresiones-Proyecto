@@ -43,7 +43,7 @@ export class MakeOrderPage implements OnInit{
       pages: new FormControl(1, [Validators.required, Validators.min(1)]),
       copies: new FormControl(1, [Validators.required, Validators.min(1)]),
       isDoubleSided: new FormControl(false),
-      binding: new FormControl(null),
+      binding: new FormControl(null, [Validators.required]),
       isColor: new FormControl(false),
       comments: new FormControl(''),
     });
@@ -200,7 +200,7 @@ private createOrderItem(cartId: number) {
     pages: f.pages,
     copies: f.copies,
     comments: f.comments,
-    file: this.selectedFile,
+    file: this.selectedFileName,
     amount: this.calculatedPrice ?? 0
   };
 
