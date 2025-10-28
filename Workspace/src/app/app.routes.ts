@@ -7,6 +7,7 @@ import { ShowCartPage } from './pages/Cart/show-cart-page/show-cart-page';
 import { UserLoginPage } from './pages/Users/user-login-page/user-login-page';
 import { UserRegisterPage } from './pages/Users/user-register-page/user-register-page';
 import { AccountPage } from './pages/Users/account-page/account-page';
+import { UserEditPage } from './pages/Users/user-edit-page/user-edit-page';
 import { permissionGuard } from './guards/permission-guard';
 
 export const routes: Routes = [
@@ -25,6 +26,12 @@ export const routes: Routes = [
     component: AccountPage, 
     canActivate: [permissionGuard],
     data: { allowedRoles: ['registered', 'admin']} 
+  },
+  {
+    path: 'user-edit',
+    component: UserEditPage,
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['registered', 'admin'] }
   }, 
 
   { 
@@ -51,6 +58,5 @@ export const routes: Routes = [
     canActivate: [permissionGuard],
     data: { allowedRoles: ['guest', 'registered', 'admin']}
   },
-
-  { path: '**', redirectTo: 'user-login' }
+    { path: '**', redirectTo: 'user-login' }
 ];

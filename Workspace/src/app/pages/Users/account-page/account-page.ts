@@ -38,4 +38,8 @@ export class AccountPage implements OnInit {
       this.router.navigate(['/']);
     }
   }
+
+  editProfile(): void {
+    this.router.navigate(['/user-edit']);
+  }
 }
