@@ -162,22 +162,22 @@ export class MakeOrderPage implements OnInit{
     return;
   }
 
-  const currentUser = this.userService.getLoggedInUser();
+  const currentUser = this.userService.getDecodedUserPayload();
   if (!currentUser) {
     alert('Debes iniciar sesión para agregar productos al carrito.');
     // Optionally, redirect to login page
     return;
   }
 
-  const userId = currentUser.id;
+  const userId = currentUser.userId;
 
   this.cartService.getCartByUserId(userId).subscribe({
     next: (carts) => {
       if (Array.isArray(carts) && carts.length > 0) {
-        // ✅ Usuario ya tiene carrito → agregamos el item
+        // Usuario ya tiene carrito → agregamos el item
         this.createOrderItem(carts[0].cartId);//aca es en la posicion cero pq siempre es un carrito por
       } else {
-        // 🆕 Usuario no tiene carrito → creamos uno
+        // Usuario no tiene carrito → creamos uno
         const newCart: Partial<Cart> = {
           userId,
           total: 0,

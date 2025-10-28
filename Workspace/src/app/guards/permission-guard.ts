@@ -29,7 +29,7 @@ export const permissionGuard: CanActivateFn = (route, state) => {
   // Sin embargo, para este caso específico, usaremos roles.
   if (!allowedRoles || allowedRoles.length === 0) {
       // Si la ruta no especifica roles, se asume que solo requiere que el usuario exista (estar logueado).
-      return !!userService.getLoggedInUser() || router.createUrlTree(['/user-login']);
+      return !!userService.getDecodedUserPayload() || router.createUrlTree(['/user-login']);
   }
 
   // 3. Comprobar si el rol del usuario está incluido en los roles permitidos

@@ -17,7 +17,19 @@ export class AccountPage implements OnInit {
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
-    this.currentUser = this.userService.getLoggedInUser();
+    const payload = this.userService.getDecodedUserPayload();
+
+    if (payload) {
+        this.userService.getUserById(payload.userId).subscribe({
+            next: (user: User) => {this.currentUser = user;},
+            error: (err) => {console.error('Error al cargar datos del usuario:', err);
+              this.userService.logout();
+              this.router.navigate(['/user-login']);
+            }
+          });
+    } else {
+      this.router.navigate(['/user-login']);
+    }
   }
 
   logout() {

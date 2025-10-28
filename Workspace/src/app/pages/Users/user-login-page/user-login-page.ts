@@ -32,22 +32,22 @@ export class UserLoginPage implements OnInit {
     })
   }
 
-    verificarLogin(){
-      if (this.formUser.valid){
-        const username=this.formUser.get('usernameF')?.value;
-        const password=this.formUser.get('passwordF')?.value;
+  verificarLogin(){
+    if (this.formUser.valid){
+      const username=this.formUser.get('usernameF')?.value;
+      const password=this.formUser.get('passwordF')?.value;
 
-        const usuarioEncontrado=this.userS.User
-        .find((user:User)=> user.username===username && user.password===password)
-        if (usuarioEncontrado){
-          this.userS.setLoggedInUser(usuarioEncontrado);
-          console.log('Login exitoso');
-          this.router.navigate(['/home'])
-        } else {
-          console.log('Credenciales incorrectas');
-        }
+      const usuarioEncontrado=this.userS.User
+      .find((user:User)=> user.username===username && user.password===password)
+      if (usuarioEncontrado){
+        this.userS.setAuthToken(usuarioEncontrado);
+        console.log('Login exitoso');
+        this.router.navigate(['/home'])
       } else {
-        console.log('Formulario no válido');
+        console.log('Credenciales incorrectas');
+      }
+    } else {
+      console.log('Formulario no válido');
     }
   }
 
@@ -64,7 +64,7 @@ export class UserLoginPage implements OnInit {
 
   private handleLogin(user: User | undefined) {
     if (user) {
-      this.userS.setLoggedInUser(user);
+      this.userS.setAuthToken(user);
       console.log(`Login exitoso como ${user.role}`);
       this.router.navigate(['/make-order']); 
     } else {
