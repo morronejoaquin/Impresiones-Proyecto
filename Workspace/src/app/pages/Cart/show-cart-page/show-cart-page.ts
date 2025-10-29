@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import OrderItem from '../../../models/Orders/order';
+import { Router } from '@angular/router';
+import { OrderService } from '../../../services/Orders/order-service';
 
 @Component({
   selector: 'app-show-cart-page',
@@ -9,17 +12,22 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
   templateUrl: './show-cart-page.html',
   styleUrl: './show-cart-page.css'
 })
-export class ShowCartPage {
+export class ShowCartPage implements OnInit {
+  orders: OrderItem[] = [];
   cartTotal: number = 0;
-  cartForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.cartForm = this.fb.group({
-      customerName: ['', Validators.required],
-      surname: ['', Validators.required],
-      phone: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      paymentMethod: ['', Validators.required],
-      signature: [null]
+  constructor(private router:Router,private orderService:OrderService) {}
+
+  ngOnInit(): void {
+    /*
+    this.orderService.getOrdersFromCart.subscribe({
+      next: (ordersGet) => {
+        this.orders = ordersGet;
+        this.cartTotal = this.orders.reduce((total, order) => total + order.amount * order.copies, 0);
+      },
+      error:(err)=>{console.error('Error al cargar los pedidos del carrito:', err);}
     });
+
+    */
   }
 }
