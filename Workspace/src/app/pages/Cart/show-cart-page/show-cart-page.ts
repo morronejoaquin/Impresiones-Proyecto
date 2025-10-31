@@ -1,9 +1,9 @@
 import { Component, OnInit, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import OrderItem from '../../../models/Orders/order';
 import { Router } from '@angular/router';
 import { OrderService } from '../../../services/Orders/order-service';
+import OrderItem from '../../../models/OrderItem/orderItem';
 
 @Component({
   selector: 'app-show-cart-page',

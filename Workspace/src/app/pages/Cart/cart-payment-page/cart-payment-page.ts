@@ -8,7 +8,8 @@ import { UserService } from '../../../services/Users/user-service';
   templateUrl: './cart-payment-page.html',
   styleUrl: './cart-payment-page.css'
 })
-export class CartPaymentPage implements OnInit{
+export class CartPaymentPage{
+  /*
 cartTotal: number = 0;
   cartForm: FormGroup;
 user:User | null = null;
@@ -34,4 +35,5 @@ user:User | null = null;
       phone: this.user?.phone,
     });
   }
+    */
 }
