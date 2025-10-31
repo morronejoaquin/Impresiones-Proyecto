@@ -1,1 +1,49 @@
-<p>cart-payment-page works!</p>
+<div class="page-wrapper">
+    <form>
+      <legend>Completa tus datos</legend>
+  
+      <fieldset>
+        <label for="customerName">Nombre:</label>
+        <input type="text" id="customerName" formControlName="customerNameF">
+      </fieldset>
+  
+      <fieldset>
+        <label for="surname">Apellido:</label>
+        <input type="text" id="surname" formControlName="surnameF">
+      </fieldset>
+  
+      <fieldset>
+        <label for="phone">Teléfono:</label>
+        <input type="tel" id="phone" formControlName="phoneF">
+      </fieldset>
+  
+      <legend>Forma de pago</legend>
+  
+      <fieldset>
+        <label for="paymentMethod">Método de pago:</label>
+        <select id="paymentMethod" formControlName="paymentMethodF">
+          <option value="cash">Efectivo</option>
+          <option value="transfer">Transferencia</option>
+        </select>
+      </fieldset>
+  
+      <fieldset class="field-inline">
+        <div>
+          <label for="sign">Seña:</label>
+          <input type="number" id="sign" formControlName="signF" min="0">
+        </div>
+        <div>
+          <label>&nbsp;</label>
+          <button type="button" class="btn btn-ghost">Guardar</button>
+        </div>
+      </fieldset>
+  
+      <div class="cart-summary" aria-live="polite">
+        <div class="label">Total carrito</div>
+        <div class="value">{{ cartTotal | number:'1.2-2' }}</div>
+      </div>
+  
+      <!-- Botón principal pedido -->
+      <button type="button" class="btn btn-primary">Realizar compra</button>
+    </form>
+  </div>

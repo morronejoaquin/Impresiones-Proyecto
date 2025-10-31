@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../../services/Users/user-service';
+import User from '../../../models/Users/user';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cart-payment-page',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './cart-payment-page.html',
   styleUrl: './cart-payment-page.css'
 })
 export class CartPaymentPage{
-  /*
+  
 cartTotal: number = 0;
   cartForm: FormGroup;
 user:User | null = null;
@@ -35,5 +37,5 @@ user:User | null = null;
       phone: this.user?.phone,
     });
   }
-    */
+    
 }

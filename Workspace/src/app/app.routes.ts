@@ -9,6 +9,8 @@ import { UserRegisterPage } from './pages/Users/user-register-page/user-register
 import { AccountPage } from './pages/Users/account-page/account-page';
 import { UserEditPage } from './pages/Users/user-edit-page/user-edit-page';
 import { permissionGuard } from './guards/permission-guard';
+import { EditOrderPage } from './pages/Orders/edit-order-page/edit-order-page';
+import { CartPaymentPage } from './pages/Cart/cart-payment-page/cart-payment-page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'user-login', pathMatch: 'full' },
@@ -46,6 +48,12 @@ export const routes: Routes = [
     canActivate: [permissionGuard],
     data: { allowedRoles: ['guest', 'registered', 'admin']}
   },
+  {
+    path: 'cart-payment',
+    component: CartPaymentPage,
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['registered', 'admin']}
+  },
   { 
     path: 'price-calculator', 
     component: PriceCalculatorPage,
@@ -57,6 +65,12 @@ export const routes: Routes = [
     component: WherePage,
     canActivate: [permissionGuard],
     data: { allowedRoles: ['guest', 'registered', 'admin']}
+  },
+  {
+    path: 'edit-order/:orderId',
+    component: EditOrderPage,
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['registered', 'admin']}
   },
     { path: '**', redirectTo: 'user-login' }
 ];

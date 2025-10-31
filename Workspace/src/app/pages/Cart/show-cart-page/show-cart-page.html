@@ -1,49 +1,22 @@
-<div class="page-wrapper">
-  <form>
-    <legend>Completa tus datos</legend>
-
-    <fieldset>
-      <label for="customerName">Nombre:</label>
-      <input type="text" id="customerName" formControlName="customerNameF">
-    </fieldset>
-
-    <fieldset>
-      <label for="surname">Apellido:</label>
-      <input type="text" id="surname" formControlName="surnameF">
-    </fieldset>
-
-    <fieldset>
-      <label for="phone">Teléfono:</label>
-      <input type="tel" id="phone" formControlName="phoneF">
-    </fieldset>
-
-    <legend>Forma de pago</legend>
-
-    <fieldset>
-      <label for="paymentMethod">Método de pago:</label>
-      <select id="paymentMethod" formControlName="paymentMethodF">
-        <option value="cash">Efectivo</option>
-        <option value="transfer">Transferencia</option>
-      </select>
-    </fieldset>
-
-    <fieldset class="field-inline">
-      <div>
-        <label for="sign">Seña:</label>
-        <input type="number" id="sign" formControlName="signF" min="0">
+@if(orders!=null){
+  @for (item of orders; track item.id) {
+    <div class="cart-item">
+      <div class="item-details">
+        <div class="item-name">{{ item.file }}</div>
+        <div class="item-quantity">Cantidad: {{ item.copies }}</div>
+        <div class="item-price">Precio: {{ item.amount | number:'1.2-2' }}</div>
+        <div class="item-iscolor">Color: {{ item.isColor ? 'Sí' : 'No' }}</div>
       </div>
-      <div>
-        <label>&nbsp;</label>
-        <button type="button" class="btn btn-ghost">Guardar</button>
+      <div class="item-actions">
+        <button type="button" (click)="confirmAndRemoveItem(item.id)" class="btn-edit">Editar</button>
+        <button type="button" (click)="confirmAndRemoveItem(item.id)" class="btn-delete">Eliminar</button>
       </div>
-    </fieldset>
-
-    <div class="cart-summary" aria-live="polite">
-      <div class="label">Total carrito</div>
-      <div class="value">{{ cartTotal | number:'1.2-2' }}</div>
     </div>
-
-    <!-- Botón principal pedido -->
-    <button type="button" class="btn btn-primary">Realizar compra</button>
-  </form>
-</div>
+  }
+  <div class="cart-actions">
+    <button type="button" class="btn-clear" (click)="confirmAndClearCart()">Vaciar carrito</button>
+    <button type="button" class="btn-proceed" (click)="proceedToPayment()">Proceder al pago</button>
+  </div>
+ }@else{
+  <p class="empty-cart-message">El carrito está vacío.</p>
+}
