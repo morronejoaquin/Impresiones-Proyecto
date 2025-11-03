@@ -8,7 +8,7 @@
         <div class="item-iscolor">Color: {{ item.isColor ? 'Sí' : 'No' }}</div>
       </div>
       <div class="item-actions">
-        <button type="button" (click)="confirmAndRemoveItem(item.id)" class="btn-edit">Editar</button>
+        <button type="button" (click)="editItem(item.id)" class="btn-edit">Editar</button>
         <button type="button" (click)="confirmAndRemoveItem(item.id)" class="btn-delete">Eliminar</button>
       </div>
     </div>

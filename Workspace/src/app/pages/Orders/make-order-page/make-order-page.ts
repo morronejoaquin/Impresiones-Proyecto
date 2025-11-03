@@ -175,18 +175,18 @@ export class MakeOrderPage implements OnInit{
     next: (carts) => {
       if (Array.isArray(carts) && carts.length > 0) {
         // Usuario ya tiene carrito → agregamos el item
-        this.createOrderItem(carts[0].cartId);//aca es en la posicion cero pq siempre es un carrito por
+        this.createOrderItem(carts[0].id);//aca es en la posicion cero pq siempre es un carrito por
       } else {
         // Usuario no tiene carrito → creamos uno
         const newCart: Partial<Cart> = {
-          userId,
+          userId: userId,
           total: 0,
           status: 'pending'
         };
 
         this.cartService.postCart(newCart as Cart).subscribe({//aca le agrega el carrito al usuario
           next: (createdCart) => {
-            this.createOrderItem(createdCart.cartId);
+            this.createOrderItem(createdCart.id);
           },
           error: (err) => console.error('Error creando carrito:', err)
         });

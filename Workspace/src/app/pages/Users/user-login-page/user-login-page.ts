@@ -52,14 +52,33 @@ export class UserLoginPage implements OnInit {
   }
 
   loginAsGuest() {
-    const guestUser = this.userS.User.find((user: User) => user.role === 'guest');
+    const guestUser: User = { 
+        id: `${Date.now()}`, 
+        username: `guest_${Date.now()}`, 
+        name: 'Invitado',
+        surname: 'Temporal',
+        email: 'guest@temp.com',
+        phone: '0000000000',
+        password: '', 
+        role: 'guest',
+    };
 
-    if (guestUser) {
-      console.log('Ingresando como invitado.');
-      this.handleLogin(guestUser);
-    } else {
-      console.error('Error: Usuario invitado no encontrado en los datos.');
-    }
+    this.userS.postUser(guestUser).subscribe({
+        next: (createdUser: User) => {
+            console.log('Usuario invitado creado:', createdUser);
+            
+            // establece el token de autenticación
+            this.handleLogin(createdUser); 
+            
+            // guarda el ID en sessionStorage para limpieza al cerrar la pestaña
+            this.userS.setGuestUserForCleanup(createdUser); 
+
+            this.router.navigate(['/make-order']); 
+        },
+        error: (error) => {
+            console.error('Error al crear el usuario invitado en el servidor:', error);
+        }
+    });
   }
 
   private handleLogin(user: User | undefined) {

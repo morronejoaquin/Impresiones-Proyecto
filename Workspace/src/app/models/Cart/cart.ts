@@ -5,7 +5,7 @@ export interface CustomerData {
 }
 
 export default interface Cart {
-  cartId: string;
+  id: string;
   userId?: string | null; // foreign key -> User.userId (nullable for guest carts)
   total: number;
   customer?: CustomerData;

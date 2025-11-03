@@ -30,7 +30,7 @@ export class ShowCartPage implements OnInit {
     this.cartService.getCartByUserId(userId).subscribe({
       next: (carts) => {
         if (carts && carts.length > 0) {
-          const cartId = carts[0].cartId;
+          const cartId = carts[0].id;
   
           // Ahora sí puedes pedir las órdenes de ese carrito
           this.orderService.getOrdersFromCart(cartId).subscribe({
@@ -83,7 +83,7 @@ export class ShowCartPage implements OnInit {
     this.cartService.getCartByUserId(userId).subscribe({
       next: (carts) => {
         if (carts && carts.length > 0) {
-          const cartId = carts[0].cartId;
+          const cartId = carts[0].id;
   
           this.orderService.getOrdersFromCart(cartId).subscribe({
             next: (orders) => {

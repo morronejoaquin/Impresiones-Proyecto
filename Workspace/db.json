@@ -41,7 +41,6 @@
   ],
   "carts": [
     {
-      "cartId": 1,
       "userId": 1,
       "total": 12.5,
       "customer": {
@@ -51,100 +50,32 @@
       },
       "status": "pending",
       "id": "1622"
-    },
-    {
-      "cartId": 2,
-      "userId": null,
-      "total": 3,
-      "customer": {
-        "name": "Guest",
-        "surname": "User",
-        "phone": ""
-      },
-      "status": "printing",
-      "id": "5423"
     }
   ],
   "orderItems": [
     {
-      "id": "0",
-      "cartId": 1,
-      "isColor": false,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "pages": 3,
-      "copies": 1,
-      "comments": "",
-      "file": "ACTIVIDAD – UNIDAD 3 Legislacion.pdf",
-      "amount": 0.15
-    },
-    {
-      "id": "",
-      "cartId": 1,
-      "isColor": false,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "pages": 3,
-      "copies": 1,
-      "comments": "",
-      "file": "ACTIVIDAD – UNIDAD 3 Legislacion.pdf",
-      "amount": 0.15
-    },
-    {
-      "id": "",
-      "cartId": 1,
-      "isColor": false,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "pages": 2,
-      "copies": 1,
-      "comments": "",
-      "file": "Analítico Secundario, Bruses Joaquin - 45576572_compressed.pdf",
-      "amount": 0
-    },
-    {
-      "id": "867f",
-      "pages": 16,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": ""
-    },
-    {
-      "id": "a447",
+      "id": "951f",
       "pages": 2,
       "copies": 1,
       "isDoubleSided": false,
-      "binding": "ringed",
+      "binding": "unringed",
       "isColor": false,
       "comments": "",
-      "file": null,
-      "amount": 0
+      "file": "ACTIVIDAD UNIDAD 1.pdf",
+      "amount": 0.1,
+      "cartId": "1622"
     },
     {
-      "id": "c2d2",
-      "pages": 16,
+      "id": "0d58",
+      "pages": 18,
       "copies": 1,
       "isDoubleSided": false,
       "binding": "unringed",
       "isColor": false,
       "comments": "",
-      "file": "Protección de derechos de autor frente a entrenamiento de IA con datos públicos.pdf",
-      "amount": 0.8,
-      "cartId": 1
-    },
-    {
-      "id": "18b2",
-      "pages": 3,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": "",
-      "file": "ACTIVIDAD – UNIDAD 3 Legislacion.pdf",
-      "amount": 0.15,
-      "cartId": 2
+      "file": "Trabajo Practico Integrador.pptx.pdf",
+      "amount": 0.9,
+      "cartId": "1622"
     }
   ],
   "payments": [
