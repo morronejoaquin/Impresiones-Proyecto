@@ -43,6 +43,12 @@ export const routes: Routes = [
     data: { allowedRoles: ['guest', 'registered', 'admin']} 
   },
   { 
+    path: 'make-order/:orderId', 
+    component: MakeOrderPage,
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['guest', 'registered', 'admin']} 
+  },
+  { 
     path: 'cart', 
     component: ShowCartPage,
     canActivate: [permissionGuard],

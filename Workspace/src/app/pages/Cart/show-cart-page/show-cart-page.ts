@@ -69,7 +69,7 @@ export class ShowCartPage implements OnInit {
   }
 
   editItem(orderId: string) {
-    this.router.navigate(['/edit-order', orderId]);
+    this.router.navigate(['/make-order', orderId]);
   }
 
   clearCart() {

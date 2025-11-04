@@ -29,6 +29,7 @@ export class MakeOrderPage implements OnInit{
   private currentObjectUrl: string | null = null;
   public calculatedPrice: number | null = null;
   orderItemService: any;
+  public editingOrderId: string | null = null;
 
   constructor(
     private zone: NgZone,

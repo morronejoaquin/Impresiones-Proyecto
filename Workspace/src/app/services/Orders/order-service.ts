@@ -12,7 +12,7 @@ export class OrderService {
 OrderItem:OrderItem[]=[]
 constructor(private http:HttpClient) { }
 
-getOrder(id:number){
+getOrder(id:string){
   return this.http.get<OrderItem>(`${this.url}/${id}`);
 }
 
