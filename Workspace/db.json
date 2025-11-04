@@ -37,6 +37,16 @@
       "phone": "2235800370",
       "password": "Asdasd@1",
       "role": "registered"
+    },
+    {
+      "id": "1762216097718",
+      "username": "guest_1762216097718",
+      "name": "Invitado",
+      "surname": "Temporal",
+      "email": "guest@temp.com",
+      "phone": "0000000000",
+      "password": "",
+      "role": "guest"
     }
   ],
   "carts": [
