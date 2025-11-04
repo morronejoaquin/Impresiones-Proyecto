@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import OrderItem from '../../models/OrderItem/orderItem';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class OrderService {
 OrderItem:OrderItem[]=[]
 constructor(private http:HttpClient) { }
 
-getOrder(id:string){
+getOrderById(id:string): Observable<OrderItem>{
   return this.http.get<OrderItem>(`${this.url}/${id}`);
 }
 
@@ -20,12 +21,12 @@ getOrdersFromCart(cartId:string){
   return this.http.get<OrderItem[]>(`${this.url}?cartId=${cartId}`);
 }
 
-postOrderToCart(order:OrderItem){
+postOrderToCart(order:Partial<OrderItem>){
   return this.http.post<OrderItem>(this.url,order);
 }//Cuando se llame desde la page hay que pasarle el cartId
 
-updateOrderInCart(order:OrderItem){
-  return this.http.put<OrderItem>(`${this.url}/${order.id}`,order);
+updateOrder(id: string, order: Partial<OrderItem>){
+  return this.http.put<OrderItem>(`${this.url}/${id}`,order);
 }
 
 deleteOrderFromCart(id:string){

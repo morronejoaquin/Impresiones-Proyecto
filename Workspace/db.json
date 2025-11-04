@@ -39,8 +39,8 @@
       "role": "registered"
     },
     {
-      "id": "1762216097718",
-      "username": "guest_1762216097718",
+      "id": "1762219808090",
+      "username": "guest_1762219808090",
       "name": "Invitado",
       "surname": "Temporal",
       "email": "guest@temp.com",
@@ -51,6 +51,7 @@
   ],
   "carts": [
     {
+      "cartId": 1,
       "userId": 1,
       "total": 12.5,
       "customer": {
@@ -60,33 +61,15 @@
       },
       "status": "pending",
       "id": "1622"
+    },
+    {
+      "id": "8f85",
+      "userId": "1762219808090",
+      "total": 0,
+      "status": "pending"
     }
   ],
   "orderItems": [
-    {
-      "id": "951f",
-      "pages": 2,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": "",
-      "file": "ACTIVIDAD UNIDAD 1.pdf",
-      "amount": 0.1,
-      "cartId": "1622"
-    },
-    {
-      "id": "0d58",
-      "pages": 18,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": "",
-      "file": "Trabajo Practico Integrador.pptx.pdf",
-      "amount": 0.9,
-      "cartId": "1622"
-    }
   ],
   "payments": [
     {

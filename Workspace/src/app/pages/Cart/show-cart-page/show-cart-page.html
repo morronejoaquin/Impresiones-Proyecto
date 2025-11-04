@@ -1,8 +1,8 @@
-@if(orders!=null){
+@if(orders && orders.length > 0){
   @for (item of orders; track item.id) {
     <div class="cart-item">
       <div class="item-details">
-        <div class="item-name">{{ item.file }}</div>
+        <div class="item-name">Archivo: {{ item.file }}</div>
         <div class="item-quantity">Cantidad: {{ item.copies }}</div>
         <div class="item-price">Precio: {{ item.amount | number:'1.2-2' }}</div>
         <div class="item-iscolor">Color: {{ item.isColor ? 'Sí' : 'No' }}</div>
@@ -13,6 +13,9 @@
       </div>
     </div>
   }
+  <div class="cart-total">
+    <h3>Total del Carrito: ${{ cartTotal | number:'1.2-2' }}</h3>
+  </div>
   <div class="cart-actions">
     <button type="button" class="btn-clear" (click)="confirmAndClearCart()">Vaciar carrito</button>
     <button type="button" class="btn-proceed" (click)="proceedToPayment()">Proceder al pago</button>

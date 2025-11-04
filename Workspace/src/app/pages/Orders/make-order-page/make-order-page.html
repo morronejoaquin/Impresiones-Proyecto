@@ -1,18 +1,21 @@
 <form [formGroup]="orderForm" (ngSubmit)="addToCart()">
-  <legend>Sube tu archivo</legend>
+  <legend>{{ editingOrderId ? 'Editar Pedido' : 'Sube tu archivo' }}</legend>
   <fieldset>
-    <div class="file-input-wrapper" (click)="fileInput.click()">
+    <div class="file-input-wrapper" (click)="!editingOrderId && fileInput.click()">
       <span>{{ selectedFileName }}</span>
-      <input accept=".pdf,image/*,.txt" type="file" #fileInput (change)="onFileSelected($event)" id="fileUpload">
+      <input accept=".pdf,image/*,.txt" type="file" #fileInput 
+             (change)="onFileSelected($event)" 
+             id="fileUpload"
+             [attr.disabled]="editingOrderId ? true : null">
     </div>
     <p>
       <legend>Paginas y anillado</legend>
       <strong>Información del archivo:</strong>
-      <ng-container *ngIf="selectedFile; else noFile">
-        <span *ngIf="isPdf">
+      <ng-container *ngIf="selectedFile || editingOrderId; else noFile">
+        <span *ngIf="isPdf || (editingOrderId && selectedFileName.toLowerCase().endsWith('.pdf'))">
           Páginas: {{ pageCount ?? 'Cargando...' }}
         </span>
-        <span *ngIf="isImage">
+        <span *ngIf="isImage || (editingOrderId && (selectedFileName.toLowerCase().endsWith('.png') || selectedFileName.toLowerCase().endsWith('.jpg') || selectedFileName.toLowerCase().endsWith('.jpeg')))">
           Dimensiones: {{ imageWidth ?? 0 }}x{{ imageHeight ?? 0 }} px
         </span>
       </ng-container>
@@ -46,6 +49,8 @@
   <section class="result">
     <h3>Precio total: ${{ calculatedPrice }}</h3>
   </section>
-}
-  <button type="submit" [disabled]="!orderForm.valid || !selectedFile">Agregar al Carrito</button>
+  }
+  <button type="submit" [disabled]="!orderForm.valid || (!selectedFile && !editingOrderId)">
+    {{ editingOrderId ? 'Actualizar Pedido' : 'Agregar al Carrito' }}
+  </button>
 </form>

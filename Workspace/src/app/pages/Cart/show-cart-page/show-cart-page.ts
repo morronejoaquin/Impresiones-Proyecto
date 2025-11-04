@@ -53,7 +53,7 @@ export class ShowCartPage implements OnInit {
   }
 
   calculateCartTotal() {
-    this.cartTotal = this.orders.reduce((total, order) => total + (order.amount * order.copies), 0);
+    this.cartTotal = this.orders.reduce((total, order) => total + order.amount, 0);
   }
   
   removeItem(orderId: string) {
