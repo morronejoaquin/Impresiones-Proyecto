@@ -17,7 +17,7 @@ import OrderItem from '../../../models/OrderItem/orderItem';
 export class ShowCartPage implements OnInit {
   orders: OrderItem[] = [];
   cartTotal: number = 0;
-  private currentCartId!: string;
+  private currentCartId!: string
 
   constructor(private router:Router,private orderService:OrderService,private cartService:CartService,private userService:UserService) {}
 
@@ -33,6 +33,7 @@ export class ShowCartPage implements OnInit {
       next: (carts) => {
         if (carts && carts.length > 0) {
           const cartId = carts[0].id;
+          this.currentCartId = cartId;
   
           // Ahora sí puedes pedir las órdenes de ese carrito
           this.orderService.getOrdersFromCart(cartId).subscribe({
