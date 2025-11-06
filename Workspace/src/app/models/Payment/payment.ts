@@ -1,5 +1,5 @@
 export default interface Payment {
-  paymentId: string;
+  id: string;
   cartId: string; // foreign key -> Cart.cartId (one payment tied to one cart)
   paymentMethod: 'cash' | 'transfer' | 'credit_card';
   paymentStatus: 'pending' | 'completed' | 'failed' | 'refunded';

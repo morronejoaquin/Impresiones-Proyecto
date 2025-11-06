@@ -1,36 +1,50 @@
 <div class="page-wrapper">
-    <form>
+    <form [formGroup]= "cartForm" (submit) = "onSubmit()">
       <legend>Completa tus datos</legend>
   
       <fieldset>
         <label for="customerName">Nombre:</label>
-        <input type="text" id="customerName" formControlName="customerNameF">
+        <input type="text" id="customerName" formControlName="customerName">
+        @if(getCustomerName()!.invalid && getCustomerName()!.touched){
+          <p class="msj-error">El nombre es obligatorio</p>
+        }
       </fieldset>
   
       <fieldset>
         <label for="surname">Apellido:</label>
-        <input type="text" id="surname" formControlName="surnameF">
+        <input type="text" id="surname" formControlName="surname">
+        @if(getSurname()!.invalid && getSurname()!.touched){
+          <p class="msj-error">El apellido es obligatorio</p>
+        }
       </fieldset>
   
       <fieldset>
         <label for="phone">Teléfono:</label>
-        <input type="tel" id="phone" formControlName="phoneF">
+        <input type="tel" id="phone" formControlName="phone">
+        @if(getPhone()!.hasError('pattern') && getPhone()!.touched){
+          <p class="msj-error">El número de telefono no es valido</p>
+        }@else if(getPhone()!.invalid && getPhone()!.touched){
+          <p class="msj-error">El número de telefono es obligatorio</p>
+        }
       </fieldset>
   
       <legend>Forma de pago</legend>
   
       <fieldset>
         <label for="paymentMethod">Método de pago:</label>
-        <select id="paymentMethod" formControlName="paymentMethodF">
+        <select id="paymentMethod" formControlName="paymentMethod">
           <option value="cash">Efectivo</option>
           <option value="transfer">Transferencia</option>
         </select>
+        @if(getPaymentMethod()!.invalid && getPaymentMethod()!.touched){
+          <p class="msj-error">El metodo de pago es obligatorio</p>
+        }
       </fieldset>
   
       <fieldset class="field-inline">
         <div>
           <label for="sign">Seña:</label>
-          <input type="number" id="sign" formControlName="signF" min="0">
+          <input type="number" id="sign" formControlName="sign" min="0">
         </div>
         <div>
           <label>&nbsp;</label>
@@ -44,6 +58,6 @@
       </div>
   
       <!-- Botón principal pedido -->
-      <button type="button" class="btn btn-primary">Realizar compra</button>
+      <button type="submit" class="btn btn-primary">Realizar compra</button>
     </form>
   </div>

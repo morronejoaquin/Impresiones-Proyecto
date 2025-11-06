@@ -58,7 +58,7 @@ export const routes: Routes = [
     path: 'cart-payment',
     component: CartPaymentPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['registered', 'admin']}
+    data: { allowedRoles: ['guest', 'registered', 'admin']}
   },
   { 
     path: 'price-calculator', 
