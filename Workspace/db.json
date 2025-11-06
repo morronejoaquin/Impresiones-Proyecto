@@ -69,20 +69,7 @@
       "status": "pending"
     }
   ],
-  "orderItems": [
-    {
-      "id": "2b7d",
-      "pages": 1,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": "",
-      "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV.pdf",
-      "amount": 0.05,
-      "cartId": "223e"
-    }
-  ],
+  "orderItems": [],
   "payments": [
     {
       "id": "4055",
@@ -94,7 +81,7 @@
       "orderDate": "2025-10-22T20:48:22.000Z"
     },
     {
-      "id": "ed9e",
+      "id": "8bfb",
       "customerName": "Lautaro",
       "surname": "Peñaflor",
       "phone": "1234567810",
@@ -102,9 +89,9 @@
       "sign": "",
       "cartId": "223e",
       "payMentStatus": "pending",
-      "finalPrice": 0,
+      "finalPrice": 0.05,
       "depositAmount": 0,
-      "orderDate": 1762457147864
+      "orderDate": 1762461855741
     }
   ]
 }

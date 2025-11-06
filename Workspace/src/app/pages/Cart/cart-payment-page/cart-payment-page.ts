@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { PaymentService } from '../../../services/Payment/payment-service';
 import { CartService } from '../../../services/Cart/cart-service';
 import { Router } from '@angular/router';
+import { OrderService } from '../../../services/Orders/order-service';
 
 @Component({
   selector: 'app-cart-payment-page',
@@ -24,6 +25,7 @@ export class CartPaymentPage implements OnInit{
     private userService: UserService, 
     private paymentService: PaymentService,
     private cartService: CartService,
+    private orderService: OrderService,
     private router: Router
   ){
     this.cartForm = this.fb.group({
@@ -54,6 +56,21 @@ export class CartPaymentPage implements OnInit{
         error: (err) => {console.error('Error al cargar datos del usuario:', err);
         }}
       );
+
+      this.cartService.getCartByUserId(this.userId).subscribe({
+        next: (carts) => {
+            if (carts && carts.length > 0) {
+                const cartId = carts[0].id;
+                this.orderService.getOrdersFromCart(cartId).subscribe({
+                    next: (orders) => {
+                        this.cartTotal = this.orderService.calculateTotal(orders)
+                    },
+                    error: (err) => console.error('Error fetching orders for total:', err)
+                });
+            }
+        },
+        error: (err) => console.error('Error getting cart for total:', err)
+    });
     }
 
     onSubmit(){
@@ -85,9 +102,17 @@ export class CartPaymentPage implements OnInit{
 
             this.paymentService.postPayment(payment).subscribe({
                 next: (data) => {
-                    console.log("Pago registrado:", data);
-                    alert("Pago registrado")
-                    this.router.navigate(['home'])
+                    this.cartService.clearOrdersInCart(cartId).subscribe({
+                      next: () => {
+                        console.log("Pago registrado")
+                        alert("Pago registrado")
+                        this.router.navigate(['home'])
+                      },
+                      error: (e) => {
+                        console.error('Error al vaciar los items después del pago:', e);
+                        alert("Pago registrado, pero hubo un error al vaciar el carrito.");
+                      }
+                    })
                 },
                 error: (e) => {
                     console.error("Error al registrar el pago:", e);
@@ -116,5 +141,4 @@ export class CartPaymentPage implements OnInit{
     getPaymentMethod() {
       return this.cartForm.get('paymentMethod');
     }
-  }
-  
+}
