@@ -6,6 +6,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 import { Router } from '@angular/router';
 import { OrderService } from '../../../services/Orders/order-service';
 import OrderItem from '../../../models/OrderItem/orderItem';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-show-cart-page',
@@ -29,29 +30,23 @@ export class ShowCartPage implements OnInit {
       return;
     }
   
-    this.cartService.getCartByUserId(userId).subscribe({
-      next: (carts) => {
-        if (carts && carts.length > 0) {
-          const cartId = carts[0].id;
-          this.currentCartId = cartId;
-  
-          // Ahora sí puedes pedir las órdenes de ese carrito
-          this.orderService.getOrdersFromCart(cartId).subscribe({
-            next: (orders) => {
-              this.orders = orders;
-              this.cartTotal = this.orderService.calculateTotal(this.orders);
-            },
-            error: (err) => {
-              console.error('Error fetching orders from cart:', err);
-            }
-          });
-        } else {
-          console.warn('No se encontró carrito para este usuario');
+    // Usamos getOrCreateActiveCart para asegurar que el usuario siempre tenga un carrito 'pending'
+    this.cartService.getOrCreateActiveCart(userId).pipe(
+        switchMap(cart => {
+          this.currentCartId = cart.id;
+            // Pedir las órdenes asociadas al carrito activo
+            return this.orderService.getOrdersFromCart(cart.id);
+        })
+    ).subscribe({
+        next: (orders) => {
+            this.orders = orders;
+            this.cartTotal = this.orderService.calculateTotal(this.orders);
+        },
+        error: (err) => {
+            console.error('Error fetching orders or cart:', err);
+            this.orders = [];
+            this.cartTotal = 0;
         }
-      },
-      error: (err) => {
-        console.error('Error obteniendo carrito por userId:', err);
-      }
     });
   }
 

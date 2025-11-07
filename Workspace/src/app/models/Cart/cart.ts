@@ -10,4 +10,5 @@ export default interface Cart {
   total: number;
   customer?: CustomerData;
   status: 'pending' | 'printing' | 'binding' | 'ready' | 'delivered' | 'cancelled';
+  cartStatus: 'pending' | 'completed' // para saber si el carrito ya fue usado
 }

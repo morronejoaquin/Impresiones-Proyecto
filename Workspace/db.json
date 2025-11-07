@@ -51,7 +51,6 @@
   ],
   "carts": [
     {
-      "cartId": 1,
       "userId": 1,
       "total": 12.5,
       "customer": {
@@ -63,13 +62,39 @@
       "id": "1622"
     },
     {
-      "id": "223e",
+      "userId": "fb5d",
+      "total": 0.05,
+      "customer": {
+        "name": "Lautaro",
+        "surname": "Peñaflor",
+        "phone": "1234567810"
+      },
+      "status": "pending",
+      "cartStatus": "completed",
+      "id": "1311"
+    },
+    {
+      "id": "1ac5",
       "userId": "fb5d",
       "total": 0,
-      "status": "pending"
+      "status": "pending",
+      "cartStatus": "pending"
     }
   ],
-  "orderItems": [],
+  "orderItems": [
+    {
+      "id": "f3c3",
+      "pages": 1,
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV.pdf",
+      "amount": 0.05,
+      "cartId": "1311"
+    }
+  ],
   "payments": [
     {
       "id": "4055",
@@ -81,17 +106,12 @@
       "orderDate": "2025-10-22T20:48:22.000Z"
     },
     {
-      "id": "8bfb",
-      "customerName": "Lautaro",
-      "surname": "Peñaflor",
-      "phone": "1234567810",
-      "paymentMethod": "cash",
-      "sign": "",
-      "cartId": "223e",
-      "payMentStatus": "pending",
+      "id": "479c",
+      "cartId": "1311",
+      "paymentStatus": "completed",
       "finalPrice": 0.05,
       "depositAmount": 0,
-      "orderDate": 1762461855741
+      "orderDate": "2025-11-07T00:14:04.404Z"
     }
   ]
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, forkJoin, Observable, switchMap } from 'rxjs';
+import { BehaviorSubject, forkJoin, map, Observable, of, switchMap } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import Cart from '../../models/Cart/cart';
 import { OrderService } from '../Orders/order-service';
@@ -23,9 +23,12 @@ export class CartService {
   }
 
   getCartByUserId(userId: string): Observable<Cart[]> {
-    return this.http.get<Cart[]>(`${this.url}?userId=${userId}`);
+    return this.http.get<Cart[]>(`${this.url}?userId=${userId}&cartStatus=pending`);
   }
   
+  updateCart(cartId: string, updates: Partial<Cart>): Observable<Cart> {
+    return this.http.put<Cart>(`${this.url}/${cartId}`, updates);
+  }
 
   postCart(cart: Cart) {
     return this.http.post<any>(this.url, cart);
@@ -36,19 +39,35 @@ export class CartService {
     return this.http.delete<any>(`${this.url}/${cartId}`);
   }
 
-  // 💡 Nuevo: Orquesta la eliminación de todos los ítems de un carrito
   clearOrdersInCart(cartId: string): Observable<any> {
-    // 1. Obtener todas las órdenes de ese carrito
     return this.orderService.getOrdersFromCart(cartId).pipe(
-        // 2. Usar switchMap para cambiar de las órdenes a una lista de Observables de eliminación
-        switchMap(orders => {
-            if (orders.length === 0) {
-                return new Observable(observer => observer.complete()); // Retorna un observable vacío si no hay órdenes
-            }
-            const deleteObservables = orders.map(order => this.orderService.deleteOrderFromCart(order.id));
-            // 3. forkJoin espera a que TODOS los Observables (eliminaciones) se completen
-            return forkJoin(deleteObservables);
-        })
+      switchMap(orders => {
+          if (orders.length === 0) {
+            return of(null);
+          }
+          const deleteObservables = orders.map(order => this.orderService.deleteOrderFromCart(order.id));
+          return forkJoin(deleteObservables);
+      })
+    );
+  }
+
+  // 💡 NUEVO: Orquesta la obtención o creación de un carrito activo
+  getOrCreateActiveCart(userId: string): Observable<Cart> {
+    return this.getCartByUserId(userId).pipe(
+      map(carts => carts[0]),
+      switchMap(activeCart => {
+        if (activeCart) {
+          return of(activeCart);
+        } else {
+        const newCart: Partial<Cart> = {
+            userId: userId,
+            total: 0,
+            status: 'pending',
+            cartStatus: 'pending'
+          };
+          return this.postCart(newCart as Cart); // Crear y retornar el nuevo carrito
+        }
+      })
     );
   }
 }
