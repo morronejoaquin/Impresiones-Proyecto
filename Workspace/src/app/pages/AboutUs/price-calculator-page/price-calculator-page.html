@@ -23,10 +23,12 @@
   </label>
 
   <button type="submit">Calcular precio</button>
-</form>
 
-@if (calculatedPrice !== null) {
+  @if (calculatedPrice !== null) {
   <section class="result">
     <h3>Precio total: ${{ calculatedPrice }}</h3>
   </section>
-}
+  }
+</form>
+
+
