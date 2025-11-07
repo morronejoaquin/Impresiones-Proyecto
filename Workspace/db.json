@@ -46,7 +46,7 @@
       "email": "lautypena@gmail.com",
       "phone": "12345678",
       "password": "Lauty1812$",
-      "role": "registered"
+      "role": "admin"
     }
   ],
   "carts": [
@@ -74,7 +74,19 @@
       "id": "1311"
     },
     {
-      "id": "1ac5",
+      "userId": "fb5d",
+      "total": 0.65,
+      "customer": {
+        "name": "Justo",
+        "surname": "Muro",
+        "phone": "2233003151"
+      },
+      "status": "pending",
+      "cartStatus": "completed",
+      "id": "1ac5"
+    },
+    {
+      "id": "3c2b",
       "userId": "fb5d",
       "total": 0,
       "status": "pending",
@@ -93,6 +105,18 @@
       "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV.pdf",
       "amount": 0.05,
       "cartId": "1311"
+    },
+    {
+      "id": "5c53",
+      "pages": 13,
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "PROTECCION DE DERECHOS DE AUTOR FRENTE A LA IA_20251016_030839_0000.pdf",
+      "amount": 0.65,
+      "cartId": "1ac5"
     }
   ],
   "payments": [
@@ -112,6 +136,14 @@
       "finalPrice": 0.05,
       "depositAmount": 0,
       "orderDate": "2025-11-07T00:14:04.404Z"
+    },
+    {
+      "id": "208e",
+      "cartId": "1ac5",
+      "paymentStatus": "completed",
+      "finalPrice": 0.65,
+      "depositAmount": 100,
+      "orderDate": "2025-11-07T13:15:52.096Z"
     }
   ]
 }

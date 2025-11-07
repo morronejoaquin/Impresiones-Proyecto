@@ -1,59 +1,103 @@
+// src/app/utils/jwt-utils.ts
 import User from "../models/Users/user";
 
-// En un entorno de desarrollo solo frontend, simulamos la codificación y decodificación
-// de JWT, que esencialmente es Base64.
-// En un backend real, este proceso involucraría una clave secreta para la firma (signature).
+// ---- Tipos ----
+export type AppRole = 'admin' | 'guest' | 'registered';
 
-// Función para simular la codificación (generación) de un JWT
-export function encodeToken(user: User): string {
-  // 1. Crear el 'payload' (datos visibles)
-  const payload = {
-    userId: user.id,
-    username: user.username,
-    role: user.role,
-    // La fecha de expiración es crucial en un JWT real
-    exp: Math.floor(Date.now() / 1000) + (60 * 60) // Expira en 1 hora
-  };
-
-  // 2. Codificación Base64Url (simulación simple)
-  // Usamos btoa() y atob() que son nativos del navegador para simular Base64 simple.
-  const header = btoa(JSON.stringify({ alg: 'none', typ: 'JWT' }));
-  const payloadEncoded = btoa(JSON.stringify(payload));
-  
-  // 3. Juntar las partes (header.payload.signature)
-  // Como no tenemos clave secreta en el frontend, la 'signature' es un placeholder.
-  return `${header}.${payloadEncoded}.MOCK_SIGNATURE`;
+export interface TokenPayload {
+  userId: string;
+  username: string;
+  role: AppRole;
+  iat: number;           // issued at (segundos)
+  exp: number;           // expires at (segundos)
 }
 
-// Función para simular la decodificación de la carga útil (payload) de un JWT
-// Esta función es usada por el cliente para leer los datos (role, userId).
-export function decodeToken(token: string): { userId: string, role: string } | null {
+// ---- Helpers base64 URL-safe (btoa/atob pero URL safe) ----
+function b64UrlEncode(obj: unknown): string {
+  const json = typeof obj === 'string' ? obj : JSON.stringify(obj);
+  return btoa(json).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/g, '');
+}
+
+function b64UrlDecode<T = unknown>(b64url: string): T {
+  const pad = b64url.length % 4 === 0 ? '' : '='.repeat(4 - (b64url.length % 4));
+  const b64 = b64url.replace(/-/g, '+').replace(/_/g, '/') + pad;
+  return JSON.parse(atob(b64)) as T;
+}
+
+// ---- Config ----
+const DEFAULT_TTL_SEC = 60 * 60; // 1h
+
+// Generar token MOCK (header.payload.signature)
+export function encodeToken(user: User, ttlSec: number = DEFAULT_TTL_SEC): string {
+  const header = { alg: 'none', typ: 'JWT' }; // MOCK: sin firma
+  const now = Math.floor(Date.now() / 1000);
+
+  const payload: TokenPayload = {
+    userId: user.id,
+    username: user.username,
+    role: user.role as AppRole,
+    iat: now,
+    exp: now + ttlSec,
+  };
+
+  const h = b64UrlEncode(header);
+  const p = b64UrlEncode(payload);
+  return `${h}.${p}.MOCK_SIGNATURE`;
+}
+
+// Decodificar/validar token (solo payload)
+export function decodeToken(token: string): TokenPayload | null {
   try {
-    const parts = token.split('.');
-    if (parts.length !== 3) {
-      return null; // Formato inválido
-    }
-    
-    // Decodificar solo la segunda parte (payload)
-    const payloadEncoded = parts[1];
-    
-    // Usamos atob() para decodificar el Base64
-    const decodedPayload = JSON.parse(atob(payloadEncoded));
+    const [h, p, s] = token.split('.');
+    if (!h || !p || !s) return null;
 
-    // Comprobar expiración (simulación de validación)
-    if (decodedPayload.exp * 1000 < Date.now()) {
-        console.warn('Token expirado (MOCK)');
-        return null;
-    }
+    const payload = b64UrlDecode<TokenPayload>(p);
 
-    return decodedPayload as { userId: string, role: string };
-  } catch (error) {
-    console.error('Error al decodificar el token:', error);
+    if (typeof payload.exp !== 'number' || typeof payload.iat !== 'number') return null;
+    if (payload.exp * 1000 < Date.now()) {
+      console.warn('Token expirado (MOCK)');
+      return null;
+    }
+    return payload;
+  } catch (err) {
+    console.error('Token inválido (MOCK):', err);
     return null;
   }
 }
 
-// Función que simplemente verifica si un token está presente y no ha expirado
 export function isTokenValid(token: string): boolean {
-    return !!decodeToken(token);
+  return !!decodeToken(token);
+}
+
+// ---- Helpers de uso común ----
+export function getUserId(token: string): string | null {
+  return decodeToken(token)?.userId ?? null;
+}
+
+export function getRole(token: string): AppRole | null {
+  return decodeToken(token)?.role ?? null;
+}
+
+export function hasRole(token: string, ...roles: AppRole[]): boolean {
+  const r = getRole(token);
+  return !!r && roles.includes(r);
+}
+
+export function getAuthHeader(token: string): Record<string, string> {
+  return token ? { Authorization: `Bearer ${token}` } : {};
+}
+
+// ---- Helpers de storage (opcional) ----
+const TOKEN_KEY = 'auth_token';
+
+export function saveToken(token: string) {
+  localStorage.setItem(TOKEN_KEY, token);
+}
+
+export function readToken(): string | null {
+  return localStorage.getItem(TOKEN_KEY);
+}
+
+export function clearToken() {
+  localStorage.removeItem(TOKEN_KEY);
 }

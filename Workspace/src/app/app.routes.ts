@@ -77,6 +77,13 @@ export const routes: Routes = [
     component: EditOrderPage,
     canActivate: [permissionGuard],
     data: { allowedRoles: ['registered', 'admin']}
-  },
+  },{
+  path: 'admin',
+  loadComponent: () =>
+    import('./pages/Admin/admin-page/admin-page').then(m => m.AdminPage),
+  canActivate: [permissionGuard],
+  data: { allowedRoles: ['admin'] }
+},
+
     { path: '**', redirectTo: 'user-login' }
 ];
