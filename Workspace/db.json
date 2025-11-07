@@ -51,14 +51,15 @@
   ],
   "carts": [
     {
-      "userId": 1,
-      "total": 12.5,
+      "userId": "1",
+      "total": 0.15000000000000002,
       "customer": {
         "name": "John",
         "surname": "Doe",
-        "phone": "+1234567890"
+        "phone": "1234567890"
       },
       "status": "pending",
+      "cartStatus": "completed",
       "id": "1622"
     },
     {
@@ -91,6 +92,13 @@
       "total": 0,
       "status": "pending",
       "cartStatus": "pending"
+    },
+    {
+      "id": "5590",
+      "userId": "1",
+      "total": 0,
+      "status": "pending",
+      "cartStatus": "pending"
     }
   ],
   "orderItems": [
@@ -117,6 +125,42 @@
       "file": "PROTECCION DE DERECHOS DE AUTOR FRENTE A LA IA_20251016_030839_0000.pdf",
       "amount": 0.65,
       "cartId": "1ac5"
+    },
+    {
+      "id": "e68b",
+      "pages": 1,
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV 2.pdf",
+      "amount": 0.05,
+      "cartId": "1622"
+    },
+    {
+      "id": "b2a3",
+      "pages": 2,
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "ACTIVIDAD UNIDAD 1.pdf",
+      "amount": 0.1,
+      "cartId": "1622"
+    },
+    {
+      "id": "a0e1",
+      "pages": 1,
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV 2.pdf",
+      "amount": 0.05,
+      "cartId": "5590"
     }
   ],
   "payments": [
@@ -144,6 +188,14 @@
       "finalPrice": 0.65,
       "depositAmount": 100,
       "orderDate": "2025-11-07T13:15:52.096Z"
+    },
+    {
+      "id": "2d91",
+      "cartId": "1622",
+      "paymentStatus": "completed",
+      "finalPrice": 0.15000000000000002,
+      "depositAmount": 0,
+      "orderDate": "2025-11-07T19:33:16.977Z"
     }
   ]
 }

@@ -18,7 +18,7 @@ export class CartService {
     //Deberia llamar desde la page al otro 
     // servicio de Orders ya que cart no guarda id de orders
     //Este es de uso del admin o del empleado
-    return this.http.get<Cart>(this.url);
+    return this.http.get<Cart[]>(this.url);
     //Revisar metodo getOrdersFromCart en order-service.ts
   }
 
