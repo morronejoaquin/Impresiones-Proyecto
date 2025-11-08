@@ -47,6 +47,16 @@
       "phone": "12345678",
       "password": "Lauty1812$",
       "role": "admin"
+    },
+    {
+      "id": "1762633847323",
+      "username": "guest_1762633847323",
+      "name": "Invitado",
+      "surname": "Temporal",
+      "email": "guest@temp.com",
+      "phone": "0000000000",
+      "password": "",
+      "role": "guest"
     }
   ],
   "carts": [
@@ -99,6 +109,18 @@
       "total": 0,
       "status": "pending",
       "cartStatus": "pending"
+    },
+    {
+      "userId": "1762633847323",
+      "total": 3.85,
+      "customer": {
+        "name": "Justo",
+        "surname": "Muro",
+        "phone": "2233003151"
+      },
+      "status": "pending",
+      "cartStatus": "completed",
+      "id": "2c6c"
     }
   ],
   "orderItems": [
@@ -161,6 +183,28 @@
       "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV 2.pdf",
       "amount": 0.05,
       "cartId": "5590"
+    },
+    {
+      "id": "ca87",
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "descarga_1.jfif",
+      "amount": 0,
+      "cartId": "2c6c"
+    },
+    {
+      "id": "fa3f",
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "ringed",
+      "isColor": true,
+      "comments": "",
+      "file": "descarga_1.jfif",
+      "amount": 3.85,
+      "cartId": "2c6c"
     }
   ],
   "payments": [
@@ -196,6 +240,14 @@
       "finalPrice": 0.15000000000000002,
       "depositAmount": 0,
       "orderDate": "2025-11-07T19:33:16.977Z"
+    },
+    {
+      "id": "5612",
+      "cartId": "2c6c",
+      "paymentStatus": "completed",
+      "finalPrice": 3.85,
+      "depositAmount": 100,
+      "orderDate": "2025-11-08T20:31:37.425Z"
     }
   ]
 }

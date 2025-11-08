@@ -1,0 +1,85 @@
+.detail {
+  padding: 24px;
+  background: #f9fafb;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+.back {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #0369a1;
+  text-decoration: none;
+}
+
+h1 {
+  margin: 0 0 12px;
+}
+
+.meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+  margin: 12px 0 20px;
+}
+
+.badge {
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.items {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,.06);
+}
+
+.items thead th {
+  background: #fafafa;
+}
+
+.items th,
+.items td {
+  padding: 10px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: left;
+}
+
+.items tfoot td {
+  background: #fafafa;
+}
+
+.right {
+  text-align: right;
+}
+
+.muted {
+  color: #6b7280;
+}
+.chip {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: 600;
+  background: #eef2f7;
+  color: #374151;
+}
+.chip.ok {
+  background: #dcfce7;   
+  color: #166534;
+}
+.chip.muted {
+  background: #f3f4f6;  
+  color: #6b7280;
+}
+.chip-binding {
+  background: #e0f2fe;  
+  color: #0369a1;
+}

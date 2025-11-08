@@ -70,4 +70,14 @@ export class CartService {
       })
     );
   }
+
+  updateCartStatus(id: string, status: string) {
+  // ajustá la URL si tu recurso no es /carts
+  return this.http.patch<Cart>(`http://localhost:3000/carts/${id}`, { status });
+}
+
+getCartById(id: string) {
+  return this.http.get<Cart>(`http://localhost:3000/carts/${id}`);
+}
+
 }

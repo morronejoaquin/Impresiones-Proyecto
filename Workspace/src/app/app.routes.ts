@@ -14,76 +14,81 @@ import { CartPaymentPage } from './pages/Cart/cart-payment-page/cart-payment-pag
 
 export const routes: Routes = [
   { path: '', redirectTo: 'user-login', pathMatch: 'full' },
-  { path: 'user-login', component: UserLoginPage},
-  { path: 'user-register', component: UserRegisterPage},
+  { path: 'user-login', component: UserLoginPage },
+  { path: 'user-register', component: UserRegisterPage },
 
-  { 
-    path: 'home', 
-    component: HomePage, 
+  {
+    path: 'home',
+    component: HomePage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['guest','registered', 'admin']} 
-  }, 
-  { 
-    path: 'account', 
-    component: AccountPage, 
+    data: { allowedRoles: ['guest', 'registered', 'admin'] }
+  },
+  {
+    path: 'account',
+    component: AccountPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['registered', 'admin']} 
+    data: { allowedRoles: ['registered', 'admin'] }
   },
   {
     path: 'user-edit',
     component: UserEditPage,
     canActivate: [permissionGuard],
     data: { allowedRoles: ['registered', 'admin'] }
-  }, 
+  },
 
-  { 
-    path: 'make-order', 
+  {
+    path: 'make-order',
     component: MakeOrderPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['guest', 'registered', 'admin']} 
+    data: { allowedRoles: ['guest', 'registered', 'admin'] }
   },
-  { 
-    path: 'make-order/:orderId', 
+  {
+    path: 'make-order/:orderId',
     component: MakeOrderPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['guest', 'registered', 'admin']} 
+    data: { allowedRoles: ['guest', 'registered', 'admin'] }
   },
-  { 
-    path: 'cart', 
+  {
+    path: 'cart',
     component: ShowCartPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['guest', 'registered', 'admin']}
+    data: { allowedRoles: ['guest', 'registered', 'admin'] }
   },
   {
     path: 'cart-payment',
     component: CartPaymentPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['guest', 'registered', 'admin']}
+    data: { allowedRoles: ['guest', 'registered', 'admin'] }
   },
-  { 
-    path: 'price-calculator', 
+  {
+    path: 'price-calculator',
     component: PriceCalculatorPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['guest', 'registered', 'admin']}
+    data: { allowedRoles: ['guest', 'registered', 'admin'] }
   },
-  { 
-    path: 'contact', 
+  {
+    path: 'contact',
     component: WherePage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['guest', 'registered', 'admin']}
+    data: { allowedRoles: ['guest', 'registered', 'admin'] }
   },
   {
     path: 'edit-order/:orderId',
     component: EditOrderPage,
     canActivate: [permissionGuard],
-    data: { allowedRoles: ['registered', 'admin']}
-  },{
-  path: 'admin',
-  loadComponent: () =>
-    import('./pages/Admin/admin-page/admin-page').then(m => m.AdminPage),
-  canActivate: [permissionGuard],
-  data: { allowedRoles: ['admin'] }
-},
-
-    { path: '**', redirectTo: 'user-login' }
+    data: { allowedRoles: ['registered', 'admin'] }
+  }, {
+    path: 'admin',
+    loadComponent: () =>
+      import('./pages/Admin/admin-page/admin-page').then(m => m.AdminPage),
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['admin'] }
+  }, {
+    path: 'admin/order/:id',
+    loadComponent: () =>
+      import('./pages/Admin/admin-order-detail/admin-order-detail').then(m => m.AdminOrderDetailPage),
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['admin'] }
+  },
+  { path: '**', redirectTo: 'user-login' }
 ];

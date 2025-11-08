@@ -1,0 +1,51 @@
+<section class="detail">
+  <a routerLink="/admin" class="back">← Volver</a>
+
+  <h1>Pedido #{{ cart()?.id }}</h1>
+
+  <div class="meta" *ngIf="cart() as c">
+    <div><b>Cliente:</b> {{ c.customer?.name }} {{ c.customer?.surname }}</div>
+    <div><b>Estado:</b> <span class="badge">{{ c.status || c.cartStatus }}</span></div>
+    <div><b>Total (cart):</b> ${{ c.total | number:'1.2-2' }}</div>
+  </div>
+
+  <h2>Items</h2>
+
+ <table *ngIf="items().length; else noItems" class="items">
+  <thead>
+    <tr>
+      <th>Archivo</th>
+      <th>Pág.</th>
+      <th>Copias</th>
+      <th>Doble cara</th>
+      <th>Color</th>
+      <th>Anillado</th>
+      <th>Precio</th>
+      <th>Subtotal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let it of items(); trackBy: track">
+      <td>{{ fileName(it.file) }}</td>
+      <td>{{ it.pages }}</td>
+      <td>{{ it.copies }}</td>
+      <td><span class="chip" [class.ok]="it.isDoubleSided" [class.muted]="!it.isDoubleSided">{{ yesNo(it.isDoubleSided) }}</span></td>
+      <td><span class="chip" [class.ok]="it.isColor" [class.muted]="!it.isColor">{{ yesNo(it.isColor) }}</span></td>
+      <td><span class="chip chip-binding">{{ bindingLabel(it.binding) }}</span></td>
+      <td>${{ it.amount | number:'1.2-2' }}</td>
+      <td>${{ sub(it) | number:'1.2-2' }}</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="7" class="right"><b>Total (items)</b></td>
+      <td><b>${{ total() | number:'1.2-2' }}</b></td>
+    </tr>
+  </tfoot>
+</table>
+
+
+  <ng-template #noItems>
+    <p class="muted">Este pedido no tiene items.</p>
+  </ng-template>
+</section>

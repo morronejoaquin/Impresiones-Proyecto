@@ -1,3 +1,4 @@
+/* --- Página --- */
 .admin-page {
   padding: 24px;
   background-color: #f9fafb;
@@ -5,26 +6,41 @@
   font-family: 'Inter', sans-serif;
 }
 
+/* --- Contenedor de tarjetas --- */
 .carts {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
 }
 
-/* Cada tarjeta (pedido) */
+/* --- Tarjeta (pedido) --- */
 .cart {
+  display: grid;                          /* info | acciones */
+  grid-template-columns: 1fr auto;
+  align-items: center;                    /* centra verticalmente */
+  gap: 16px;
+
   background-color: #fff;
   border-radius: 16px;
   padding: 20px 24px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  cursor: pointer;                        /* toda la tarjeta clickeable */
 }
-
 .cart:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-/* Estado del pedido */
+/* Bloques informativos a la izquierda */
+.cart-status,
+.cart-resumen,
+.cart-archivos,
+.cart-total {
+  grid-column: 1;
+}
+
+/* Estado (pill) */
 .cart-status span {
   display: inline-block;
   background-color: #e0f2fe;
@@ -35,13 +51,12 @@
   font-size: 0.85rem;
 }
 
-/* Bloques de información */
+/* Info */
 .cart-resumen,
 .cart-archivos,
 .cart-total {
   margin-top: 12px;
 }
-
 .cart-resumen p:first-child,
 .cart-archivos p:first-child,
 .cart-total p:first-child {
@@ -49,7 +64,6 @@
   color: #374151;
   margin-bottom: 4px;
 }
-
 .cart-resumen p,
 .cart-archivos p,
 .cart-total p {
@@ -57,20 +71,16 @@
   font-size: 0.95rem;
   color: #1f2937;
 }
-
-/* Subdetalles (archivos, cantidad, etc.) */
 .cart-archivos p:not(:first-child) {
   color: #4b5563;
   font-size: 0.9rem;
 }
-
-/* Total con énfasis */
 .cart-total p:last-child {
   font-weight: 700;
   color: #111827;
 }
 
-/* Mensaje cuando no hay pedidos */
+/* Mensaje vacío */
 .admin-page > p {
   text-align: center;
   color: #6b7280;
@@ -78,7 +88,7 @@
   margin-top: 40px;
 }
 
-/* filtrado */
+/* --- Filtros --- */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -86,7 +96,6 @@
   margin-bottom: 24px;
   align-items: center;
 }
-
 .filters label {
   font-weight: 600;
   color: #374151;
@@ -94,7 +103,6 @@
   display: flex;
   flex-direction: column;
 }
-
 .filters select,
 .filters input {
   margin-top: 4px;
@@ -105,15 +113,13 @@
   color: #111827;
   font-size: 0.95rem;
   outline: none;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: border .2s ease, box-shadow .2s ease;
 }
-
 .filters select:focus,
 .filters input:focus {
   border-color: #0369a1;
   box-shadow: 0 0 0 2px rgba(3, 105, 161, 0.2);
 }
-
 .filters button {
   padding: 6px 14px;
   background-color: #0369a1;
@@ -123,10 +129,69 @@
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: background-color .2s ease, transform .2s ease;
 }
-
 .filters button:hover {
   background-color: #024e73;
   transform: translateY(-1px);
+}
+
+/* --- Acciones a la derecha (solo select) --- */
+.cart-actions {
+  grid-column: 2;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: default; /* evita la mano dentro de los controles */
+}
+.cart-actions label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.9rem;
+}
+.cart-actions select {
+  margin-top: 4px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #111827;
+  font-size: .95rem;
+  outline: none;
+  transition: border .2s ease, box-shadow .2s ease;
+}
+.cart-actions select:focus {
+  border-color: #0369a1;
+  box-shadow: 0 0 0 2px rgba(3,105,161,0.2);
+}
+.filters button {
+  align-self: flex-end;  
+  margin-top: 22px;       
+}
+
+
+@media (max-width: 640px) {
+  .filters button {
+    margin-top: 0;
+    align-self: auto;
+  }
+}
+
+/* --- Responsive: acciones debajo en mobile --- */
+@media (max-width: 640px) {
+  .carts {
+    grid-template-columns: 1fr;
+  }
+  .cart {
+    grid-template-columns: 1fr;
+  }
+  .cart-actions {
+    grid-column: 1;
+    justify-self: stretch;
+    justify-content: flex-end;
+    margin-top: 8px;
+  }
 }
