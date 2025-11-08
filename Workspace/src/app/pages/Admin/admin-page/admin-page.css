@@ -77,3 +77,56 @@
   font-size: 1rem;
   margin-top: 40px;
 }
+
+/* filtrado */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+  align-items: center;
+}
+
+.filters label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.filters select,
+.filters input {
+  margin-top: 4px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background-color: #fff;
+  color: #111827;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filters select:focus,
+.filters input:focus {
+  border-color: #0369a1;
+  box-shadow: 0 0 0 2px rgba(3, 105, 161, 0.2);
+}
+
+.filters button {
+  padding: 6px 14px;
+  background-color: #0369a1;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.filters button:hover {
+  background-color: #024e73;
+  transform: translateY(-1px);
+}
