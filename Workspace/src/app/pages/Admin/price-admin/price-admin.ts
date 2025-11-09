@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PriceManagerService } from '../../../services/Prices/price-manager-service';
 import Prices from '../../../models/Prices/Prices';
 
 @Component({
   selector: 'app-price-admin',
+  imports: [ReactiveFormsModule],
   templateUrl: './price-admin.component.html',
   styleUrls: ['./price-admin.component.css']
 })
