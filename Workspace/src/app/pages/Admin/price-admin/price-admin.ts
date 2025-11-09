@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PriceManagerService } from '../../../services/Prices/price-manager-service';
 import Prices from '../../../models/Prices/Prices';
 
 @Component({
   selector: 'app-price-admin',
-  imports: [ReactiveFormsModule],
   templateUrl: './price-admin.component.html',
   styleUrls: ['./price-admin.component.css']
 })
@@ -21,21 +20,23 @@ export class PriceAdminComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadPrices();
     this.priceForm = this.fb.group({
       pricePerSheetBW: [0, [Validators.required, Validators.min(0)]],
       pricePerSheetColor: [0, [Validators.required, Validators.min(0)]],
       priceRingedBinding: [0, [Validators.required, Validators.min(0)]]
     });
+
+    this.loadPrices();
   }
 
   loadPrices() {
     this.priceService.getPrices().subscribe({
       next: (data) => {
         this.prices = data;
+
         if (this.prices.length > 0) {
           const price = this.prices[0];
-          this.priceForm.patchValue({
+          this.priceForm.setValue({
             pricePerSheetBW: price.pricePerSheetBW,
             pricePerSheetColor: price.pricePerSheetColor,
             priceRingedBinding: price.priceRingedBinding
@@ -47,25 +48,47 @@ export class PriceAdminComponent implements OnInit {
   }
 
   savePrices() {
-    if (!this.prices[0]) return;
+    const formValues = this.priceForm.value;
 
-    const updatedPrice: Prices = {
-      priceId: this.prices[0].priceId,
-      ...this.priceForm.value
-    };
+    if (this.prices.length > 0) {
+      const updatedPrice: Prices = {
+        priceId: this.prices[0].priceId,
+        ...formValues
+      };
 
-    this.loading = true;
-    this.priceService.updatePrices(updatedPrice).subscribe({
-      next: (res) => {
-        this.loading = false;
-        this.message = 'Precios actualizados correctamente!';
-        this.loadPrices();
-      },
-      error: (err) => {
-        this.loading = false;
-        this.message = 'Error al actualizar precios';
-        console.error(err);
-      }
-    });
+      this.loading = true;
+      this.priceService.updatePrices(updatedPrice).subscribe({
+        next: () => {
+          this.loading = false;
+          this.message = 'Precios actualizados correctamente!';
+          this.loadPrices();
+        },
+        error: (err) => {
+          this.loading = false;
+          this.message = 'Error al actualizar precios';
+          console.error(err);
+        }
+      });
+    } 
+    else {
+      const newPrice: Prices = {
+        priceId: 0, 
+        ...formValues
+      };
+
+      this.loading = true;
+      this.priceService.postPrices(newPrice).subscribe({
+        next: () => {
+          this.loading = false;
+          this.message = 'Precio creado correctamente!';
+          this.loadPrices();
+        },
+        error: (err) => {
+          this.loading = false;
+          this.message = 'Error al crear el precio';
+          console.error(err);
+        }
+      });
+    }
   }
 }
