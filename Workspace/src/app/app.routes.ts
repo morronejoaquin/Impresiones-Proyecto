@@ -89,6 +89,12 @@ export const routes: Routes = [
       import('./pages/Admin/admin-order-detail/admin-order-detail').then(m => m.AdminOrderDetailPage),
     canActivate: [permissionGuard],
     data: { allowedRoles: ['admin'] }
+  },{
+    path: 'admin/prices',
+    loadComponent: () =>
+      import('./pages/Admin/price-admin/price-admin').then(m => m.PriceAdminComponent),
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['admin'] }
   },
   { path: '**', redirectTo: 'user-login' }
 ];

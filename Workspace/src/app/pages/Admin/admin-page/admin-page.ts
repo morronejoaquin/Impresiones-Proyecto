@@ -9,8 +9,8 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 interface CartWithItems extends Cart {
-    orderItems: OrderItem[];
-    fileSummary: string;
+  orderItems: OrderItem[];
+  fileSummary: string;
 }
 
 @Component({
@@ -32,9 +32,15 @@ export class AdminPage implements OnInit{
   readonly STATUSES = ['pending','printing','binding','ready','delivered','cancelled'];
   savingIds = new Set<string>();
 
-  constructor(private cartService: CartService, private orderService: OrderService , private router : Router){}
+  constructor(
+    private cartService: CartService,
+    private orderService: OrderService,
+    private router: Router
+  ) {}
 
-  ngOnInit(): void { this.loadCompletedCarts() }
+  ngOnInit(): void {
+    this.loadCompletedCarts();
+  }
 
   loadCompletedCarts(): void {
     this.cartService.getCartItems().pipe(
@@ -105,6 +111,10 @@ export class AdminPage implements OnInit{
   }
 
   goToDetail(cart: CartWithItems) {
-  this.router.navigate(['/admin/order', cart.id]);
-}
+    this.router.navigate(['/admin/order', cart.id]);
+  }
+
+  goToPriceAdmin() {
+    this.router.navigate(['/admin/prices']);
+  }
 }

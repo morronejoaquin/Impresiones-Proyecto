@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { PriceAdminComponent } from './price-admin';
 
-import { PriceAdmin } from './price-admin';
 
 describe('PriceAdmin', () => {
-  let component: PriceAdmin;
-  let fixture: ComponentFixture<PriceAdmin>;
+  let component: PriceAdminComponent;
+  let fixture: ComponentFixture<PriceAdminComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PriceAdmin]
+      imports: [PriceAdminComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PriceAdmin);
+    fixture = TestBed.createComponent(PriceAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

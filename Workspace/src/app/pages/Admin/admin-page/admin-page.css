@@ -195,3 +195,29 @@
     margin-top: 8px;
   }
 }
+/* --- Botón Administrar Precios --- */
+.price-admin-button {
+  padding: 8px 16px;
+  background-color: #10b981; /* verde smaragd */
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.price-admin-button:hover {
+  background-color: #0f9f6e;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 640px) {
+  .price-admin-button {
+    width: 100%;
+    text-align: center;
+  }
+}
+
