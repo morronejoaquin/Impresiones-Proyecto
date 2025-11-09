@@ -1,0 +1,25 @@
+<div class="price-admin-container">
+  <h2>Administrar Precios de Impresiones</h2>
+
+  <form [formGroup]="priceForm" (ngSubmit)="savePrices()">
+    <div>
+      <label>Precio por hoja blanco y negro:</label>
+      <input type="number" formControlName="pricePerSheetBW" step="0.01" />
+    </div>
+
+    <div>
+      <label>Precio por hoja a Color:</label>
+      <input type="number" formControlName="pricePerSheetColor" step="0.01" />
+    </div>
+
+    <div>
+      <label>Precio encuadernación anillada:</label>
+      <input type="number" formControlName="priceRingedBinding" step="0.01" />
+    </div>
+
+    <button type="submit" [disabled]="loading || priceForm.invalid">Guardar</button>
+  </form>
+@if(message){
+  <p>{{ message }}</p>
+}
+</div>
