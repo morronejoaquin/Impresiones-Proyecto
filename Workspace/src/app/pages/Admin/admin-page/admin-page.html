@@ -31,9 +31,18 @@
     <div class="carts">
       @for (cart of filteredCarts; track cart.id) {
         <div class="cart" (click)="goToDetail(cart)">
-      <div class="cart-status">
-        <span>{{ cart.status }}</span>
+      
+      <div class="cart-header">
+        <div class="cart-status">
+          <span>{{ cart.status }}</span>
+        </div>
+        <div class="cart-situacion">
+          @if(cart.status === 'ready'){
+            <span>Listo para entregar</span>
+          }
+        </div>
       </div>
+      
 
       <div class="cart-resumen">
         <p>Cliente:</p>

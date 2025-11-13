@@ -33,11 +33,19 @@
 }
 
 /* Bloques informativos a la izquierda */
-.cart-status,
+.cart-header,
 .cart-resumen,
 .cart-archivos,
 .cart-total {
   grid-column: 1;
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  /* La clave para alinear un elemento a la izquierda y otro a la derecha */
+  justify-content: space-between; 
+  gap: 12px; 
 }
 
 /* Estado (pill) */
@@ -45,6 +53,16 @@
   display: inline-block;
   background-color: #e0f2fe;
   color: #0369a1;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.cart-situacion span {
+  display: inline-block;
+  background-color: #e0f2fe;
+  color: #10b981;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 12px;
