@@ -1,0 +1,117 @@
+/* --- Página --- */
+.admin-record {
+  padding: 24px;
+  background-color: #f9fafb;
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+}
+
+/* --- Contenedor de tarjetas --- */
+.carts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+/* --- Tarjeta (pedido) --- */
+.cart {
+  display: grid;                          /* info | acciones */
+  grid-template-columns: 1fr auto;
+  align-items: center;                    /* centra verticalmente */
+  gap: 16px;
+
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  transition: transform .2s ease, box-shadow .2s ease;
+  cursor: pointer;                        /* toda la tarjeta clickeable */
+}
+.cart:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+/* Bloques informativos a la izquierda */
+.cart-header,
+.cart-resumen,
+.cart-archivos,
+.cart-total {
+  grid-column: 1;
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  /* La clave para alinear un elemento a la izquierda y otro a la derecha */
+  justify-content: space-between; 
+  gap: 12px; 
+}
+
+/* Estado (pill) */
+.cart-status span {
+  display: inline-block;
+  background-color: #e0f2fe;
+  color: #0369a1;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+.cart-situacion span {
+  display: inline-block;
+  background-color: #e0f2fe;
+  color: #10b981;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+/* Info */
+.cart-resumen,
+.cart-archivos,
+.cart-total {
+  margin-top: 12px;
+}
+.cart-resumen p:first-child,
+.cart-archivos p:first-child,
+.cart-total p:first-child {
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 4px;
+}
+.cart-resumen p,
+.cart-archivos p,
+.cart-total p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #1f2937;
+}
+.cart-archivos p:not(:first-child) {
+  color: #4b5563;
+  font-size: 0.9rem;
+}
+.cart-total p:last-child {
+  font-weight: 700;
+  color: #111827;
+}
+
+/* Mensaje vacío */
+.admin-page > p {
+  text-align: center;
+  color: #6b7280;
+  font-size: 1rem;
+  margin-top: 40px;
+}
+
+/* --- Responsive: acciones debajo en mobile --- */
+@media (max-width: 640px) {
+  .carts {
+    grid-template-columns: 1fr;
+  }
+  .cart {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,37 @@
+<div class="admin-record">
+
+  @if (carts.length === 0) {
+    <p>No hay pedidos entregados</p>
+  } @else {
+    <div class="carts">
+      @for (cart of carts; track cart.id) {
+        <div class="cart" (click) = goToDetail(cart)>
+      
+            <div class="cart-header">
+                <div class="cart-status">
+                <span>Entregado</span>
+                </div>
+            </div>
+            
+            <div class="cart-resumen">
+                <p>Cliente:</p>
+                <p>{{ cart.customer?.name }} {{ cart.customer?.surname }}</p>
+            </div>
+
+            <div class="cart-archivos">
+                <p>Archivos:</p>
+                <p>{{ cart.fileSummary }}</p>
+                <p>{{ cart.orderItems.length }} items en total</p>
+            </div>
+
+            <div class="cart-total">
+                <p>Total:</p>
+                <p>${{ cart.total | number:'1.2-2' }}</p>
+            </div>
+
+    </div>
+      }
+  </div>
+  }
+
+</div>

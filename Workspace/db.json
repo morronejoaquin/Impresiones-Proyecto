@@ -68,7 +68,7 @@
         "surname": "Doe",
         "phone": "1234567890"
       },
-      "status": "pending",
+      "status": "ready",
       "cartStatus": "completed",
       "id": "1622"
     },
@@ -80,7 +80,7 @@
         "surname": "Peñaflor",
         "phone": "1234567810"
       },
-      "status": "pending",
+      "status": "delivered",
       "cartStatus": "completed",
       "id": "1311"
     },

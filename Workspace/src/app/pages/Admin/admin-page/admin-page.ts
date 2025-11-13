@@ -43,31 +43,7 @@ export class AdminPage implements OnInit{
   }
 
   loadCompletedCarts(): void {
-    this.cartService.getCartItems().pipe(
-      map(allCarts => allCarts.filter(cart => cart.cartStatus === 'completed')),
-      switchMap(completedCarts => {
-        if (completedCarts.length === 0) return of([] as CartWithItems[]);
-        const cartObservables = completedCarts.map(cart =>
-          this.orderService.getOrdersFromCart(cart.id).pipe(
-            map(orderItems => {
-              // --- resumen archivos ---
-              const fileNames = orderItems
-                .map(item => typeof item.file === 'string' ? item.file.split('/').pop() : 'Archivo desconocido')
-                .filter(Boolean) as string[];
-              const fileSummary =
-                fileNames.length === 0 ? 'Sin archivos.' :
-                fileNames.length === 1 ? fileNames[0] : `${fileNames[0]}... (${fileNames.length} archivos)`;
-
-              // --- NORMALIZAR status: si viene cartStatus, lo copiamos a status ---
-              const status = (cart as any).status ?? (cart as any).cartStatus ?? '';
-
-              return { ...cart, orderItems, fileSummary, status } as CartWithItems;
-            })
-          )
-        );
-        return forkJoin(cartObservables);
-      })
-    ).subscribe({
+    this.cartService.getCompletedCartsWithDetails().subscribe({
       next: (cartsWithItems) => {
         this.carts = cartsWithItems;
         this.filteredCarts = [...cartsWithItems];
@@ -116,5 +92,9 @@ export class AdminPage implements OnInit{
 
   goToPriceAdmin() {
     this.router.navigate(['/admin/prices']);
+  }
+
+  goToRecordAdmin(){
+    this.router.navigate(['/admin/record'])
   }
 }

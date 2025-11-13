@@ -11,6 +11,7 @@ import { UserEditPage } from './pages/Users/user-edit-page/user-edit-page';
 import { permissionGuard } from './guards/permission-guard';
 import { EditOrderPage } from './pages/Orders/edit-order-page/edit-order-page';
 import { CartPaymentPage } from './pages/Cart/cart-payment-page/cart-payment-page';
+import { AdminRecordPage } from './pages/Admin/admin-record-page/admin-record-page';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'user-login', pathMatch: 'full' },
@@ -95,6 +96,12 @@ export const routes: Routes = [
       import('./pages/Admin/price-admin/price-admin').then(m => m.PriceAdminComponent),
     canActivate: [permissionGuard],
     data: { allowedRoles: ['admin'] }
+  },
+  {
+    path: 'admin/record',
+    component: AdminRecordPage,
+    canActivate: [permissionGuard],
+    data: { allowedRoles: ['admin']}
   },
   { path: '**', redirectTo: 'user-login' }
 ];

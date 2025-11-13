@@ -1,0 +1,101 @@
+/* Estilos para el contenedor principal de administración de precios */
+.price-admin-container {
+    width: 100%;
+    max-width: 48rem;
+    margin: 2rem auto;
+    padding: 1.5rem; /* Un poco más de padding que el calculador */
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(20, 20, 20, 0.06);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Título de la sección */
+.price-admin-container h2 {
+    font-size: 1.75rem;
+    color: #2a9d8f; /* Usando el color de acento del botón */
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0;
+}
+
+/* Estilo para los grupos de formulario (label + input) */
+.price-admin-container form div {
+    margin-bottom: 1.25rem;
+}
+
+/* Labels */
+.price-admin-container label {
+    display: block;
+    font-weight: 600;
+    color: #222;
+    margin-bottom: 0.35rem;
+}
+
+/* Inputs (igual que el calculador) */
+.price-admin-container input[type="number"] {
+    width: 100%;
+    padding: 0.55em 0;
+    border: none;
+    border-bottom: 1px solid #d8d8d8;
+    background: transparent;
+    font-size: 1rem;
+    color: #333;
+    box-sizing: border-box;
+}
+
+/* Efectos al enfocar (igual que el calculador) */
+.price-admin-container input:focus {
+    outline: none;
+    border-bottom: 2px solid #2a9d8f;
+}
+
+/* Botón "Guardar" (igual que el calculador) */
+.price-admin-container button[type="submit"] {
+    width: 100%;
+    padding: 0.85rem;
+    background: #2a9d8f;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1rem;
+    transition: transform 0.12s ease, background 0.12s ease;
+}
+
+.price-admin-container button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #1f7a66;
+}
+
+/* Estado del botón deshabilitado */
+.price-admin-container button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Mensaje de estado (éxito/error) */
+.price-admin-container p {
+    margin-top: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    background: #e6f7ff; /* Fondo azul claro, puedes cambiarlo */
+    color: #007bff; /* Texto azul oscuro */
+    border: 1px solid #b3e0ff;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+    .price-admin-container {
+        padding: 0.9rem;
+        margin: 1rem;
+    }
+}
