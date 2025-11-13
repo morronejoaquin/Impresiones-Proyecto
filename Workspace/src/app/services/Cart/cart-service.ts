@@ -51,7 +51,7 @@ export class CartService {
     );
   }
 
-  // 💡 NUEVO: Orquesta la obtención o creación de un carrito activo
+  // NUEVO: Orquesta la obtención o creación de un carrito activo
   getOrCreateActiveCart(userId: string): Observable<Cart> {
     return this.getCartByUserId(userId).pipe(
       map(carts => carts[0]),
@@ -72,8 +72,10 @@ export class CartService {
   }
 
   updateCartStatus(id: string, status: string) {
-  // ajustá la URL si tu recurso no es /carts
-  return this.http.patch<Cart>(`http://localhost:3000/carts/${id}`, { status });
+    const updateStatus = {
+      status: status
+    }
+  return this.http.patch<Cart>(`${this.url}/${id}`, updateStatus);
 }
 
 getCartById(id: string) {

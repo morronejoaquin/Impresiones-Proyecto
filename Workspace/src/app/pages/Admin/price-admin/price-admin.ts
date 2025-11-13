@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PriceManagerService } from '../../../services/Prices/price-manager-service';
 import Prices from '../../../models/Prices/Prices';
 
 @Component({
   selector: 'app-price-admin',
-  templateUrl: './price-admin.component.html',
-  styleUrls: ['./price-admin.component.css']
+  imports: [ReactiveFormsModule],
+  templateUrl: './price-admin.html',
+  styleUrls: ['./price-admin.css']
 })
 export class PriceAdminComponent implements OnInit {
   priceForm!: FormGroup;

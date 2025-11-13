@@ -2,7 +2,7 @@
 
   <button class="price-admin-button" (click)="goToPriceAdmin()">Administrar Precios</button>
 
-  <!-- 🔹 FILTROS -->
+  <!-- FILTROS -->
   <div class="filters">
     <label>
       Filtrar por Status:
@@ -55,7 +55,7 @@
         <label>
           Estado:
           <select
-            [(ngModel)]="cart.status"
+            [ngModel]="cart.status"
             (ngModelChange)="updateStatus(cart, $event)"
             [disabled]="savingIds.has(cart.id)">
             <option *ngFor="let s of STATUSES" [value]="s">{{ s }}</option>

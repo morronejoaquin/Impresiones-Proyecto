@@ -50,7 +50,7 @@ export class AdminPage implements OnInit{
         const cartObservables = completedCarts.map(cart =>
           this.orderService.getOrdersFromCart(cart.id).pipe(
             map(orderItems => {
-              // --- resumen archivos (igual que tu lógica) ---
+              // --- resumen archivos ---
               const fileNames = orderItems
                 .map(item => typeof item.file === 'string' ? item.file.split('/').pop() : 'Archivo desconocido')
                 .filter(Boolean) as string[];
