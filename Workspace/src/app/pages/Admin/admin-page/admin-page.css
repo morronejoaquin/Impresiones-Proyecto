@@ -1,4 +1,3 @@
-/* --- Página --- */
 .admin-page {
   padding: 24px;
   background-color: #f9fafb;
@@ -6,18 +5,16 @@
   font-family: 'Inter', sans-serif;
 }
 
-/* --- Contenedor de tarjetas --- */
 .carts {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 20px;
 }
 
-/* --- Tarjeta (pedido) --- */
 .cart {
-  display: grid;                          /* info | acciones */
+  display: grid;
   grid-template-columns: 1fr auto;
-  align-items: center;                    /* centra verticalmente */
+  align-items: center;
   gap: 16px;
 
   background-color: #fff;
@@ -25,14 +22,13 @@
   padding: 20px 24px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   transition: transform .2s ease, box-shadow .2s ease;
-  cursor: pointer;                        /* toda la tarjeta clickeable */
+  cursor: pointer;
 }
 .cart:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.12);
 }
 
-/* Bloques informativos a la izquierda */
 .cart-header,
 .cart-resumen,
 .cart-archivos,
@@ -43,12 +39,10 @@
 .cart-header {
   display: flex;
   align-items: center;
-  /* La clave para alinear un elemento a la izquierda y otro a la derecha */
   justify-content: space-between; 
   gap: 12px; 
 }
 
-/* Estado (pill) */
 .cart-status span {
   display: inline-block;
   background-color: #e0f2fe;
@@ -69,7 +63,6 @@
   font-size: 0.85rem;
 }
 
-/* Info */
 .cart-resumen,
 .cart-archivos,
 .cart-total {
@@ -98,7 +91,6 @@
   color: #111827;
 }
 
-/* Mensaje vacío */
 .admin-page > p {
   text-align: center;
   color: #6b7280;
@@ -106,7 +98,6 @@
   margin-top: 40px;
 }
 
-/* --- Filtros --- */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -154,14 +145,13 @@
   transform: translateY(-1px);
 }
 
-/* --- Acciones a la derecha (solo select) --- */
 .cart-actions {
   grid-column: 2;
   justify-self: end;
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: default; /* evita la mano dentro de los controles */
+  cursor: default;
 }
 .cart-actions label {
   display: flex;
@@ -198,7 +188,6 @@
   }
 }
 
-/* --- Responsive: acciones debajo en mobile --- */
 @media (max-width: 640px) {
   .carts {
     grid-template-columns: 1fr;
@@ -213,10 +202,9 @@
     margin-top: 8px;
   }
 }
-/* --- Botón Administrar Precios --- */
 .price-admin-button {
   padding: 8px 16px;
-  background-color: #10b981; /* verde smaragd */
+  background-color: #10b981;
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
@@ -230,7 +218,6 @@
 .buttons {
   display: flex;
   align-items: center;
-  /* La clave para alinear un elemento a la izquierda y otro a la derecha */
   justify-content: space-between; 
   gap: 12px; 
 }
@@ -240,10 +227,9 @@
   transform: translateY(-1px);
 }
 
-/* --- Botón ver historial --- */
 .record-admin-button {
   padding: 8px 16px;
-  background-color: #10b981; /* verde smaragd */
+  background-color: #10b981;
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
@@ -261,7 +247,7 @@
 
 .cart-header {
   display: grid;
-  grid-template-columns: 1fr auto auto; /* estado | situacion | fecha */
+  grid-template-columns: 1fr auto auto;
   align-items: center;
   gap: 12px;
   margin-bottom: 8px;

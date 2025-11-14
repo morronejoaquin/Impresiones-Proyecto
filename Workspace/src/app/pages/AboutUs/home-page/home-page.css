@@ -1,4 +1,3 @@
-/* ======== Estilos generales ======== */
 main {
     max-width: 200px;
     margin: 40px auto;
@@ -11,7 +10,6 @@ main {
     bottom: 20000px;
   }
   
-  /* ======== Lista ======== */
   li {
     list-style: none;
     margin: 15px 0;
@@ -33,7 +31,6 @@ main {
 
   }
   
-  /* ======== Responsive ======== */
   @media (max-width: 500px) {
     main {
       width: 90%;

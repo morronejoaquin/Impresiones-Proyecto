@@ -69,7 +69,7 @@ export class CartPaymentPage implements OnInit{
                     error: (err) => console.error('Error fetching orders for total:', err)
                 });
             }else {
-              this.cartTotal = 0;  // Carrito vacio
+              this.cartTotal = 0;
             }
         },
         error: (err) => console.error('Error getting cart for total:', err)
@@ -93,10 +93,9 @@ export class CartPaymentPage implements OnInit{
 
       const cartId = carts[0].id;
 
-      // 👇 corregido: paymentMethod
       const payment = {
         cartId,
-        paymentMethod: p.paymentMethod,     // <- antes: payMentMethod (typo)
+        paymentMethod: p.paymentMethod,
         paymentStatus: 'completed',
         finalPrice: this.cartTotal,
         depositAmount: p.sign || 0,
@@ -113,9 +112,9 @@ export class CartPaymentPage implements OnInit{
             surname: p.surname,
             phone: p.phone
           },
-          status: 'pending',          // o 'ready' si querés marcarlo como listo
-          cartStatus: 'completed',    // ✅ necesario para el reporte
-          completedAt: new Date().toISOString() // ✅ clave para filtrar por fecha
+          status: 'pending',
+          cartStatus: 'completed',
+          completedAt: new Date().toISOString()
         }))
       );
     })

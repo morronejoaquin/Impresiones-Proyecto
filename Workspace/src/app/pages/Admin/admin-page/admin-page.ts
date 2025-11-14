@@ -129,4 +129,16 @@ export class AdminPage implements OnInit {
   this.updateStatus(cart, value as unknown as Cart['status']);
 }
 
+statusLabel(v?: 'ready' | 'delivered' | 'cancelled' | 'pending' | 'printing' | 'binding'): string {
+  switch (v) {
+    case 'pending':   return 'Pendiente';
+    case 'printing':  return 'Imprimiendo';
+    case 'binding':   return 'Encuadernando';
+    case 'ready':     return 'Listo';
+    case 'delivered': return 'Entregado';
+    case 'cancelled': return 'Cancelado';
+    default:         return '-';
+  }
+}
+
 }

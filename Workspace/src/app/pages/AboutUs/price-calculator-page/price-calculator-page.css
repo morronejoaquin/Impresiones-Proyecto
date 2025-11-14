@@ -1,4 +1,3 @@
-/* Contenedor principal del formulario */
 .calculator-form {
     width: 100%;
     max-width: 48rem;
@@ -14,7 +13,6 @@
     gap: 1rem;
   }
   
-  /* Labels */
   .calculator-form label {
     display: block;
     font-weight: 600;
@@ -22,7 +20,6 @@
     margin-bottom: 0.35rem;
   }
   
-  /* Inputs y selects */
   .calculator-form input[type="number"],
   .calculator-form select {
     width: 100%;
@@ -36,27 +33,23 @@
     margin-bottom: 1rem;
   }
   
-  /* Efectos al enfocar */
   .calculator-form input:focus,
   .calculator-form select:focus {
     outline: none;
     border-bottom: 2px solid #2a9d8f;
   }
   
-  /* Checkboxes */
   .calculator-form input[type="checkbox"] {
     margin-right: 0.5rem;
     transform: scale(1.1);
   }
   
-  /* Alinear checkbox con su texto */
   .calculator-form label input[type="checkbox"] + span,
   .calculator-form label input[type="checkbox"] {
     display: inline-block;
     vertical-align: middle;
   }
   
-  /* Botón principal */
   .calculator-form button[type="submit"] {
     width: 100%;
     padding: 0.85rem;
@@ -75,7 +68,6 @@
     background: #1f7a66;
   }
   
-  /* Sección del resultado */
   .result {
     margin-top: 1.5rem;
     background: #f7f9f9;
@@ -93,7 +85,6 @@
     font-weight: 800;
   }
   
-  /* Responsive */
   @media (max-width: 520px) {
     .calculator-form {
       padding: 0.9rem;

@@ -5,18 +5,17 @@
     <button class="record-admin-button" (click)="goToRecordAdmin()">Ver historial</button>
   </div>
 
-  <!-- FILTROS -->
   <div class="filters">
     <label>
       Filtrar por Status:
       <select [(ngModel)]="filterStatus" (change)="filterByStatus()">
         <option value="">Todos</option>
-        <option value="pending">Pending</option>
-        <option value="printing">Printing</option>
-        <option value="binding">Binding</option>
-        <option value="ready">Ready</option>
-        <option value="delivered">Delivered</option>
-        <option value="cancelled">Cancelled</option>
+        <option value="pending">Pendiente</option>
+        <option value="printing">Imprimiendo</option>
+        <option value="binding">Anillando</option>
+        <option value="ready">Listo</option>
+        <option value="delivered">Entregado</option>
+        <option value="cancelled">Cancelado</option>
       </select>
     </label>
 
@@ -35,10 +34,9 @@
     @for (cart of filteredCarts; track cart.id) {
     <div class="cart" (click)="goToDetail(cart)">
 
-      <!-- Encabezado: estado + situación + fecha -->
       <div class="cart-header">
         <div class="cart-status">
-          <span>{{ cart.status }}</span>
+          <span>{{ statusLabel(cart.status) }}</span>
         </div>
 
         <div class="cart-situacion">

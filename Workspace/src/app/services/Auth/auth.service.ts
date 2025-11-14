@@ -1,4 +1,3 @@
-// src/app/services/auth.service.ts
 import { Injectable, signal } from '@angular/core';
 import User from '../../models/Users/user';
 import { encodeToken, saveToken, readToken, clearToken, decodeToken } from '../../utils/jwt-utils';

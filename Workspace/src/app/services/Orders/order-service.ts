@@ -37,5 +37,4 @@ calculateTotal(orders: OrderItem[]): number {
         // Corrección importante: sumar (amount * copies)
         return orders.reduce((total, order) => total + (order.amount * (order.copies || 1)), 0);
 }
-
 }

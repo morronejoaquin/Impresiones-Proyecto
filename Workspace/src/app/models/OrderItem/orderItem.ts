@@ -1,6 +1,6 @@
 export default interface OrderItem {
   id: string;
-  cartId: string; // foreign key -> Cart.cartId
+  cartId: string;
   isColor: boolean;
   isDoubleSided: boolean;
   binding?: 'ringed' | 'stapled' | 'unringed';

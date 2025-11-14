@@ -1,4 +1,3 @@
-// src/app/pages/UsersLogin/user-login-page.ts (ajusta la ruta si es otra)
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { FormBuilder, Validators, FormGroup, ReactiveFormsModule } from '@angular/forms';

@@ -29,8 +29,8 @@ export class UserEditPage implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       password: [
-        '', // El campo es opcional, no lleva Validators.required
-        [ // Se aplican solo si el campo no está vacío
+        '',
+        [
           Validators.minLength(6), 
           Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,18}$/)
         ],

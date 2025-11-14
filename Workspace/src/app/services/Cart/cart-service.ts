@@ -21,11 +21,7 @@ export class CartService {
 
 
   getCartItems(){
-    //Deberia llamar desde la page al otro 
-    // servicio de Orders ya que cart no guarda id de orders
-    //Este es de uso del admin o del empleado
     return this.http.get<Cart[]>(this.url);
-    //Revisar metodo getOrdersFromCart en order-service.ts
   }
 
   getCartByUserId(userId: string): Observable<Cart[]> {
@@ -57,7 +53,6 @@ export class CartService {
     );
   }
 
-  // NUEVO: Orquesta la obtención o creación de un carrito activo
   getOrCreateActiveCart(userId: string): Observable<Cart> {
     return this.getCartByUserId(userId).pipe(
       map(carts => carts[0]),
@@ -71,7 +66,7 @@ export class CartService {
             status: 'pending',
             cartStatus: 'pending'
           };
-          return this.postCart(newCart as Cart); // Crear y retornar el nuevo carrito
+          return this.postCart(newCart as Cart);
         }
       })
     );
@@ -79,7 +74,7 @@ export class CartService {
 
   getCompletedCartsWithDetails(): Observable<CartWithItems[]> {
   return this.http.get<Cart[]>(this.url).pipe(
-    // ✅ Mostrar en "Pedidos" todo lo completado/finalizado EXCEPTO los entregados
+
     map(allCarts => allCarts.filter(cart =>
       cart.status !== 'delivered' && (
         cart.cartStatus === 'completed' ||
@@ -116,7 +111,6 @@ export class CartService {
 
 getDeliveredCartsWithDetails(): Observable<CartWithItems[]> {
   return this.http.get<Cart[]>(this.url).pipe(
-    // ✅ Entregados: con que status sea 'delivered' alcanza
     map(allCarts => allCarts.filter(cart => cart.status === 'delivered')),
     switchMap(deliveredCarts => {
       if (deliveredCarts.length === 0) return of([] as CartWithItems[]);
@@ -146,7 +140,6 @@ getDeliveredCartsWithDetails(): Observable<CartWithItems[]> {
 }
 
 
-  // ✅ setea status y opcionalmente sella completedAt / deliveredAt
 updateCartStatus(
   id: string,
   status: Cart['status'],
@@ -163,7 +156,7 @@ updateCartStatus(
     updates.deliveredAt = now;
   }
 
-  return this.http.patch<Cart>(`${this.url}/${id}`, updates); // PATCH, no PUT
+  return this.http.patch<Cart>(`${this.url}/${id}`, updates);
 }
 
 

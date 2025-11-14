@@ -10,7 +10,6 @@
   <div><b>Estado:</b> <span class="badge">{{ c.status || c.cartStatus }}</span></div>
   <div><b>Total (cart):</b> ${{ c.total | number:'1.2-2' }}</div>
 
-  <!-- ✅ Fechas -->
   <div><b>Fecha de pedido:</b>
     <span>{{ c.completedAt ? (c.completedAt | date:'dd/MM/yyyy HH:mm') : '—' }}</span>
   </div>

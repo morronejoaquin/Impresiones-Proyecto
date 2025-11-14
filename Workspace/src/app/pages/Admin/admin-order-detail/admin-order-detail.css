@@ -84,7 +84,6 @@ h1 {
   color: #0369a1;
 }
 
-/* --- Header con botón volver --- */
 .record-header {
   display: flex;
   justify-content: flex-start;
@@ -92,13 +91,12 @@ h1 {
   margin-bottom: 16px;
 }
 
-/* Anchor con look de botón */
 .record-header .back {
   display: inline-block;
   text-decoration: none;
   padding: 8px 14px;
   border-radius: 10px;
-  background: #0369a1;           /* azul consistente con tu UI */
+  background: #0369a1;
   color: #fff;
   font-weight: 600;
   font-size: 0.95rem;
@@ -123,7 +121,6 @@ h1 {
   box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.35);
 }
 
-/* Dark mode opcional */
 @media (prefers-color-scheme: dark) {
   .record-header .back {
     background: #0b78b6;

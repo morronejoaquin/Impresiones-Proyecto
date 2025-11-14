@@ -146,7 +146,7 @@ constructor(
     this.orderForm.valueChanges.subscribe(() => {
         this.calcularPrecio();
     });
-    this.calcularPrecio(); // Calcular el precio inicial al cargar
+    this.calcularPrecio();
   }
 
   private loadOrderForEditing(orderId: string): void {
@@ -203,7 +203,6 @@ constructor(
   const currentUser = this.userService.getDecodedUserPayload();
   if (!currentUser) {
     alert('Debes iniciar sesión para agregar productos al carrito.');
-    // Optionally, redirect to login page
     return;
   }
 
@@ -212,10 +211,8 @@ constructor(
   this.cartService.getCartByUserId(userId).subscribe({
     next: (carts) => {
       if (Array.isArray(carts) && carts.length > 0) {
-        // Usuario ya tiene carrito → agregamos el item
         this.createOrderItem(carts[0].id);//aca es en la posicion cero pq siempre es un carrito por
       } else {
-        // Usuario no tiene carrito → creamos uno
         const newCart: Partial<Cart> = {
           userId: userId,
           total: 0,
@@ -238,13 +235,12 @@ constructor(
 private createOrderItem(cartId: string) {
   const f = this.orderForm.value;
   const orderItem = {
-    ...f, // Copia las propiedades del formulario (pages, copies, etc.)
-    cartId: cartId, // 1. Agrega el cartId
-    file: this.selectedFileName, // 2. Agrega el nombre del archivo
-    amount: this.calculatedPrice, // 3. Usa el precio calculado
+    ...f,
+    cartId: cartId,
+    file: this.selectedFileName,
+    amount: this.calculatedPrice,
   };
 
-  // Elimina la propiedad 'pages' si el archivo no es un PDF, ya que no aplicaría
   if (!this.isPdf) {
     delete orderItem.pages;
   }
@@ -252,7 +248,6 @@ private createOrderItem(cartId: string) {
   this.orderService.postOrderToCart(orderItem).subscribe({
     next: () => {
       alert('Archivo agregado al carrito');
-      // Limpiar formulario y selección de archivo
       this.selectedFile = null;
       this.selectedFileName = 'Selecciona un archivo';
       this.orderForm.reset({
@@ -276,7 +271,7 @@ private updateOrderItem(): void {
   const updatedOrderItem = {
     ...f,
     amount: this.calculatedPrice,
-    file: this.selectedFileName, // Assuming file name doesn't change on edit, or handle new file upload
+    file: this.selectedFileName,
   };
 
   this.orderService.updateOrder(this.editingOrderId, updatedOrderItem).subscribe({

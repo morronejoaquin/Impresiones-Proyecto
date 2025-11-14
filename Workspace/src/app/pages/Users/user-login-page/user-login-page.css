@@ -1,4 +1,3 @@
-/* ======== Estilos generales ======== */
 form {
   max-width: 400px;
   margin: 40px auto;
@@ -13,14 +12,12 @@ form {
   text-align: center;
 }
 
-/* ======== Título ======== */
 h1 {
   font-size: 1.8rem;
   color: #333;
   margin-bottom: 1rem;
 }
 
-/* ======== Inputs ======== */
 fieldset {
   border: none;
   display: flex;
@@ -48,7 +45,6 @@ input:focus {
   outline: none;
 }
 
-/* ======== Botón principal ======== */
 button[type="submit"] {
   background: linear-gradient(339deg, rgba(255, 0, 0, 1) 0%, rgba(21, 0, 255, 1) 100%);
   color: white;
@@ -66,7 +62,6 @@ button[type="submit"]:hover {
   transform: scale(1.03);
 }
 
-/* ======== Enlaces ======== */
 h4 {
   margin-top: 1rem;
   font-size: 0.9rem;
@@ -95,14 +90,12 @@ a:hover {
   color: #0056b3;
 }
 
-/* ======== Texto de prueba (usuario y contraseña) ======== */
 p {
   font-size: 0.85rem;
   color: #666;
   margin: 0;
 }
 
-/* ======== Responsive ======== */
 @media (max-width: 500px) {
   form {
     width: 90%;

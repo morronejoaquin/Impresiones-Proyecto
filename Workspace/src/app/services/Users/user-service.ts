@@ -71,10 +71,6 @@ export class UserService {
     sessionStorage.removeItem(this.TOKEN_KEY);
   }
 
-  /**
-     * @description Obtiene los datos del usuario decodificando el JWT. 
-     * Este método reemplaza a getLoggedInUser().
-     */
   getDecodedUserPayload(): { userId: string, role: 'admin' | 'guest' | 'registered' } | null {
       const token = this.getAuthToken();
       if (!token || !isTokenValid(token)) {
@@ -90,9 +86,6 @@ export class UserService {
       return null;
   }
 
-  /**
-   * @description Almacena el ID y el rol del usuario invitado en localStorage.
-   */
   setGuestUserForCleanup(user: User): void {
     if (user.role === 'guest' && user.id) {
       localStorage.setItem(this.GUEST_ID_KEY, user.id.toString());
@@ -100,10 +93,6 @@ export class UserService {
     }
   }
 
-  /**
-   * @description Verifica si existía un usuario invitado de una sesión previa
-   * (pestaña cerrada o navegación) y lo elimina.
-   */
   checkPreviousGuestSession(): void {
         const guestId = localStorage.getItem(this.GUEST_ID_KEY);
         const guestRole = localStorage.getItem(this.GUEST_ROLE_KEY);
@@ -160,9 +149,6 @@ export class UserService {
         }
     }
     
-    /**
-     * @description Elimina el carrito y luego el usuario. 
-     */
     private deleteCartAndUser(cartId: string, guestId: string): void {
         this.cartService.deleteCart(cartId).subscribe({
             next: () => {
@@ -185,9 +171,6 @@ export class UserService {
         });
     }
 
-    /**
-     * @description 
-     */
     private cleanupLocalStorage(): void {
         console.log('[LIMPIEZA] Limpiando localStorage.');
         localStorage.removeItem(this.GUEST_ID_KEY); 

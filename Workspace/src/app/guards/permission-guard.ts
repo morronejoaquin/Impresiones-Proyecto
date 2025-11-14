@@ -1,9 +1,7 @@
-// src/app/guards/permission.guard.ts
 import { inject } from '@angular/core';
 import { CanActivateFn, Router, UrlTree } from '@angular/router';
 import { UserService } from '../services/Users/user-service';
 
-// mismos roles que tu modelo
 type Role = 'admin' | 'guest' | 'registered';
 
 const LOGIN_URL = '/user-login';

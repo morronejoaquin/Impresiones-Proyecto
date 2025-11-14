@@ -30,11 +30,10 @@ export class ShowCartPage implements OnInit {
       return;
     }
   
-    // Usamos getOrCreateActiveCart para asegurar que el usuario siempre tenga un carrito 'pending'
+    // Usamos getOrCreateActiveCart para asegurar que el usuario siempre tenga un carrito "pending"
     this.cartService.getOrCreateActiveCart(userId).pipe(
         switchMap(cart => {
           this.currentCartId = cart.id;
-            // Pedir las órdenes asociadas al carrito activo
             return this.orderService.getOrdersFromCart(cart.id);
         })
     ).subscribe({
