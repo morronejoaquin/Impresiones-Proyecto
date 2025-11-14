@@ -4,10 +4,19 @@
   <h1>Pedido #{{ cart()?.id }}</h1>
 
   <div class="meta" *ngIf="cart() as c">
-    <div><b>Cliente:</b> {{ c.customer?.name }} {{ c.customer?.surname }}</div>
-    <div><b>Estado:</b> <span class="badge">{{ c.status || c.cartStatus }}</span></div>
-    <div><b>Total (cart):</b> ${{ c.total | number:'1.2-2' }}</div>
+  <div><b>Cliente:</b> {{ c.customer?.name }} {{ c.customer?.surname }}</div>
+  <div><b>Estado:</b> <span class="badge">{{ c.status || c.cartStatus }}</span></div>
+  <div><b>Total (cart):</b> ${{ c.total | number:'1.2-2' }}</div>
+
+  <!-- ✅ Fechas -->
+  <div><b>Fecha de pedido:</b>
+    <span>{{ c.completedAt ? (c.completedAt | date:'dd/MM/yyyy HH:mm') : '—' }}</span>
   </div>
+  <div><b>Fecha de entrega:</b>
+    <span>{{ c.deliveredAt ? (c.deliveredAt | date:'dd/MM/yyyy HH:mm') : '—' }}</span>
+  </div>
+</div>
+
 
   <h2>Items</h2>
 
