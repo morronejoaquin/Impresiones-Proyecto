@@ -8,6 +8,7 @@ import { CartService } from '../../../services/Cart/cart-service';
 import { Router } from '@angular/router';
 import { OrderService } from '../../../services/Orders/order-service';
 import { switchMap } from 'rxjs';
+import { NotificationService } from '../../../services/Notification/notification-service';
 
 @Component({
   selector: 'app-cart-payment-page',
@@ -27,6 +28,7 @@ export class CartPaymentPage implements OnInit{
     private paymentService: PaymentService,
     private cartService: CartService,
     private orderService: OrderService,
+    private notificationService: NotificationService,
     private router: Router
   ){
     this.cartForm = this.fb.group({
@@ -121,12 +123,14 @@ export class CartPaymentPage implements OnInit{
   ).subscribe({
     next: () => {
       console.log('Pago registrado y carrito movido a completado.');
-      alert('Pago registrado. Su pedido está siendo procesado.');
-      this.router.navigate(['home']);
+      this.notificationService.success(
+        'Pago registrado. Su pedido está siendo procesado.', 
+        'home' // se pasa como parametro la ruta
+      );
     },
     error: (e) => {
       console.error('Error en el flujo de pago:', e);
-      alert('Error al procesar el pago o actualizar el pedido.');
+      this.notificationService.error('Error al procesar el pago o actualizar el pedido.');
     }
   });
 }

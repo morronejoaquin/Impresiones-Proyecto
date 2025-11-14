@@ -8,6 +8,7 @@ import { PriceManagerService } from '../../../services/Prices/price-manager-serv
 import { UserService } from '../../../services/Users/user-service';
 import Cart from '../../../models/Cart/cart';
 import { OrderService } from '../../../services/Orders/order-service';
+import { NotificationService } from '../../../services/Notification/notification-service';
 
 GlobalWorkerOptions.workerSrc =
   'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/5.4.149/pdf.worker.min.mjs';
@@ -38,6 +39,7 @@ constructor(
     private priceS: PriceManagerService,
     private orderService: OrderService,
     private userService: UserService,
+    private notificationService: NotificationService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router
@@ -197,12 +199,12 @@ constructor(
     }
 
   if ((!this.selectedFile && !this.editingOrderId) || !this.orderForm.valid) {
-    alert('Selecciona un archivo y completa todos los campos.');
+    this.notificationService.error('Selecciona un archivo y completa todos los campos.');
     return;
   }
   const currentUser = this.userService.getDecodedUserPayload();
   if (!currentUser) {
-    alert('Debes iniciar sesión para agregar productos al carrito.');
+    this.notificationService.info('Debes iniciar sesión para agregar productos al carrito.');
     return;
   }
 
@@ -247,18 +249,21 @@ private createOrderItem(cartId: string) {
 
   this.orderService.postOrderToCart(orderItem).subscribe({
     next: () => {
-      alert('Archivo agregado al carrito');
-      this.selectedFile = null;
-      this.selectedFileName = 'Selecciona un archivo';
-      this.orderForm.reset({
-        pages: 1,
-        copies: 1,
-        isDoubleSided: false,
-        binding: null,
-        isColor: false,
-        comments: ''
-      });
-      this.calculatedPrice = null;
+      this.notificationService.success('Archivo agregado al carrito');
+
+      setTimeout(() => {
+        this.selectedFile = null;
+        this.selectedFileName = 'Selecciona un archivo';
+        this.orderForm.reset({
+          pages: 1,
+          copies: 1,
+          isDoubleSided: false,
+          binding: 'unringed', 
+          isColor: false,
+          comments: ''
+        });
+        this.calculatedPrice = null;
+      }, 500);
     },
     error: (err: any) => console.error('Error agregando item:', err)
   });
@@ -276,7 +281,7 @@ private updateOrderItem(): void {
 
   this.orderService.updateOrder(this.editingOrderId, updatedOrderItem).subscribe({
     next: () => {
-      alert('Pedido actualizado correctamente.');
+      this.notificationService.success('Pedido actualizado correctamente.');
       this.router.navigate(['/cart']);
     },
     error: (err) => console.error('Error updating order item:', err)

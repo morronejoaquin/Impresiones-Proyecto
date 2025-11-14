@@ -1,0 +1,5 @@
+@if (currentNotification) {
+    <div [class]="'toast ' + currentNotification.type" [class.show]="isVisible">
+        {{ currentNotification.message }}
+    </div>
+}
