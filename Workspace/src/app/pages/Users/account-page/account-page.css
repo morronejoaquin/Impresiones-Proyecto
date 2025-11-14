@@ -109,3 +109,48 @@ h2 {
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+@media (max-width: 768px) {
+    .account-container {
+        margin: 1rem; /* Reducir margen en móviles */
+        padding: 1rem; /* Reducir padding */
+    }
+
+    h2 {
+        font-size: 1.75rem; /* Reducir tamaño de título */
+    }
+
+    .card-body {
+        padding: 1.5rem; /* Reducir padding del cuerpo de la tarjeta */
+    }
+    
+    .card-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    /* Stackear (apilar) la información de texto en el móvil */
+    .card-text { 
+        flex-direction: column; /* Cambiar a apilado vertical */
+        align-items: flex-start; /* Alinear texto a la izquierda */
+        margin-bottom: 1rem;
+    }
+
+    .card-text strong {
+        min-width: unset; /* Quitar ancho fijo */
+        margin-bottom: 0.25rem; /* Añadir pequeño margen debajo del label */
+        font-weight: 600; /* Hacer el label más audaz */
+        color: var(--text-color); /* Cambiar color del label para mayor contraste */
+    }
+
+    .card-footer {
+        padding: 1rem 1.5rem; /* Reducir padding del footer */
+        flex-direction: column; /* Apilar los botones verticalmente */
+        gap: 0.75rem; /* Espaciado entre botones */
+    }
+
+    .btn-primary, .btn-danger {
+        width: 100%; /* Botones de ancho completo */
+        font-size: 0.95rem;
+    }
+}

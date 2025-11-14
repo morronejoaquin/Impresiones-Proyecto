@@ -121,9 +121,125 @@ h1 {
   box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.35);
 }
 
-@media (prefers-color-scheme: dark) {
-  .record-header .back {
-    background: #0b78b6;
-    box-shadow: 0 2px 8px rgba(11, 120, 182, 0.25);
-  }
+@media (max-width: 768px) {
+    .detail {
+        padding: 1rem; /* Reducir padding general */
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* 1. Ajuste de Metadatos */
+    .meta {
+        grid-template-columns: 1fr; /* Una sola columna para los metadatos */
+        gap: 12px;
+        padding: 16px;
+    }
+    .meta div {
+        font-size: 1rem;
+    }
+    
+    /* 2. Transformación de la Tabla de Items a Tarjetas */
+    .items, .items tbody, .items tr, .items td {
+        display: block; /* Convertir elementos de tabla en bloques */
+        width: 100%;
+    }
+
+    .items {
+        border-radius: 8px; /* Reducir el radio */
+        box-shadow: none; /* Eliminar sombra para apilamiento */
+    }
+
+    /* Ocultar encabezados de la tabla en móvil */
+    .items thead {
+        display: none;
+    }
+
+    /* Darle formato de tarjeta al cuerpo y las filas */
+    .items tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 12px; /* Espacio entre cada "tarjeta" de ítem */
+    }
+    
+    .items tr {
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 0; /* Ya usamos gap en tbody */
+        box-shadow: 0 2px 4px rgba(0,0,0,.04);
+    }
+    
+    .items td {
+        border-bottom: none; /* Eliminar borde entre celdas */
+        padding: 4px 0;
+        text-align: left;
+        position: relative;
+        padding-left: 100px; /* Espacio para la etiqueta de columna */
+        white-space: normal;
+    }
+    
+    /* Crear las etiquetas de columna (simulando thead) usando ::before */
+    .items td::before {
+        content: attr(data-label); /* Usa el atributo data-label del HTML */
+        position: absolute;
+        left: 0;
+        width: 90px;
+        font-weight: 600;
+        color: #4b5563;
+        font-size: 0.9rem;
+    }
+
+    td:nth-child(7), td:nth-child(8) { 
+        padding-left: 0;
+        text-align: right;
+    }
+
+    td:nth-child(7)::before, td:nth-child(8)::before {
+        display: none;
+    }
+
+    /* Footer de la Tabla (Total) */
+    .items tfoot {
+        display: block; /* Hacer que el footer sea un bloque */
+        margin-top: 1rem;
+    }
+    .items tfoot tr {
+        border: none;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+    .items tfoot td {
+        background: #e0f2fe; /* Color de fondo destacado para el total */
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .items tfoot td.right {
+        text-align: left;
+        font-weight: 700;
+    }
+    .items tfoot td:last-child {
+        width: auto;
+    }
+    
+    .items tfoot td b {
+        font-weight: 700;
+    }
 }
