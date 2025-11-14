@@ -57,6 +57,16 @@
       "phone": "0000000000",
       "password": "",
       "role": "guest"
+    },
+    {
+      "id": "b5fd",
+      "username": "JustoMuro",
+      "name": "Justo",
+      "surname": "Muro",
+      "email": "justomuro18@gmail.com",
+      "phone": "2233003151",
+      "password": "Justo123!",
+      "role": "registered"
     }
   ],
   "carts": [
@@ -68,7 +78,7 @@
         "surname": "Doe",
         "phone": "1234567890"
       },
-      "status": "ready",
+      "status": "delivered",
       "cartStatus": "completed",
       "id": "1622"
     },
@@ -121,6 +131,19 @@
       "status": "pending",
       "cartStatus": "completed",
       "id": "2c6c"
+    },
+    {
+      "userId": "b5fd",
+      "total": 2.65,
+      "customer": {
+        "name": "Justo",
+        "surname": "Muro",
+        "phone": "2233003151"
+      },
+      "status": "pending",
+      "cartStatus": "completed",
+      "completedAt": "2025-11-14T00:14:09.456Z",
+      "id": "af58"
     }
   ],
   "orderItems": [
@@ -205,6 +228,17 @@
       "file": "descarga_1.jfif",
       "amount": 3.85,
       "cartId": "2c6c"
+    },
+    {
+      "id": "bf2f",
+      "copies": 1,
+      "isDoubleSided": true,
+      "binding": "ringed",
+      "isColor": true,
+      "comments": "asdads",
+      "file": "81d6502c-a69d-47a7-bafe-79a1b8296c46.png",
+      "amount": 2.65,
+      "cartId": "af58"
     }
   ],
   "payments": [
@@ -248,6 +282,15 @@
       "finalPrice": 3.85,
       "depositAmount": 100,
       "orderDate": "2025-11-08T20:31:37.425Z"
+    },
+    {
+      "id": "0bf8",
+      "cartId": "af58",
+      "paymentMethod": "cash",
+      "paymentStatus": "completed",
+      "finalPrice": 2.65,
+      "depositAmount": 10000,
+      "orderDate": "2025-11-14T00:14:09.452Z"
     }
   ]
 }

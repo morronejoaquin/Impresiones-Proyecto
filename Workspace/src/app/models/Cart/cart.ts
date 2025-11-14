@@ -11,4 +11,6 @@ export default interface Cart {
   customer?: CustomerData;
   status: 'pending' | 'printing' | 'binding' | 'ready' | 'delivered' | 'cancelled';
   cartStatus: 'pending' | 'completed' // para saber si el carrito ya fue usado
+  completedAt?: string; // ISO - cuándo se completó (para filtrar por fechas)
+
 }

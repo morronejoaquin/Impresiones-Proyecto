@@ -34,50 +34,58 @@
     <div class="carts">
       @for (cart of filteredCarts; track cart.id) {
         <div class="cart" (click)="goToDetail(cart)">
-      
-      <div class="cart-header">
-        <div class="cart-status">
-          <span>{{ cart.status }}</span>
+
+          <!-- Encabezado: estado + situación + fecha -->
+          <div class="cart-header">
+            <div class="cart-status">
+              <span>{{ cart.status }}</span>
+            </div>
+
+            <div class="cart-situacion">
+              @if(cart.status === 'ready'){
+                <span>Listo para entregar</span>
+              }
+            </div>
+
+            <div class="cart-fecha">
+              <span class="fecha-label">Fecha:</span>
+              <span class="fecha-value">
+                {{ cart.completedAt ? (cart.completedAt | date:'dd/MM/yyyy HH:mm') : '—' }}
+              </span>
+            </div>
+          </div>
+
+          <div class="cart-resumen">
+            <p>Cliente:</p>
+            <p>{{ cart.customer?.name }} {{ cart.customer?.surname }}</p>
+          </div>
+
+          <div class="cart-archivos">
+            <p>Archivos:</p>
+            <p>{{ cart.fileSummary }}</p>
+            <p>{{ cart.orderItems.length }} items en total</p>
+          </div>
+
+          <div class="cart-total">
+            <p>Total:</p>
+            <p>${{ cart.total | number:'1.2-2' }}</p>
+          </div>
+
+          <div class="cart-actions" (click)="$event.stopPropagation()">
+            <label>
+              Estado:
+              <select
+                [ngModel]="cart.status"
+                (ngModelChange)="updateStatus(cart, $event)"
+                [disabled]="savingIds.has(cart.id)">
+                <option *ngFor="let s of STATUSES" [value]="s">{{ s }}</option>
+              </select>
+            </label>
+            <span *ngIf="savingIds.has(cart.id)" style="opacity:.7">Guardando…</span>
+          </div>
+
         </div>
-        <div class="cart-situacion">
-          @if(cart.status === 'ready'){
-            <span>Listo para entregar</span>
-          }
-        </div>
-      </div>
-      
-
-      <div class="cart-resumen">
-        <p>Cliente:</p>
-        <p>{{ cart.customer?.name }} {{ cart.customer?.surname }}</p>
-      </div>
-
-      <div class="cart-archivos">
-        <p>Archivos:</p>
-        <p>{{ cart.fileSummary }}</p>
-        <p>{{ cart.orderItems.length }} items en total</p>
-      </div>
-
-      <div class="cart-total">
-        <p>Total:</p>
-        <p>${{ cart.total | number:'1.2-2' }}</p>
-      </div>
-
-      <div class="cart-actions" (click)="$event.stopPropagation()">
-        <label>
-          Estado:
-          <select
-            [ngModel]="cart.status"
-            (ngModelChange)="updateStatus(cart, $event)"
-            [disabled]="savingIds.has(cart.id)">
-            <option *ngFor="let s of STATUSES" [value]="s">{{ s }}</option>
-          </select>
-        </label>
-
-        <span *ngIf="savingIds.has(cart.id)" style="opacity:.7">Guardando…</span>
-      </div>
-    </div>
       }
-  </div>
+    </div>
   }
 </div>

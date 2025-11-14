@@ -76,65 +76,62 @@ export class CartPaymentPage implements OnInit{
     });
     }
 
-    onSubmit(){
-      if(this.cartForm.invalid){
-        this.cartForm.markAllAsTouched()
-        console.log("Datos invalidos")
-        return;
+    onSubmit() {
+  if (this.cartForm.invalid) {
+    this.cartForm.markAllAsTouched();
+    console.log('Datos inválidos');
+    return;
+  }
+
+  const p = this.cartForm.value;
+
+  this.cartService.getCartByUserId(this.userId).pipe(
+    switchMap(carts => {
+      if (!carts || carts.length === 0) {
+        throw new Error('No se encontró un carrito activo para el usuario. Imposible pagar.');
       }
 
-      const p = this.cartForm.value
+      const cartId = carts[0].id;
 
-      this.cartService.getCartByUserId(this.userId).pipe(
-        switchMap(carts => {
-          if (!carts || carts.length === 0) {
-            throw new Error("No se encontró un carrito activo para el usuario. Imposible pagar.");
-          }
+      // 👇 corregido: paymentMethod
+      const payment = {
+        cartId,
+        paymentMethod: p.paymentMethod,     // <- antes: payMentMethod (typo)
+        paymentStatus: 'completed',
+        finalPrice: this.cartTotal,
+        depositAmount: p.sign || 0,
+        orderDate: new Date().toISOString()
+      };
 
-          const cartId = carts[0].id;
+      return this.paymentService.postPayment(payment as any).pipe(
+        // luego de registrar el pago, cerramos el carrito
+        switchMap(() => this.cartService.updateCart(cartId, {
+          userId: this.userId,
+          total: this.cartTotal,
+          customer: {
+            name: p.customerName,
+            surname: p.surname,
+            phone: p.phone
+          },
+          status: 'pending',          // o 'ready' si querés marcarlo como listo
+          cartStatus: 'completed',    // ✅ necesario para el reporte
+          completedAt: new Date().toISOString() // ✅ clave para filtrar por fecha
+        }))
+      );
+    })
+  ).subscribe({
+    next: () => {
+      console.log('Pago registrado y carrito movido a completado.');
+      alert('Pago registrado. Su pedido está siendo procesado.');
+      this.router.navigate(['home']);
+    },
+    error: (e) => {
+      console.error('Error en el flujo de pago:', e);
+      alert('Error al procesar el pago o actualizar el pedido.');
+    }
+  });
+}
 
-          const payment = {
-              cartId: cartId, 
-              paymentMethod: p.payMentMethod,
-              paymentStatus: 'completed', // Cambiado a 'completed' (asumiendo éxito)
-              finalPrice: this.cartTotal, 
-              depositAmount: p.sign || 0, 
-              orderDate: new Date().toISOString()
-          };
-
-          return this.paymentService.postPayment(payment as any).pipe(
-              // Usar switchMap para encadenar la actualización del estado del carrito
-                switchMap(() => {
-                  // El carrito se convierte en un PEDIDO y se guarda
-                    return this.cartService.updateCart(cartId, { 
-                      userId: this.userId,
-                      total: this.cartTotal, 
-                      customer: {
-                          name: p.customerName,
-                          surname: p.surname,
-                          phone: p.phone
-                      },
-                      status: 'pending',
-                      cartStatus: 'completed', // Se mueve a completado
-
-                    });
-                })
-            );
-        })
-    ).subscribe({
-        next: () => {
-            // Después de que el pago y la actualización del estado son exitosos
-            // El próximo paso es que el CartService (o quien lo use) creará un nuevo carrito.
-            console.log("Pago registrado y Carrito movido a estado completado.");
-            alert("Pago registrado. Su pedido está siendo procesado.");
-            this.router.navigate(['home']);
-        },
-        error: (e) => {
-            console.error("Error en el flujo de pago:", e);
-            alert("Error al procesar el pago o actualizar el pedido.");
-        }
-    });
-  }
 
   getCustomerName() {
     return this.cartForm.get('customerName');

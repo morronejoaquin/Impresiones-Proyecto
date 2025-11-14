@@ -259,6 +259,32 @@
   transform: translateY(-1px);
 }
 
+.cart-header {
+  display: grid;
+  grid-template-columns: 1fr auto auto; /* estado | situacion | fecha */
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.cart-fecha {
+  justify-self: end;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.95rem;
+}
+
+.cart-fecha .fecha-label {
+  color: #374151;
+  font-weight: 600;
+}
+
+.cart-fecha .fecha-value {
+  color: #1f2937;
+}
+
+
 @media (max-width: 640px) {
   .price-admin-button {
     width: 100%;
