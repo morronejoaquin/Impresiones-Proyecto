@@ -71,40 +71,39 @@
   ],
   "carts": [
     {
-      "userId": "1",
-      "total": 0.15000000000000002,
-      "customer": {
-        "name": "John",
-        "surname": "Doe",
-        "phone": "1234567890"
-      },
-      "status": "delivered",
-      "cartStatus": "completed",
-      "id": "1622"
-    },
-    {
-      "userId": "fb5d",
+      "userId": "b5fd",
       "total": 0.05,
-      "customer": {
-        "name": "Lautaro",
-        "surname": "Peñaflor",
-        "phone": "1234567810"
-      },
-      "status": "delivered",
-      "cartStatus": "completed",
-      "id": "1311"
-    },
-    {
-      "userId": "fb5d",
-      "total": 0.65,
       "customer": {
         "name": "Justo",
         "surname": "Muro",
         "phone": "2233003151"
       },
-      "status": "printing",
+      "status": "delivered",
       "cartStatus": "completed",
-      "id": "1ac5"
+      "completedAt": "2025-11-14T00:43:21.414Z",
+      "id": "1622",
+      "deliveredAt": "2025-11-14T00:43:39.457Z"
+    },
+    {
+      "userId": "b5fd",
+      "total": 0.05,
+      "customer": {
+        "name": "Justo",
+        "surname": "Muro",
+        "phone": "2233003151"
+      },
+      "status": "delivered",
+      "cartStatus": "completed",
+      "completedAt": "2025-11-14T00:39:19.793Z",
+      "id": "1311",
+      "deliveredAt": "2025-11-14T00:41:18.328Z"
+    },
+    {
+      "status": "delivered",
+      "deliveredAt": "2025-11-14T00:25:30.124Z",
+      "id": "1ac5",
+      "cartStatus": "completed",
+      "completedAt": "2025-11-14T00:50:56.676Z"
     },
     {
       "id": "3c2b",
@@ -121,20 +120,22 @@
       "cartStatus": "pending"
     },
     {
-      "userId": "1762633847323",
-      "total": 3.85,
-      "customer": {
-        "name": "Justo",
-        "surname": "Muro",
-        "phone": "2233003151"
-      },
-      "status": "pending",
+      "status": "delivered",
+      "deliveredAt": "2025-11-14T00:25:38.027Z",
+      "id": "2c6c",
       "cartStatus": "completed",
-      "id": "2c6c"
+      "completedAt": "2025-11-14T00:46:23.407Z"
+    },
+    {
+      "status": "delivered",
+      "id": "af58",
+      "cartStatus": "completed",
+      "completedAt": "2025-11-14T00:51:03.981Z",
+      "deliveredAt": "2025-11-14T00:51:03.981Z"
     },
     {
       "userId": "b5fd",
-      "total": 2.65,
+      "total": 0.05,
       "customer": {
         "name": "Justo",
         "surname": "Muro",
@@ -142,8 +143,35 @@
       },
       "status": "pending",
       "cartStatus": "completed",
-      "completedAt": "2025-11-14T00:14:09.456Z",
-      "id": "af58"
+      "completedAt": "2025-11-14T00:52:17.344Z",
+      "id": "281c"
+    },
+    {
+      "userId": "b5fd",
+      "total": 0.05,
+      "customer": {
+        "name": "Justo",
+        "surname": "Muro",
+        "phone": "2233003151"
+      },
+      "status": "pending",
+      "cartStatus": "completed",
+      "completedAt": "2025-11-14T00:52:28.901Z",
+      "id": "5808"
+    },
+    {
+      "userId": "b5fd",
+      "total": 0.05,
+      "customer": {
+        "name": "Justo",
+        "surname": "Muro",
+        "phone": "2233003151"
+      },
+      "status": "delivered",
+      "cartStatus": "completed",
+      "completedAt": "2025-11-14T00:52:37.837Z",
+      "id": "2117",
+      "deliveredAt": "2025-11-14T00:52:59.349Z"
     }
   ],
   "orderItems": [
@@ -158,42 +186,6 @@
       "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV.pdf",
       "amount": 0.05,
       "cartId": "1311"
-    },
-    {
-      "id": "5c53",
-      "pages": 13,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": "",
-      "file": "PROTECCION DE DERECHOS DE AUTOR FRENTE A LA IA_20251016_030839_0000.pdf",
-      "amount": 0.65,
-      "cartId": "1ac5"
-    },
-    {
-      "id": "e68b",
-      "pages": 1,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": "",
-      "file": "LAUTARO JOAQUÍN PEÑAFLOR_CV 2.pdf",
-      "amount": 0.05,
-      "cartId": "1622"
-    },
-    {
-      "id": "b2a3",
-      "pages": 2,
-      "copies": 1,
-      "isDoubleSided": false,
-      "binding": "unringed",
-      "isColor": false,
-      "comments": "",
-      "file": "ACTIVIDAD UNIDAD 1.pdf",
-      "amount": 0.1,
-      "cartId": "1622"
     },
     {
       "id": "a0e1",
@@ -239,6 +231,52 @@
       "file": "81d6502c-a69d-47a7-bafe-79a1b8296c46.png",
       "amount": 2.65,
       "cartId": "af58"
+    },
+    {
+      "id": "50da",
+      "pages": 1,
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "GDD_OnePager_F1_Tycoon_Clicker.pdf",
+      "amount": 0.05,
+      "cartId": "1622"
+    },
+    {
+      "id": "af98",
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "81d6502c-a69d-47a7-bafe-79a1b8296c46.png",
+      "amount": 0.05,
+      "cartId": "281c"
+    },
+    {
+      "id": "dbd8",
+      "pages": 1,
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "",
+      "file": "GDD_OnePager_F1_Tycoon_Clicker.pdf",
+      "amount": 0.05,
+      "cartId": "5808"
+    },
+    {
+      "id": "f33a",
+      "copies": 1,
+      "isDoubleSided": false,
+      "binding": "unringed",
+      "isColor": false,
+      "comments": "ASDASD",
+      "file": "81d6502c-a69d-47a7-bafe-79a1b8296c46.png",
+      "amount": 0.05,
+      "cartId": "2117"
     }
   ],
   "payments": [
@@ -291,6 +329,60 @@
       "finalPrice": 2.65,
       "depositAmount": 10000,
       "orderDate": "2025-11-14T00:14:09.452Z"
+    },
+    {
+      "id": "5a3d",
+      "cartId": "1622",
+      "paymentMethod": "cash",
+      "paymentStatus": "completed",
+      "finalPrice": 2.1,
+      "depositAmount": 0,
+      "orderDate": "2025-11-14T00:39:12.405Z"
+    },
+    {
+      "id": "6708",
+      "cartId": "1311",
+      "paymentMethod": "cash",
+      "paymentStatus": "completed",
+      "finalPrice": 0.05,
+      "depositAmount": 0,
+      "orderDate": "2025-11-14T00:39:19.790Z"
+    },
+    {
+      "id": "5cc4",
+      "cartId": "1622",
+      "paymentMethod": "cash",
+      "paymentStatus": "completed",
+      "finalPrice": 0.05,
+      "depositAmount": 0,
+      "orderDate": "2025-11-14T00:43:21.411Z"
+    },
+    {
+      "id": "b1d4",
+      "cartId": "281c",
+      "paymentMethod": "cash",
+      "paymentStatus": "completed",
+      "finalPrice": 0.05,
+      "depositAmount": 0,
+      "orderDate": "2025-11-14T00:52:17.341Z"
+    },
+    {
+      "id": "b9ff",
+      "cartId": "5808",
+      "paymentMethod": "cash",
+      "paymentStatus": "completed",
+      "finalPrice": 0.05,
+      "depositAmount": 0,
+      "orderDate": "2025-11-14T00:52:28.897Z"
+    },
+    {
+      "id": "9a01",
+      "cartId": "2117",
+      "paymentMethod": "cash",
+      "paymentStatus": "completed",
+      "finalPrice": 0.05,
+      "depositAmount": 0,
+      "orderDate": "2025-11-14T00:52:37.833Z"
     }
   ]
 }

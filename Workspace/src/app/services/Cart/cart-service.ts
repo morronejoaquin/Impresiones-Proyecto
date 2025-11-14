@@ -78,85 +78,95 @@ export class CartService {
   }
 
   getCompletedCartsWithDetails(): Observable<CartWithItems[]> {
-    return this.http.get<Cart[]>(this.url).pipe(
-      // 1. Filtrar solo los carritos completados
-      map(allCarts => allCarts.filter(cart => cart.cartStatus === 'completed')),
-      
-      // 2. Por cada carrito, obtener sus órdenes y agregar los detalles
-      switchMap(completedCarts => {
-        if (completedCarts.length === 0) {
-          return of([] as CartWithItems[]);
-        }
+  return this.http.get<Cart[]>(this.url).pipe(
+    // ✅ Mostrar en "Pedidos" todo lo completado/finalizado EXCEPTO los entregados
+    map(allCarts => allCarts.filter(cart =>
+      cart.status !== 'delivered' && (
+        cart.cartStatus === 'completed' ||
+        (['ready','cancelled','printing','binding'] as Cart['status'][]).includes(cart.status)
+      )
+    )),
+    switchMap(completedCarts => {
+      if (completedCarts.length === 0) return of([] as CartWithItems[]);
+      const cartObservables = completedCarts.map(cart =>
+        this.orderService.getOrdersFromCart(cart.id).pipe(
+          map(orderItems => {
+            const fileNames = orderItems
+              .map(item => typeof item.file === 'string' ? item.file.split('/').pop() : 'Archivo desconocido')
+              .filter(Boolean) as string[];
 
-        const cartObservables = completedCarts.map(cart =>
-          this.orderService.getOrdersFromCart(cart.id).pipe(
-            map(orderItems => {
-              // --- resumen archivos ---
-              const fileNames = orderItems
-                .map(item => typeof item.file === 'string' ? item.file.split('/').pop() : 'Archivo desconocido')
-                .filter(Boolean) as string[];
-              
-              const fileSummary =
-                fileNames.length === 0 ? 'Sin archivos.' :
-                fileNames.length === 1 ? fileNames[0] : `${fileNames[0]}... (${fileNames.length} archivos)`;
+            const fileSummary =
+              fileNames.length === 0 ? 'Sin archivos.' :
+              fileNames.length === 1 ? fileNames[0] : `${fileNames[0]}... (${fileNames.length} archivos)`;
 
-              // --- NORMALIZAR status: si viene cartStatus, lo copiamos a status (Backward compatibility) ---
-              const status = (cart as any).status ?? (cart as any).cartStatus ?? '';
+            const status = (cart as any).status ?? (cart as any).cartStatus ?? '';
 
-              // Retorna la estructura CartWithItems completa
-              return { ...cart, orderItems, fileSummary, status } as CartWithItems;
-            })
-          )
-        );
-        // Espera a que todas las peticiones de órdenes se completen
-        return forkJoin(cartObservables);
-      })
-    );
-  }
+            const fallbackTotal = orderItems.reduce((acc, it) => acc + (it.amount || 0), 0);
+            const total = (cart.total ?? fallbackTotal);
 
-  getDeliveredCartsWithDetails(): Observable<CartWithItems[]> {
-    return this.http.get<Cart[]>(this.url).pipe(
-      // 1. Filtrar solo los carritos completados
-      map(allCarts => allCarts.filter(cart => cart.cartStatus === 'completed' && cart.status === 'delivered')),
-      
-      // 2. Por cada carrito, obtener sus órdenes y agregar los detalles
-      switchMap(completedCarts => {
-        if (completedCarts.length === 0) {
-          return of([] as CartWithItems[]);
-        }
-
-        const cartObservables = completedCarts.map(cart =>
-          this.orderService.getOrdersFromCart(cart.id).pipe(
-            map(orderItems => {
-              // --- resumen archivos ---
-              const fileNames = orderItems
-                .map(item => typeof item.file === 'string' ? item.file.split('/').pop() : 'Archivo desconocido')
-                .filter(Boolean) as string[];
-              
-              const fileSummary =
-                fileNames.length === 0 ? 'Sin archivos.' :
-                fileNames.length === 1 ? fileNames[0] : `${fileNames[0]}... (${fileNames.length} archivos)`;
-
-              // --- NORMALIZAR status: si viene cartStatus, lo copiamos a status (Backward compatibility) ---
-              const status = (cart as any).status ?? (cart as any).cartStatus ?? '';
-
-              // Retorna la estructura CartWithItems completa
-              return { ...cart, orderItems, fileSummary, status } as CartWithItems;
-            })
-          )
-        );
-        // Espera a que todas las peticiones de órdenes se completen
-        return forkJoin(cartObservables);
-      })
-    );
-  }
-
-  updateCartStatus(id: string, status: string) {
-    const updateStatus = {
-      status: status
-    }
-  return this.http.patch<Cart>(`${this.url}/${id}`, updateStatus);
+            return { ...cart, orderItems, fileSummary, status, total } as CartWithItems;
+          })
+        )
+      );
+      return forkJoin(cartObservables);
+    })
+  );
 }
+
+
+getDeliveredCartsWithDetails(): Observable<CartWithItems[]> {
+  return this.http.get<Cart[]>(this.url).pipe(
+    // ✅ Entregados: con que status sea 'delivered' alcanza
+    map(allCarts => allCarts.filter(cart => cart.status === 'delivered')),
+    switchMap(deliveredCarts => {
+      if (deliveredCarts.length === 0) return of([] as CartWithItems[]);
+      const cartObservables = deliveredCarts.map(cart =>
+        this.orderService.getOrdersFromCart(cart.id).pipe(
+          map(orderItems => {
+            const fileNames = orderItems
+              .map(item => typeof item.file === 'string' ? item.file.split('/').pop() : 'Archivo desconocido')
+              .filter(Boolean) as string[];
+
+            const fileSummary =
+              fileNames.length === 0 ? 'Sin archivos.' :
+              fileNames.length === 1 ? fileNames[0] : `${fileNames[0]}... (${fileNames.length} archivos)`;
+
+            const status = (cart as any).status ?? (cart as any).cartStatus ?? '';
+
+            const fallbackTotal = orderItems.reduce((acc, it) => acc + (it.amount || 0), 0);
+            const total = (cart.total ?? fallbackTotal);
+
+            return { ...cart, orderItems, fileSummary, status, total } as CartWithItems;
+          })
+        )
+      );
+      return forkJoin(cartObservables);
+    })
+  );
+}
+
+
+  // ✅ setea status y opcionalmente sella completedAt / deliveredAt
+updateCartStatus(
+  id: string,
+  status: Cart['status'],
+  opts?: { stampCompletion?: boolean; stampDelivery?: boolean }
+) {
+  const now = new Date().toISOString();
+  const updates: any = { status };
+
+  if (opts?.stampCompletion) {
+    updates.cartStatus = 'completed';
+    updates.completedAt = now;
+  }
+  if (opts?.stampDelivery) {
+    updates.deliveredAt = now;
+  }
+
+  return this.http.patch<Cart>(`${this.url}/${id}`, updates); // PATCH, no PUT
+}
+
+
 
 getCartById(id: string) {
   return this.http.get<Cart>(`http://localhost:3000/carts/${id}`);

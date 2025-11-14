@@ -106,6 +106,12 @@
   margin-top: 40px;
 }
 
+.cart-header { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.cart-fecha { display:flex; align-items:center; gap:6px; font-size:.95rem; }
+.cart-fecha .fecha-label { color:#374151; font-weight:600; }
+.cart-fecha .fecha-value { color:#1f2937; }
+
+
 /* --- Responsive: acciones debajo en mobile --- */
 @media (max-width: 640px) {
   .carts {
