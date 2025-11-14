@@ -141,10 +141,11 @@
         "surname": "Muro",
         "phone": "2233003151"
       },
-      "status": "pending",
+      "status": "delivered",
       "cartStatus": "completed",
       "completedAt": "2025-11-14T00:52:17.344Z",
-      "id": "281c"
+      "id": "281c",
+      "deliveredAt": "2025-11-14T01:08:19.918Z"
     },
     {
       "userId": "b5fd",
@@ -154,10 +155,11 @@
         "surname": "Muro",
         "phone": "2233003151"
       },
-      "status": "pending",
+      "status": "delivered",
       "cartStatus": "completed",
       "completedAt": "2025-11-14T00:52:28.901Z",
-      "id": "5808"
+      "id": "5808",
+      "deliveredAt": "2025-11-14T00:59:04.940Z"
     },
     {
       "userId": "b5fd",

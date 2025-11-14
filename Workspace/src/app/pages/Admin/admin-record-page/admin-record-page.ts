@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CartService, CartWithItems } from '../../../services/Cart/cart-service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin-record-page',
-  imports: [CommonModule],
+  imports: [CommonModule , RouterLink],
   templateUrl: './admin-record-page.html',
   styleUrl: './admin-record-page.css'
 })

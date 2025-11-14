@@ -111,6 +111,53 @@
 .cart-fecha .fecha-label { color:#374151; font-weight:600; }
 .cart-fecha .fecha-value { color:#1f2937; }
 
+/* --- Header con botón volver --- */
+.record-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Anchor con look de botón */
+.record-header .back {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #0369a1;           /* azul consistente con tu UI */
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 8px rgba(3, 105, 161, 0.25);
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+}
+
+.record-header .back:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(3, 105, 161, 0.28);
+  filter: brightness(1.03);
+}
+
+.record-header .back:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(3, 105, 161, 0.22);
+  filter: brightness(.98);
+}
+
+.record-header .back:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(3, 105, 161, 0.35);
+}
+
+/* Dark mode opcional */
+@media (prefers-color-scheme: dark) {
+  .record-header .back {
+    background: #0b78b6;
+    box-shadow: 0 2px 8px rgba(11, 120, 182, 0.25);
+  }
+}
+
 
 /* --- Responsive: acciones debajo en mobile --- */
 @media (max-width: 640px) {
