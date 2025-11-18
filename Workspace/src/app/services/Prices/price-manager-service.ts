@@ -20,7 +20,7 @@ export class PriceManagerService {
   }
 
   updatePrices(price: Prices) {
-    return this.http.put<Prices>(`${this.url}/${price.priceId}`, price);
+    return this.http.put<Prices>(`${this.url}/${price.id}`, price);
   }
 
   loadPrices() {

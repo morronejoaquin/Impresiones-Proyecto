@@ -49,13 +49,20 @@ export class PriceAdminComponent implements OnInit {
   }
 
   savePrices() {
+    if (this.priceForm.invalid) {
+      this.priceForm.markAllAsTouched();
+      this.message = 'Por favor, ingrese valores válidos (números positivos).';
+      return;
+    }
+
     const formValues = this.priceForm.value;
 
     if (this.prices.length > 0) {
       const updatedPrice: Prices = {
-        priceId: this.prices[0].priceId,
+        id: this.prices[0].id,
         ...formValues
       };
+      console.log(updatedPrice.id + "Este es el que estamos modificando")
 
       this.loading = true;
       this.priceService.updatePrices(updatedPrice).subscribe({
@@ -73,7 +80,7 @@ export class PriceAdminComponent implements OnInit {
     } 
     else {
       const newPrice: Prices = {
-        priceId: 0, 
+        id: 0, 
         ...formValues
       };
 

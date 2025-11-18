@@ -1,11 +1,10 @@
 {
   "prices": [
     {
-      "pricesId": 1,
-      "pricePerSheetBW": 0.05,
+      "id": "a7c9",
+      "pricePerSheetBW": 0.11,
       "pricePerSheetColor": 0.15,
-      "priceRingedBinding": 2.5,
-      "id": "a7c9"
+      "priceRingedBinding": 2.5
     }
   ],
   "users": [

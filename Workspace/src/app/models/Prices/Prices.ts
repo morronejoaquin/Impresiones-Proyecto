@@ -1,5 +1,5 @@
 export default interface Prices {
-  priceId: number;
+  id: string;
   pricePerSheetBW: number;
   pricePerSheetColor: number;
   priceRingedBinding: number;
